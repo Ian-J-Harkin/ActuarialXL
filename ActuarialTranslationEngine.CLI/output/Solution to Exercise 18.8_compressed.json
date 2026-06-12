@@ -1,0 +1,227 @@
+{
+  "TargetWorksheet": "Solution to Exercise 18.8",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:1.05^-Col[B]|F:SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])|J:$I$10*Col[F][\u002B1]/$F$7",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.05^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Annuity Due",
+          "TokenizedFormulaTemplate": "SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Maximum Surrender Charge",
+          "TokenizedFormulaTemplate": "$I$10*Col[F][\u002B1]/$F$7",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 25,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:\u002BCol[D][-1]*(1-Col[C][-1])|E:1.04^-Col[B]|F:SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])|J:$I$10*Col[F][\u002B1]/$F$7",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.04^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Annuity Due",
+          "TokenizedFormulaTemplate": "SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Maximum Surrender Charge",
+          "TokenizedFormulaTemplate": "$I$10*Col[F][\u002B1]/$F$7",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 26,
+      "EndRow": 76,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:\u002BCol[D][-1]*(1-Col[C][-1])|E:1.04^-Col[B]|F:SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])|J:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.04^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Annuity Due",
+          "TokenizedFormulaTemplate": "SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Maximum Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 77,
+      "EndRow": 77,
+      "FormulaSignature": "A:|B:\u002BCol[B][-1]\u002B1|C:|D:\u002BCol[D][-1]*(1-Col[C][-1])|E:1.04^-Col[B]|F:SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])|J:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.04^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Annuity Due",
+          "TokenizedFormulaTemplate": "SUMPRODUCT(Col[D]:$D$120,Col[E]:$E$120)/(Col[E]*Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Maximum Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": [
+    {
+      "Coordinate": "Solution to Exercise 18.8!F77",
+      "RawFormula": "SUMPRODUCT(D77:$D$120,E77:$E$120)/(E77*D77)",
+      "EvaluatedValue": "\u003CERROR_STATE: DivisionByZero\u003E",
+      "ExceptionFlag": 1,
+      "Telemetry": {}
+    }
+  ]
+}

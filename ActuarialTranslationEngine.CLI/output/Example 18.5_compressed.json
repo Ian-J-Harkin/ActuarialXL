@@ -1,0 +1,219 @@
+{
+  "TargetWorksheet": "Example 18.5",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 5,
+      "EndRow": 5,
+      "FormulaSignature": "A:|B:|C:|D:Col[B]-Col[C]|E:Col[D]-0.0125|F:|G:|H:0.1-Col[F]|I:|J:Col[I]*(Col[D]-Col[E])*(1-Col[G])^0.5*(1-Col[H])^0.5|K:Col[I]*(1\u002BCol[D])^0.5*(1-Col[G])^0.5*Col[H]*Col[F]|L:\u002BCol[K]\u002BCol[J]|M:(Col[M][\u002B1]\u002BCol[L])/(1\u002BCol[E])|N:4100/Col[M]|O:4100|P:Col[O]*(1\u002BCol[E])-Col[L]*$N$5",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Investment Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Investment Expense",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Investment Rate",
+          "TokenizedFormulaTemplate": "Col[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Credited Interest Rate",
+          "TokenizedFormulaTemplate": "Col[D]-0.0125",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Mortality Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Lapse Rate",
+          "TokenizedFormulaTemplate": "0.1-Col[F]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Fund Value BOY",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Interest Gross Margin",
+          "TokenizedFormulaTemplate": "Col[I]*(Col[D]-Col[E])*(1-Col[G])^0.5*(1-Col[H])^0.5",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Surrender Charges",
+          "TokenizedFormulaTemplate": "Col[I]*(1\u002BCol[D])^0.5*(1-Col[G])^0.5*Col[H]*Col[F]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Gross Margins",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[J]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Present Value BOY",
+          "TokenizedFormulaTemplate": "(Col[M][\u002B1]\u002BCol[L])/(1\u002BCol[E])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "DAC Amortization Percent",
+          "TokenizedFormulaTemplate": "4100/Col[M]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "DAC BOY",
+          "TokenizedFormulaTemplate": "4100",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "DAC EOY",
+          "TokenizedFormulaTemplate": "Col[O]*(1\u002BCol[E])-Col[L]*$N$5",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 6,
+      "EndRow": 54,
+      "FormulaSignature": "A:Col[A][-1]\u002B1|B:|C:|D:Col[B]-Col[C]|E:Col[D]-0.0125|F:|G:|H:0.1-Col[F]|I:Col[I][-1]*(1\u002BCol[E][-1])*(1-Col[G][-1])*(1-Col[H][-1])|J:Col[I]*(Col[D]-Col[E])*(1-Col[G])^0.5*(1-Col[H])^0.5|K:Col[I]*(1\u002BCol[D])^0.5*(1-Col[G])^0.5*Col[H]*Col[F]|L:\u002BCol[K]\u002BCol[J]|M:(Col[M][\u002B1]\u002BCol[L])/(1\u002BCol[E])|N:|O:Col[P][-1]|P:Col[O]*(1\u002BCol[E])-Col[L]*$N$5",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Year",
+          "TokenizedFormulaTemplate": "Col[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Investment Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Investment Expense",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Investment Rate",
+          "TokenizedFormulaTemplate": "Col[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Credited Interest Rate",
+          "TokenizedFormulaTemplate": "Col[D]-0.0125",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Mortality Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Lapse Rate",
+          "TokenizedFormulaTemplate": "0.1-Col[F]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Fund Value BOY",
+          "TokenizedFormulaTemplate": "Col[I][-1]*(1\u002BCol[E][-1])*(1-Col[G][-1])*(1-Col[H][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Interest Gross Margin",
+          "TokenizedFormulaTemplate": "Col[I]*(Col[D]-Col[E])*(1-Col[G])^0.5*(1-Col[H])^0.5",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Surrender Charges",
+          "TokenizedFormulaTemplate": "Col[I]*(1\u002BCol[D])^0.5*(1-Col[G])^0.5*Col[H]*Col[F]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Gross Margins",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[J]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Present Value BOY",
+          "TokenizedFormulaTemplate": "(Col[M][\u002B1]\u002BCol[L])/(1\u002BCol[E])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "DAC Amortization Percent",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "DAC BOY",
+          "TokenizedFormulaTemplate": "Col[P][-1]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "DAC EOY",
+          "TokenizedFormulaTemplate": "Col[O]*(1\u002BCol[E])-Col[L]*$N$5",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

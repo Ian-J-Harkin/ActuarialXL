@@ -1,0 +1,82 @@
+{
+  "TargetWorksheet": "Table 13.10",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 9,
+      "EndRow": 9,
+      "FormulaSignature": "A:|B:Col[D][-5]*(1\u002BCol[D][-4])|C:|D:\u002BCol[B][\u002B9]*(1\u002BCol[D][-4])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Account Value",
+          "TokenizedFormulaTemplate": "Col[D][-5]*(1\u002BCol[D][-4])",
+          "ChronologicalLookbacks": [
+            4,
+            5
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Account Value",
+          "TokenizedFormulaTemplate": "\u002BCol[B][\u002B9]*(1\u002BCol[D][-4])",
+          "ChronologicalLookbacks": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 10,
+      "EndRow": 18,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]*(1\u002B$D$5)|C:\u002BCol[C][-1]\u002B1|D:\u002BCol[D][-1]*(1\u002B$D$5)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Account Value",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]*(1\u002B$D$5)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Account Value",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1\u002B$D$5)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

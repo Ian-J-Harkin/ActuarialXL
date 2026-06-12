@@ -1,0 +1,117 @@
+{
+  "TargetWorksheet": "Solution to Exercise 15.1",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 7,
+      "FormulaSignature": "A:|B:|C:\u002BCol[B]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "\u002BCol[B]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 8,
+      "EndRow": 15,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:\u002BCol[B]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "\u002BCol[B]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 16,
+      "EndRow": 25,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:\u002BCol[B]-1",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "\u002BCol[B]-1",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 27,
+      "EndRow": 27,
+      "FormulaSignature": "A:|B:IRR(Col[B][-21]:Col[B][-2])|C:IRR(Col[C][-21]:Col[C][-2])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "IRR(Col[B][-21]:Col[B][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            21
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits",
+          "TokenizedFormulaTemplate": "IRR(Col[C][-21]:Col[C][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            21
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

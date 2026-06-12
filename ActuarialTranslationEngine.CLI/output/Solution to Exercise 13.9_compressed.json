@@ -1,0 +1,108 @@
+{
+  "TargetWorksheet": "Solution to Exercise 13.9",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 4,
+      "EndRow": 8,
+      "FormulaSignature": "A:|G:|M:|S:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Rider 1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Rider 2",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Rider 3",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "S",
+          "ExtractedHeaderName": "Rider 4",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 9,
+      "EndRow": 17,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|G:\u002BCol[G][-1]\u002B1|M:\u002BCol[M][-1]\u002B1|S:\u002BCol[S][-1]\u002B1",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Rider 1",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Rider 2",
+          "TokenizedFormulaTemplate": "\u002BCol[G][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Rider 3",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "S",
+          "ExtractedHeaderName": "Rider 4",
+          "TokenizedFormulaTemplate": "\u002BCol[S][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 19,
+      "EndRow": 23,
+      "FormulaSignature": "A:|G:|M:|S:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Rider 1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Rider 2",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Rider 3",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "S",
+          "ExtractedHeaderName": "Rider 4",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

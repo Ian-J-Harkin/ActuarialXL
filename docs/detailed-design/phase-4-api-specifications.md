@@ -2,29 +2,39 @@
 
 This document acts as an expansion of the `enterprise-lifecycle-spec.md` (Phase IV) to capture the explicit routing stubs, API architectural boundaries, and performance assumptions required to host the `ActuarialTranslationEngine`.
 
+**Related Documents:**
+- For database architecture, entity models, and runtime rule execution, see: [Phase 4 Persistence Schema](phase-4-persistence-schema.md).
+
 ## 1. Hosting Architecture
-- **Framework:** ASP.NET Core 10 WebAPI
+- **Framework:** ASP.NET Core 8/9 WebAPI (Minimal APIs)
 - **Deployment Strategy:** Stateless Container (Docker/Kubernetes ready)
 - **Dependency Injection (DI):** 
+  - `ActuarialGovernanceDbContext` registered as a **Scoped** service.
   - `RoslynReconciliationEngine` must be registered as a **Transient** or **Scoped** service, never Singleton, to ensure `AssemblyLoadContext` is garbage collected between web requests.
-  - `ActuarialExtractionEngine` (ClosedXML) can be **Scoped**.
+  - `ActuarialExtractionEngine` (ClosedXML/OpenXml) can be **Scoped**.
 
 ## 2. API Routing Stubs
 
 ### A. Spreadsheet Ingestion Endpoint
-**POST** `/api/v1/workbooks/analyze`
-- **Payload:** `multipart/form-data` (File upload: `.xlsx`)
-- **Action:** Streams the Excel file directly into `ClosedXML` without saving to physical disk to prevent I/O blocking.
-- **Returns:** `202 Accepted` with an `AnalysisJobId` for asynchronous polling (or `200 OK` if processing is fast enough to remain synchronous).
+**POST** `/api/v1/workbooks`
+- **Payload:** `multipart/form-data` (File upload: `.xlsx`, `.xlsm`, `.xlsb`)
+- **Action:** Streams the Excel file directly into the Extraction Engine without saving to physical disk. Parses logic and initializes an `ActuarialWorkbook` entity with associated `WorksheetTopology` entities.
+- **Returns:** `202 Accepted` with `{workbookId}` for asynchronous polling.
 
-### B. Archetype Extraction Endpoint
-**GET** `/api/v1/workbooks/{jobId}/archetypes`
-- **Action:** Retrieves the list of identified Actuarial Archetypes (e.g., "Universal Life", "Variable Annuity") extracted from the workbook.
+### B. Worksheet Topology Endpoint
+**GET** `/api/v1/workbooks/{workbookId}/worksheets`
+- **Action:** Retrieves the list of identified Actuarial Archetypes extracted from the workbook, mapped to their `WorksheetTopology` Guid records.
 
-### C. Logic Graph Export Endpoint
-**GET** `/api/v1/workbooks/{jobId}/logic-graph`
-- **Action:** Returns the fully compiled `CSharpCompilation` syntax tree mapping, detailing every cell's mathematical formula translated into standard C# actuarial logic.
-- **Returns:** JSON representation of the `IVectorCompressionEngine` output.
+### C. Translation Rule Export Endpoint
+**GET** `/api/v1/worksheets/{worksheetId}/active-rule`
+- **Action:** Returns the fully compiled syntax tree mapping, detailing every cell's mathematical formula translated into standard C# actuarial logic. This retrieves the `TranslationPayload` of the active `RuleTranslationVersion`.
+- **Returns:** JSON representation of the `IVectorCompressionEngine` output and active rule payload.
+
+### D. Runtime Execution Endpoint
+**POST** `/api/v1/worksheets/{worksheetId}/execute`
+- **Payload:** JSON dictionary of row inputs (`Dictionary<string, decimal>`).
+- **Action:** Invokes `ExecuteActiveRuleAsync` to dynamically load the active C# rule (`Payload.GeneratedCSharpMirrorCode`) from the database and execute it via the Roslyn compiler.
+- **Returns:** The computed `decimal` result.
 
 ## 3. Concurrency & Performance Assumptions
 - **Throttling/Rate Limiting:** Roslyn compilation is CPU-heavy. The API must implement `AspNetCore.RateLimiting` to prevent CPU exhaustion from concurrent compilation requests.

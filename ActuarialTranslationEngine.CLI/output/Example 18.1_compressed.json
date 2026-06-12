@@ -1,0 +1,515 @@
+{
+  "TargetWorksheet": "Example 18.1",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 7,
+      "EndRow": 7,
+      "FormulaSignature": "A:|B:|C:|D:1.0475^-Col[A]|E:\u002BCol[D]/(1.0475)^1|F:|G:\u002BCol[F]*Col[D]|H:\u002BCol[F]*Col[E]*Col[C]|I:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.0475^-Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002BCol[D]/(1.0475)^1",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*Col[D]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*Col[E]*Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 8,
+      "EndRow": 8,
+      "FormulaSignature": "A:|B:|C:|D:1.0475^-Col[A]|E:\u002BCol[D]/(1.0475)^1|F:\u002BCol[F][-1]*(1-Col[C][-1])|G:\u002BCol[F]*Col[D]|H:\u002BCol[F]*Col[E]*Col[C]|I:\u002B(100000*Col[H][\u002B8]*1.0475-100000*Col[C][-1])/(1-Col[C][-1])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.0475^-Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002BCol[D]/(1.0475)^1",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "\u002BCol[F][-1]*(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*Col[D]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*Col[E]*Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "\u002B(100000*Col[H][\u002B8]*1.0475-100000*Col[C][-1])/(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 9,
+      "EndRow": 11,
+      "FormulaSignature": "A:|B:|C:|D:1.0475^-Col[A]|E:\u002BCol[D]/(1.0475)^1|F:\u002BCol[F][-1]*(1-Col[C][-1])|G:\u002BCol[F]*Col[D]|H:\u002BCol[F]*Col[E]*Col[C]|I:\u002B((Col[I][-1]\u002B100000*$H$15)*1.0475-100000*Col[C][-1])/(1-Col[C][-1])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.0475^-Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002BCol[D]/(1.0475)^1",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "\u002BCol[F][-1]*(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*Col[D]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*Col[E]*Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "\u002B((Col[I][-1]\u002B100000*$H$15)*1.0475-100000*Col[C][-1])/(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 12,
+      "EndRow": 12,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:|H:|I:\u002B((Col[I][-1]\u002B100000*$H$15)*1.0475-100000*Col[C][-1])/(1-Col[C][-1])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "\u002B((Col[I][-1]\u002B100000*$H$15)*1.0475-100000*Col[C][-1])/(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 13,
+      "EndRow": 13,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:SUM(Col[G][-6]:Col[G][-1])|H:SUM(Col[H][-6]:Col[H][-1])|I:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "SUM(Col[G][-6]:Col[G][-1])",
+          "ChronologicalLookbacks": [
+            1,
+            6
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "SUM(Col[H][-6]:Col[H][-1])",
+          "ChronologicalLookbacks": [
+            1,
+            6
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 15,
+      "EndRow": 15,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:|H:\u002B(Col[H][-2]\u002BCol[H][\u002B2])/Col[G][-2]|I:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002B(Col[H][-2]\u002BCol[H][\u002B2])/Col[G][-2]",
+          "ChronologicalLookbacks": [
+            2
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 16,
+      "EndRow": 16,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:|H:\u002BCol[H][-1]-Col[H][\u002B1]|I:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "\u002BCol[H][-1]-Col[H][\u002B1]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 17,
+      "EndRow": 17,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:|H:|I:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "q70\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt\u002B1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "vt*tp70",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "tp70*q70\u002Bt*vt\u002B1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "tV",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

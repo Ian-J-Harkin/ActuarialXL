@@ -1,0 +1,1037 @@
+{
+  "TargetWorksheet": "Solutions to Ex. 15.4 and 15.5",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|H:|I:|J:|K:\u002BCol[I]/Col[J]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "\u002BCol[I]/Col[J]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 25,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:|D:|E:|F:|H:\u002BCol[H][-1]\u002B1|I:|J:|K:\u002BCol[I]/Col[J]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "\u002BCol[H][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "\u002BCol[I]/Col[J]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 27,
+      "EndRow": 27,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 29,
+      "EndRow": 29,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:IRR(Col[C][-23]:Col[C][-4],0.1)|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "IRR(Col[C][-23]:Col[C][-4],0.1)",
+          "ChronologicalLookbacks": [
+            4,
+            23
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 30,
+      "EndRow": 30,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:NPV(0.055,Col[C][-24]:Col[C][-5])/1.055/NPV(0.055,Col[B][-24]:Col[B][-5])|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "NPV(0.055,Col[C][-24]:Col[C][-5])/1.055/NPV(0.055,Col[B][-24]:Col[B][-5])",
+          "ChronologicalLookbacks": [
+            5,
+            24
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 31,
+      "EndRow": 31,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:NPV(Col[F][-2],Col[C][-25]:Col[C][-6])/(1\u002BCol[F][-2])/NPV(Col[F][-2],Col[B][-25]:Col[B][-6])|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "NPV(Col[F][-2],Col[C][-25]:Col[C][-6])/(1\u002BCol[F][-2])/NPV(Col[F][-2],Col[B][-25]:Col[B][-6])",
+          "ChronologicalLookbacks": [
+            2,
+            6,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 32,
+      "EndRow": 33,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 34,
+      "EndRow": 34,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:-Col[C][-28]/Col[B][-28]|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "-Col[C][-28]/Col[B][-28]",
+          "ChronologicalLookbacks": [
+            28
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 35,
+      "EndRow": 35,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 36,
+      "EndRow": 36,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:\u002BCol[D][-21]/Col[E][-21]|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-21]/Col[E][-21]",
+          "ChronologicalLookbacks": [
+            21
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 37,
+      "EndRow": 37,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:\u002BCol[D][-17]/Col[E][-17]|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-17]/Col[E][-17]",
+          "ChronologicalLookbacks": [
+            17
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 38,
+      "EndRow": 38,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:\u002BCol[D][-13]/Col[E][-13]|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-13]/Col[E][-13]",
+          "ChronologicalLookbacks": [
+            13
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 40,
+      "EndRow": 40,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 42,
+      "EndRow": 42,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:AVERAGE(Col[K][-36]:Col[K][-17])|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "AVERAGE(Col[K][-36]:Col[K][-17])",
+          "ChronologicalLookbacks": [
+            17,
+            36
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 43,
+      "EndRow": 43,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|H:|I:|J:|K:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profit with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Assets",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Surplus without Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "GAAP Net Income",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Surplus with Required Surplus",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Annual ROE",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

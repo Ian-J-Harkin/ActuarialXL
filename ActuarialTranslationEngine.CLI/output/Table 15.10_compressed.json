@@ -1,0 +1,32 @@
+{
+  "TargetWorksheet": "Table 15.10",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 7,
+      "EndRow": 16,
+      "FormulaSignature": "A:|B:|C:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Beginning of the Year Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

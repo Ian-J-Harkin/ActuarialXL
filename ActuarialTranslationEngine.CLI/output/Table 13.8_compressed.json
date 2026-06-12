@@ -1,0 +1,61 @@
+{
+  "TargetWorksheet": "Table 13.8",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 7,
+      "EndRow": 7,
+      "FormulaSignature": "A:|B:|C:PMT(0.005,240,-100000)*(1-(1.005^-(241-12*Col[A])))/0.005",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Straight Line Decrease",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Mortgage Loan Decrease",
+          "TokenizedFormulaTemplate": "PMT(0.005,240,-100000)*(1-(1.005^-(241-12*Col[A])))/0.005",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 8,
+      "EndRow": 26,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]-5000|C:PMT(0.005,240,-100000)*(1-(1.005^-(241-12*Col[A])))/0.005",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Straight Line Decrease",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]-5000",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Mortgage Loan Decrease",
+          "TokenizedFormulaTemplate": "PMT(0.005,240,-100000)*(1-(1.005^-(241-12*Col[A])))/0.005",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

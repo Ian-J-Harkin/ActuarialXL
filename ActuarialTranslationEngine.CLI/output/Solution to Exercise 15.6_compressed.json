@@ -1,0 +1,106 @@
+{
+  "TargetWorksheet": "Solution to Exercise 15.6",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 7,
+      "EndRow": 16,
+      "FormulaSignature": "A:|B:|C:|D:\u002BCol[B]/Col[C]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Beginning of the Year Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Annual Spread Margin",
+          "TokenizedFormulaTemplate": "\u002BCol[B]/Col[C]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 19,
+      "EndRow": 19,
+      "FormulaSignature": "A:|B:|C:|D:NPV(0.05,Col[B][-12]:Col[B][-3])/(NPV(0.05,Col[C][-12]:Col[C][-3])*1.05)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Beginning of the Year Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Annual Spread Margin",
+          "TokenizedFormulaTemplate": "NPV(0.05,Col[B][-12]:Col[B][-3])/(NPV(0.05,Col[C][-12]:Col[C][-3])*1.05)",
+          "ChronologicalLookbacks": [
+            3,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 21,
+      "EndRow": 21,
+      "FormulaSignature": "A:|B:|C:|D:AVERAGE(Col[D][-14]:Col[D][-5])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Beginning of the Year Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Annual Spread Margin",
+          "TokenizedFormulaTemplate": "AVERAGE(Col[D][-14]:Col[D][-5])",
+          "ChronologicalLookbacks": [
+            5,
+            14
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

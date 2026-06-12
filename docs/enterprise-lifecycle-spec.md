@@ -466,6 +466,94 @@ namespace ActuarialTranslationEngine.Engine.Roslyn
 
 ---
 
+## Phase III-C: Imperative VBA Logic Extraction & Translation (The Dynamo Addendum)
+
+### 1. Architectural Intent
+To expand the translation engine beyond declarative cell formula networks (Archetypes A-D) into imperative, state-mutating legacy code. This phase proves the platform can extract raw VBA binary streams, parse imperative loops (e.g., Monte Carlo simulations), and translate them into stateless, deterministic C# implementations that fit into our `IActuarialReconciliationUnit` sandbox.
+
+### 2. Solution Topology & Dependencies
+**Dependency Addition:** Append `DocumentFormat.OpenXml` to the `ActuarialTranslationEngine.Engine` project. ClosedXML cannot read the `vbaProject.bin` binary stream; OpenXml is required to natively extract the macro source text from `.xlsm` and `.xlsb` files without requiring an Excel interop process.
+
+### 3. Target Dataset Boundary
+* **Source Asset:** CAS Public Access DFA Model (Dynamo v4.1) (`.xlsb` or `.xlsm` format).
+* **Archetype Scope:** **Archetype E (Imperative State Mutation)**. Workbooks where the core actuarial logic does not live in cell formulas, but rather in VBA modules that read inputs, compute in memory, and overwrite dashboard cells.
+
+### 4. Code & Contract Specification
+
+#### The VBA Extraction Contract (`ActuarialTranslationEngine.Core/Interfaces`)
+The pipeline must route macro-enabled files through an additional binary extraction phase.
+
+```csharp
+namespace ActuarialTranslationEngine.Core.Interfaces
+{
+    using System.IO;
+    using System.Collections.Generic;
+
+    public interface IVbaExtractionEngine
+    {
+        // Returns a dictionary where Key = Module Name, Value = Raw VBA Source Text
+        Dictionary<string, string> ExtractMacroModules(Stream fileStream);
+    }
+}
+```
+
+#### The OpenXml Extraction Implementation (`ActuarialTranslationEngine.Engine/Parsers`)
+
+```csharp
+namespace ActuarialTranslationEngine.Engine.Parsers
+{
+    using System.IO;
+    using System.Collections.Generic;
+    using DocumentFormat.OpenXml.Packaging;
+    using ActuarialTranslationEngine.Core.Interfaces;
+
+    public class VbaExtractionEngine : IVbaExtractionEngine
+    {
+        public Dictionary<string, string> ExtractMacroModules(Stream fileStream)
+        {
+            var modules = new Dictionary<string, string>();
+            
+            // OpenXml targets the vbaProject.bin part natively
+            using var spreadsheetDocument = SpreadsheetDocument.Open(fileStream, isEditable: false);
+            var vbaProjectPart = spreadsheetDocument.WorkbookPart?.VbaProjectPart;
+
+            if (vbaProjectPart == null) return modules; // No macros present
+
+            using var vbaStream = vbaProjectPart.GetStream();
+            using var reader = new StreamReader(vbaStream);
+            string rawVbaBinaryText = reader.ReadToEnd();
+
+            // NOTE: Agent must implement standard binary regex/parsing here 
+            // to split rawVbaBinaryText into distinct Module blocks (e.g., "Attribute VB_Name = ...")
+            modules.Add("Extracted_VBA_Payload", rawVbaBinaryText); 
+            
+            return modules;
+        }
+    }
+}
+```
+
+#### LLM Prompt Modification (Imperative Translation)
+When `VBAMacroDependency` is flagged, the LLM prompt must shift. It can no longer assume a single cell output.
+
+```text
+SYSTEM INSTRUCTIONS FOR VBA TRANSLATION:
+You are analyzing an extracted legacy VBA module from an actuarial spreadsheet.
+Unlike cell formulas, this code represents imperative state mutation.
+
+1. Trace the Monte Carlo or Simulation Loops.
+2. Identify the Input Range addresses and Output Range addresses.
+3. Translate the VBA logic into the standard `IActuarialReconciliationUnit` C# class. 
+   - You MUST replace VBA multidimensional arrays and Collections with native C# generic arrays or Lists.
+   - Output the C# code under the strict ===CSHARP_MIRROR=== delimiter.
+```
+
+### 5. Phase III-C Exit Criteria
+* **Extraction Pass:** The CLI successfully targets the CAS Dynamo `.xlsm`/`.xlsb` file and extracts the macro binary stream into readable string variables without throwing an `OpenXmlPackageException`.
+* **Compilation Pass:** The LLM Interrogation Core translates a target VBA subroutine (e.g., a claims reserving loop) into C#, and the Roslyn engine successfully compiles the resulting code into memory without syntax errors.
+
+---
+
 ## Phase IV: Full Enterprise-Grade Architecture (Production API)
 
 ### 1. Architectural Intent
@@ -494,10 +582,9 @@ Expose the certified parsing, compression, and reconciliation core as a secure, 
 
 ## Strategic Summary of Technical Evolution
 
-| Dimension | Phase I: PoC | Phase II: Small Pipeline | Phase III-A: Scope Expansion | Phase III-B: Reconciliation | Phase IV: Enterprise API |
-| --- | --- | --- | --- | --- | --- |
-| **Primary Project** | xUnit Test Spike | Multi-Project Solution | Developer CLI Tool | Roslyn Core Reference | ASP.NET Core WebAPI |
-| **LLM Bridge Type** | Live API Pass | Mock Bridge (Free) | Mock Bridge (Free) | Live API Pass | Live API Pass |
-| **Algorithmic Focus** | Baseline Validation | $t-1$ Vector Compression | Change-Point Ranges | Dynamic Sandbox Comp | Collectible Sandboxing |
-| **Data Scope Source** | 1 Cell (`Table 13.4`) | 1 Sheet (`Table 13.4`) | All Archetypes (`edu-2012`) | Confirmed Payload Sets | Enterprise Workbooks |
-| **Validation Metric** | Range Tolerance Match | JSON Schema Assertion | Data Graph Validation | Variance $\le 0.00001$ | Concurrency & Leak Profile |
+| Dimension | Phase II: Small Pipeline | Phase III-A: Scope | Phase III-B: Recon | Phase III-C: VBA Logic | Phase IV: Enterprise API | Phase V: Governance UI |
+| --- | --- | --- | --- | --- | --- | --- |
+| **Primary Project** | Multi-Project Solution | Developer CLI Tool | Roslyn Core Reference | OpenXml Implementation | ASP.NET Core WebAPI | Blazor WASM / Server |
+| **Algorithmic Focus** | $t-1$ Vector Compression | Change-Point Ranges | Dynamic Sandbox Comp | Imperative Translation | Collectible Sandboxing | DOM Rendering & State |
+| **Data Scope Source** | 1 Sheet (Table 13.4) | All edu-2012 Archetypes | Confirmed Payload Sets | CAS Dynamo Model | Enterprise Workbooks | Novel Actuarial Models |
+| **Validation Metric** | JSON Schema Assertion | Data Graph Validation | Variance $\le 0.00001$ | VBA Parsing & Comp | Concurrency Profile | Formal UAT Sign-off |

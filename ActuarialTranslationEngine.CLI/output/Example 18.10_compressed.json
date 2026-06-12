@@ -1,0 +1,304 @@
+{
+  "TargetWorksheet": "Example 18.10",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:\u002BCol[D]*(1-Col[C])|F:\u002B(Col[D]*0.875-50)*1.03|G:\u002BCol[G][\u002B1]/(1\u002BCol[B][\u002B1]\u002B0.01)|I:|J:|K:|L:|M:\u002BCol[L]*(1-Col[K])|N:\u002B(Col[L]*0.875-50)*1.03|O:\u002BCol[O][\u002B1]/(1\u002BCol[J][\u002B1]\u002B0.01)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time Since Issue",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[D]*(1-Col[C])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Minimum Nonforfeiture Amount",
+          "TokenizedFormulaTemplate": "\u002B(Col[D]*0.875-50)*1.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Present Value of Maturity Value",
+          "TokenizedFormulaTemplate": "\u002BCol[G][\u002B1]/(1\u002BCol[B][\u002B1]\u002B0.01)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Time Since Issue",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[K])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Minimum Nonforfeiture Amount",
+          "TokenizedFormulaTemplate": "\u002B(Col[L]*0.875-50)*1.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Present Value of Maturity Value",
+          "TokenizedFormulaTemplate": "\u002BCol[O][\u002B1]/(1\u002BCol[J][\u002B1]\u002B0.01)",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 15,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:|D:\u002BCol[D][-1]*(1\u002BCol[B])|E:\u002BCol[D]*(1-Col[C])|F:\u002B(Col[F][-1]-50)*1.03|G:\u002BCol[G][\u002B1]/(1\u002BCol[B][\u002B1]\u002B0.01)|I:\u002BCol[I][-1]\u002B1|J:|K:|L:\u002BCol[L][-1]*(1\u002BCol[J])|M:\u002BCol[L]*(1-Col[K])|N:\u002B(Col[N][-1]-50)*1.03|O:\u002BCol[O][\u002B1]/(1\u002BCol[J][\u002B1]\u002B0.01)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time Since Issue",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1\u002BCol[B])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[D]*(1-Col[C])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Minimum Nonforfeiture Amount",
+          "TokenizedFormulaTemplate": "\u002B(Col[F][-1]-50)*1.03",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Present Value of Maturity Value",
+          "TokenizedFormulaTemplate": "\u002BCol[G][\u002B1]/(1\u002BCol[B][\u002B1]\u002B0.01)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Time Since Issue",
+          "TokenizedFormulaTemplate": "\u002BCol[I][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L][-1]*(1\u002BCol[J])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[K])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Minimum Nonforfeiture Amount",
+          "TokenizedFormulaTemplate": "\u002B(Col[N][-1]-50)*1.03",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Present Value of Maturity Value",
+          "TokenizedFormulaTemplate": "\u002BCol[O][\u002B1]/(1\u002BCol[J][\u002B1]\u002B0.01)",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 16,
+      "EndRow": 16,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:|D:\u002BCol[D][-1]*(1\u002BCol[B])|E:\u002BCol[D]*(1-Col[C])|F:\u002B(Col[F][-1]-50)*1.03|G:\u002BCol[E]|I:\u002BCol[I][-1]\u002B1|J:|K:|L:\u002BCol[L][-1]*(1\u002BCol[J])|M:\u002BCol[L]*(1-Col[K])|N:\u002B(Col[N][-1]-50)*1.03|O:\u002BCol[M]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Time Since Issue",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1\u002BCol[B])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[D]*(1-Col[C])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Minimum Nonforfeiture Amount",
+          "TokenizedFormulaTemplate": "\u002B(Col[F][-1]-50)*1.03",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Present Value of Maturity Value",
+          "TokenizedFormulaTemplate": "\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Time Since Issue",
+          "TokenizedFormulaTemplate": "\u002BCol[I][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L][-1]*(1\u002BCol[J])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[K])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Minimum Nonforfeiture Amount",
+          "TokenizedFormulaTemplate": "\u002B(Col[N][-1]-50)*1.03",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Present Value of Maturity Value",
+          "TokenizedFormulaTemplate": "\u002BCol[M]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

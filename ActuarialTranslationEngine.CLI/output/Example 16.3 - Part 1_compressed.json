@@ -1,0 +1,162 @@
+{
+  "TargetWorksheet": "Example 16.3 - Part 1",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Random Number",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Return",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 16,
+      "FormulaSignature": "A:|B:RAND()|C:HLOOKUP(Col[B],$H$6:$M$7,2)|D:\u002BCol[D][-1]*(1\u002BCol[C])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Random Number",
+          "TokenizedFormulaTemplate": "RAND()",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Return",
+          "TokenizedFormulaTemplate": "HLOOKUP(Col[B],$H$6:$M$7,2)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1\u002BCol[C])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": [
+    {
+      "Coordinate": "Example 16.3 - Part 1!B7",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.14318139981638467",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B8",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.7477152043728783",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B9",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.09920901094062806",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B10",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.06502544584825243",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B11",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.7204012083185036",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B12",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.9183825261490532",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B13",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.7959682022260604",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B14",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.33956792303917926",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B15",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.8792130826932465",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    },
+    {
+      "Coordinate": "Example 16.3 - Part 1!B16",
+      "RawFormula": "RAND()",
+      "EvaluatedValue": "0.044394512865417735",
+      "ExceptionFlag": 2,
+      "Telemetry": {
+        "IsVolatile": true
+      }
+    }
+  ]
+}

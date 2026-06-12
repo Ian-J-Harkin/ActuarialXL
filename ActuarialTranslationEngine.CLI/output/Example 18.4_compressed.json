@@ -1,0 +1,971 @@
+{
+  "TargetWorksheet": "Example 18.4",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 5,
+      "EndRow": 5,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:|H:|I:|J:|K:|L:|M:|N:|O:|P:|R:|S:|T:|U:|V:|W:|X:|Z:|AA:|AB:|AC:|AD:(SUMPRODUCT(Col[Z][\u002B1]:Z$25,Col[W][\u002B1]:W$25)\u002BSUMPRODUCT(Col[AA][\u002B1]:AA$25,Col[X][\u002B1]:X$25)\u002BCol[AB][\u002B20]-AC$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/Col[R][\u002B1]|AF:|AG:|AH:|AI:(SUMPRODUCT(Col[AF][\u002B1]:AF$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AG][\u002B1]:AG$25,Col[V][\u002B1]:V$25)-AH$6*SUMPRODUCT(Col[R][\u002B1]:R$25,Col[V][\u002B1]:V$25))/Col[R][\u002B1]|AK:|AL:|AM:|AN:|AO:(SUMPRODUCT(Col[AL][\u002B1]:AL$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AM][\u002B1]:AM$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AK][\u002B1]:AK$25,Col[W][\u002B1]:W$25)-AN$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/Col[R][\u002B1]|AQ:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "1000 qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "wx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Commissions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per Policy Issue Expenses",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Per 1000 Issue Expense",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Maintenance Expenses Per Policy\u0027",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Premium Taxes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Net Investment Earnings Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Gross Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "GAAP Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "GAAP Mortality with PAD",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "GAAP Maintenance Expenses Per Policy with PAD",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "In Force at Beginning of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "S",
+          "ExtractedHeaderName": "Deaths",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Lapses",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "In Force at End of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "V",
+          "ExtractedHeaderName": "Interest Discount Beg of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Interest Discount Middle of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "Interest Discount End of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Death Benefits",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "Surrender Benefits",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AB",
+          "ExtractedHeaderName": "Maturity Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Benefit Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "Benefit Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[Z][\u002B1]:Z$25,Col[W][\u002B1]:W$25)\u002BSUMPRODUCT(Col[AA][\u002B1]:AA$25,Col[X][\u002B1]:X$25)\u002BCol[AB][\u002B20]-AC$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/Col[R][\u002B1]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Deferred Commissions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "Defered Expenses",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AH",
+          "ExtractedHeaderName": "DAC Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AI",
+          "ExtractedHeaderName": "DAC Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AF][\u002B1]:AF$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AG][\u002B1]:AG$25,Col[V][\u002B1]:V$25)-AH$6*SUMPRODUCT(Col[R][\u002B1]:R$25,Col[V][\u002B1]:V$25))/Col[R][\u002B1]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AK",
+          "ExtractedHeaderName": "Maintenance Expenses",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AL",
+          "ExtractedHeaderName": "Premium Tax",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AM",
+          "ExtractedHeaderName": "Commissons",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AN",
+          "ExtractedHeaderName": "Expense Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AO",
+          "ExtractedHeaderName": "Expense Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AL][\u002B1]:AL$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AM][\u002B1]:AM$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AK][\u002B1]:AK$25,Col[W][\u002B1]:W$25)-AN$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/Col[R][\u002B1]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AQ",
+          "ExtractedHeaderName": "Net Gaap Reserve",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:|H:|I:|J:|K:|L:|M:|N:\u002BCol[J]-0.005|O:\u002BCol[C]/1000*1.05|P:\u002BCol[H]*1.05|R:|S:Col[R]*Col[O]|T:(Col[R]-Col[S])*Col[D]|U:\u002BCol[R]-Col[S]-Col[T]|V:|W:\u002B(1\u002BCol[N])^-0.5|X:1/(1\u002BCol[N])|Z:\u002BCol[S]*Col[K]|AA:\u002BCol[T]*Col[M]|AB:|AC:(SUMPRODUCT(Col[Z]:Col[Z][\u002B19],Col[W]:Col[W][\u002B19])\u002BSUMPRODUCT(Col[AA]:Col[AA][\u002B19],Col[X]:Col[X][\u002B19])\u002BCol[AB][\u002B19])/SUMPRODUCT(Col[R]:Col[R][\u002B19],Col[V]:Col[V][\u002B19])|AD:(SUMPRODUCT(Col[Z][\u002B1]:Z$25,Col[W][\u002B1]:W$25)\u002BSUMPRODUCT(Col[AA][\u002B1]:AA$25,Col[X][\u002B1]:X$25)\u002BAB$25-AC$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])|AF:\u002B(Col[E]-E$25)*Col[L]*Col[R]|AG:\u002BCol[F]\u002BCol[G]*Col[K]/1000|AH:(SUMPRODUCT(Col[AF]:Col[AF][\u002B19],Col[V]:Col[V][\u002B19])\u002BSUMPRODUCT(Col[AG]:Col[AG][\u002B19],Col[V]:Col[V][\u002B19]))/SUMPRODUCT(Col[R]:Col[R][\u002B19],Col[V]:Col[V][\u002B19])|AI:(SUMPRODUCT(Col[AF][\u002B1]:AF$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AG][\u002B1]:AG$25,Col[V][\u002B1]:V$25)-AH$6*SUMPRODUCT(Col[R][\u002B1]:R$25,Col[V][\u002B1]:V$25))/(Col[U]*Col[X])|AK:\u002BCol[P]*Col[R]|AL:\u002BCol[I]*Col[L]*Col[R]|AM:\u002BCol[E]*Col[L]*Col[R]-Col[AF]|AN:(SUMPRODUCT(Col[AL]:Col[AL][\u002B19],Col[V]:Col[V][\u002B19])\u002BSUMPRODUCT(Col[AM]:Col[AM][\u002B19],Col[V]:Col[V][\u002B19])\u002BSUMPRODUCT(Col[AK]:Col[AK][\u002B19],Col[W]:Col[W][\u002B19]))/SUMPRODUCT(Col[V]:Col[V][\u002B19],Col[R]:Col[R][\u002B19])|AO:(SUMPRODUCT(Col[AL][\u002B1]:AL$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AM][\u002B1]:AM$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AK][\u002B1]:AK$25,Col[W][\u002B1]:W$25)-AN$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])|AQ:\u002BCol[AD]\u002BCol[AI]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "1000 qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "wx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Commissions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per Policy Issue Expenses",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Per 1000 Issue Expense",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Maintenance Expenses Per Policy\u0027",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Premium Taxes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Net Investment Earnings Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Gross Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "GAAP Interest Rate",
+          "TokenizedFormulaTemplate": "\u002BCol[J]-0.005",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "GAAP Mortality with PAD",
+          "TokenizedFormulaTemplate": "\u002BCol[C]/1000*1.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "GAAP Maintenance Expenses Per Policy with PAD",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*1.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "In Force at Beginning of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "S",
+          "ExtractedHeaderName": "Deaths",
+          "TokenizedFormulaTemplate": "Col[R]*Col[O]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Lapses",
+          "TokenizedFormulaTemplate": "(Col[R]-Col[S])*Col[D]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "In Force at End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[R]-Col[S]-Col[T]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "V",
+          "ExtractedHeaderName": "Interest Discount Beg of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Interest Discount Middle of Year",
+          "TokenizedFormulaTemplate": "\u002B(1\u002BCol[N])^-0.5",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "Interest Discount End of Year",
+          "TokenizedFormulaTemplate": "1/(1\u002BCol[N])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Death Benefits",
+          "TokenizedFormulaTemplate": "\u002BCol[S]*Col[K]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "Surrender Benefits",
+          "TokenizedFormulaTemplate": "\u002BCol[T]*Col[M]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AB",
+          "ExtractedHeaderName": "Maturity Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Benefit Premium",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[Z]:Col[Z][\u002B19],Col[W]:Col[W][\u002B19])\u002BSUMPRODUCT(Col[AA]:Col[AA][\u002B19],Col[X]:Col[X][\u002B19])\u002BCol[AB][\u002B19])/SUMPRODUCT(Col[R]:Col[R][\u002B19],Col[V]:Col[V][\u002B19])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "Benefit Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[Z][\u002B1]:Z$25,Col[W][\u002B1]:W$25)\u002BSUMPRODUCT(Col[AA][\u002B1]:AA$25,Col[X][\u002B1]:X$25)\u002BAB$25-AC$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Deferred Commissions",
+          "TokenizedFormulaTemplate": "\u002B(Col[E]-E$25)*Col[L]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "Defered Expenses",
+          "TokenizedFormulaTemplate": "\u002BCol[F]\u002BCol[G]*Col[K]/1000",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AH",
+          "ExtractedHeaderName": "DAC Premium",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AF]:Col[AF][\u002B19],Col[V]:Col[V][\u002B19])\u002BSUMPRODUCT(Col[AG]:Col[AG][\u002B19],Col[V]:Col[V][\u002B19]))/SUMPRODUCT(Col[R]:Col[R][\u002B19],Col[V]:Col[V][\u002B19])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AI",
+          "ExtractedHeaderName": "DAC Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AF][\u002B1]:AF$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AG][\u002B1]:AG$25,Col[V][\u002B1]:V$25)-AH$6*SUMPRODUCT(Col[R][\u002B1]:R$25,Col[V][\u002B1]:V$25))/(Col[U]*Col[X])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AK",
+          "ExtractedHeaderName": "Maintenance Expenses",
+          "TokenizedFormulaTemplate": "\u002BCol[P]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AL",
+          "ExtractedHeaderName": "Premium Tax",
+          "TokenizedFormulaTemplate": "\u002BCol[I]*Col[L]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AM",
+          "ExtractedHeaderName": "Commissons",
+          "TokenizedFormulaTemplate": "\u002BCol[E]*Col[L]*Col[R]-Col[AF]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AN",
+          "ExtractedHeaderName": "Expense Premium",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AL]:Col[AL][\u002B19],Col[V]:Col[V][\u002B19])\u002BSUMPRODUCT(Col[AM]:Col[AM][\u002B19],Col[V]:Col[V][\u002B19])\u002BSUMPRODUCT(Col[AK]:Col[AK][\u002B19],Col[W]:Col[W][\u002B19]))/SUMPRODUCT(Col[V]:Col[V][\u002B19],Col[R]:Col[R][\u002B19])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AO",
+          "ExtractedHeaderName": "Expense Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AL][\u002B1]:AL$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AM][\u002B1]:AM$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AK][\u002B1]:AK$25,Col[W][\u002B1]:W$25)-AN$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AQ",
+          "ExtractedHeaderName": "Net Gaap Reserve",
+          "TokenizedFormulaTemplate": "\u002BCol[AD]\u002BCol[AI]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 24,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:|E:|F:|G:|H:|I:|J:|K:|L:|M:|N:\u002BCol[J]-0.005|O:\u002BCol[C]/1000*1.05|P:\u002BCol[H]*1.05|R:Col[U][-1]|S:Col[R]*Col[O]|T:(Col[R]-Col[S])*Col[D]|U:\u002BCol[R]-Col[S]-Col[T]|V:\u002BCol[V][-1]/(1\u002BCol[N][-1])|W:\u002BCol[W][-1]/(1\u002BCol[N][-1])^0.5/(1\u002BCol[N])^0.5|X:\u002BCol[X][-1]/(1\u002BCol[N])|Z:\u002BCol[S]*Col[K]|AA:\u002BCol[T]*Col[M]|AB:|AC:|AD:(SUMPRODUCT(Col[Z][\u002B1]:Z$25,Col[W][\u002B1]:W$25)\u002BSUMPRODUCT(Col[AA][\u002B1]:AA$25,Col[X][\u002B1]:X$25)\u002BAB$25-AC$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])|AF:\u002B(Col[E]-E$25)*Col[L]*Col[R]|AG:\u002BCol[F]\u002BCol[G]*Col[K]/1000|AH:|AI:(SUMPRODUCT(Col[AF][\u002B1]:AF$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AG][\u002B1]:AG$25,Col[V][\u002B1]:V$25)-AH$6*SUMPRODUCT(Col[R][\u002B1]:R$25,Col[V][\u002B1]:V$25))/(Col[U]*Col[X])|AK:\u002BCol[P]*Col[R]|AL:\u002BCol[I]*Col[L]*Col[R]|AM:\u002BCol[E]*Col[L]*Col[R]-Col[AF]|AN:|AO:(SUMPRODUCT(Col[AL][\u002B1]:AL$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AM][\u002B1]:AM$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AK][\u002B1]:AK$25,Col[W][\u002B1]:W$25)-AN$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])|AQ:\u002BCol[AD]\u002BCol[AI]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "1000 qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "wx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Commissions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per Policy Issue Expenses",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Per 1000 Issue Expense",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Maintenance Expenses Per Policy\u0027",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Premium Taxes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Net Investment Earnings Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Gross Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "GAAP Interest Rate",
+          "TokenizedFormulaTemplate": "\u002BCol[J]-0.005",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "GAAP Mortality with PAD",
+          "TokenizedFormulaTemplate": "\u002BCol[C]/1000*1.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "GAAP Maintenance Expenses Per Policy with PAD",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*1.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "In Force at Beginning of Year",
+          "TokenizedFormulaTemplate": "Col[U][-1]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "S",
+          "ExtractedHeaderName": "Deaths",
+          "TokenizedFormulaTemplate": "Col[R]*Col[O]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Lapses",
+          "TokenizedFormulaTemplate": "(Col[R]-Col[S])*Col[D]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "In Force at End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[R]-Col[S]-Col[T]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "V",
+          "ExtractedHeaderName": "Interest Discount Beg of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[V][-1]/(1\u002BCol[N][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Interest Discount Middle of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[W][-1]/(1\u002BCol[N][-1])^0.5/(1\u002BCol[N])^0.5",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "Interest Discount End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[X][-1]/(1\u002BCol[N])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Death Benefits",
+          "TokenizedFormulaTemplate": "\u002BCol[S]*Col[K]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "Surrender Benefits",
+          "TokenizedFormulaTemplate": "\u002BCol[T]*Col[M]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AB",
+          "ExtractedHeaderName": "Maturity Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Benefit Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "Benefit Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[Z][\u002B1]:Z$25,Col[W][\u002B1]:W$25)\u002BSUMPRODUCT(Col[AA][\u002B1]:AA$25,Col[X][\u002B1]:X$25)\u002BAB$25-AC$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Deferred Commissions",
+          "TokenizedFormulaTemplate": "\u002B(Col[E]-E$25)*Col[L]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "Defered Expenses",
+          "TokenizedFormulaTemplate": "\u002BCol[F]\u002BCol[G]*Col[K]/1000",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AH",
+          "ExtractedHeaderName": "DAC Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AI",
+          "ExtractedHeaderName": "DAC Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AF][\u002B1]:AF$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AG][\u002B1]:AG$25,Col[V][\u002B1]:V$25)-AH$6*SUMPRODUCT(Col[R][\u002B1]:R$25,Col[V][\u002B1]:V$25))/(Col[U]*Col[X])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AK",
+          "ExtractedHeaderName": "Maintenance Expenses",
+          "TokenizedFormulaTemplate": "\u002BCol[P]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AL",
+          "ExtractedHeaderName": "Premium Tax",
+          "TokenizedFormulaTemplate": "\u002BCol[I]*Col[L]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AM",
+          "ExtractedHeaderName": "Commissons",
+          "TokenizedFormulaTemplate": "\u002BCol[E]*Col[L]*Col[R]-Col[AF]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AN",
+          "ExtractedHeaderName": "Expense Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AO",
+          "ExtractedHeaderName": "Expense Reserves",
+          "TokenizedFormulaTemplate": "(SUMPRODUCT(Col[AL][\u002B1]:AL$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AM][\u002B1]:AM$25,Col[V][\u002B1]:V$25)\u002BSUMPRODUCT(Col[AK][\u002B1]:AK$25,Col[W][\u002B1]:W$25)-AN$6*SUMPRODUCT(Col[V][\u002B1]:V$25,Col[R][\u002B1]:R$25))/(Col[U]*Col[X])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AQ",
+          "ExtractedHeaderName": "Net Gaap Reserve",
+          "TokenizedFormulaTemplate": "\u002BCol[AD]\u002BCol[AI]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 25,
+      "EndRow": 25,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:|E:|F:|G:|H:|I:|J:|K:|L:|M:|N:\u002BCol[J]-0.005|O:\u002BCol[C]/1000*1.05|P:\u002BCol[H]*1.05|R:Col[U][-1]|S:Col[R]*Col[O]|T:(Col[R]-Col[S])*Col[D]|U:\u002BCol[R]-Col[S]-Col[T]|V:\u002BCol[V][-1]/(1\u002BCol[N][-1])|W:\u002BCol[W][-1]/(1\u002BCol[N][-1])^0.5/(1\u002BCol[N])^0.5|X:\u002BCol[X][-1]/(1\u002BCol[N])|Z:\u002BCol[S]*Col[K]|AA:\u002BCol[T]*Col[M]|AB:100000*Col[X]*Col[U]|AC:|AD:AB$25/Col[X]/Col[U]|AF:\u002B(Col[E]-E$25)*Col[L]*Col[R]|AG:\u002BCol[F]\u002BCol[G]*Col[K]/1000|AH:|AI:|AK:\u002BCol[P]*Col[R]|AL:\u002BCol[I]*Col[L]*Col[R]|AM:\u002BCol[E]*Col[L]*Col[R]-Col[AF]|AN:|AO:|AQ:\u002BCol[AD]\u002BCol[AI]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "1000 qx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "wx\u002Bt",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Commissions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per Policy Issue Expenses",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Per 1000 Issue Expense",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Maintenance Expenses Per Policy\u0027",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Premium Taxes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Net Investment Earnings Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Gross Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Cash Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "GAAP Interest Rate",
+          "TokenizedFormulaTemplate": "\u002BCol[J]-0.005",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "GAAP Mortality with PAD",
+          "TokenizedFormulaTemplate": "\u002BCol[C]/1000*1.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "GAAP Maintenance Expenses Per Policy with PAD",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*1.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "In Force at Beginning of Year",
+          "TokenizedFormulaTemplate": "Col[U][-1]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "S",
+          "ExtractedHeaderName": "Deaths",
+          "TokenizedFormulaTemplate": "Col[R]*Col[O]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Lapses",
+          "TokenizedFormulaTemplate": "(Col[R]-Col[S])*Col[D]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "In Force at End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[R]-Col[S]-Col[T]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "V",
+          "ExtractedHeaderName": "Interest Discount Beg of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[V][-1]/(1\u002BCol[N][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Interest Discount Middle of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[W][-1]/(1\u002BCol[N][-1])^0.5/(1\u002BCol[N])^0.5",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "Interest Discount End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[X][-1]/(1\u002BCol[N])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Death Benefits",
+          "TokenizedFormulaTemplate": "\u002BCol[S]*Col[K]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "Surrender Benefits",
+          "TokenizedFormulaTemplate": "\u002BCol[T]*Col[M]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AB",
+          "ExtractedHeaderName": "Maturity Benefit",
+          "TokenizedFormulaTemplate": "100000*Col[X]*Col[U]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Benefit Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "Benefit Reserves",
+          "TokenizedFormulaTemplate": "AB$25/Col[X]/Col[U]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Deferred Commissions",
+          "TokenizedFormulaTemplate": "\u002B(Col[E]-E$25)*Col[L]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "Defered Expenses",
+          "TokenizedFormulaTemplate": "\u002BCol[F]\u002BCol[G]*Col[K]/1000",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AH",
+          "ExtractedHeaderName": "DAC Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AI",
+          "ExtractedHeaderName": "DAC Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AK",
+          "ExtractedHeaderName": "Maintenance Expenses",
+          "TokenizedFormulaTemplate": "\u002BCol[P]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AL",
+          "ExtractedHeaderName": "Premium Tax",
+          "TokenizedFormulaTemplate": "\u002BCol[I]*Col[L]*Col[R]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AM",
+          "ExtractedHeaderName": "Commissons",
+          "TokenizedFormulaTemplate": "\u002BCol[E]*Col[L]*Col[R]-Col[AF]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AN",
+          "ExtractedHeaderName": "Expense Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AO",
+          "ExtractedHeaderName": "Expense Reserves",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AQ",
+          "ExtractedHeaderName": "Net Gaap Reserve",
+          "TokenizedFormulaTemplate": "\u002BCol[AD]\u002BCol[AI]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

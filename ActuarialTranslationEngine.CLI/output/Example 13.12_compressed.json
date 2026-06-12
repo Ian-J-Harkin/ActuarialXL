@@ -1,0 +1,111 @@
+{
+  "TargetWorksheet": "Example 13.12",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 9,
+      "FormulaSignature": "A:|B:|F:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "AIR -\u003E",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "0.03",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Enter the actual interest rate earned each year in column E",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 10,
+      "EndRow": 10,
+      "FormulaSignature": "A:|B:|F:Col[D][-4]*Col[B]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "AIR -\u003E",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "0.03",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Enter the actual interest rate earned each year in column E",
+          "TokenizedFormulaTemplate": "Col[D][-4]*Col[B]",
+          "ChronologicalLookbacks": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 11,
+      "EndRow": 19,
+      "FormulaSignature": "A:|B:|F:IF(Col[B]=0,\u0022\u0022,Col[I][-1])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "AIR -\u003E",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "0.03",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Enter the actual interest rate earned each year in column E",
+          "TokenizedFormulaTemplate": "IF(Col[B]=0,\u0022\u0022,Col[I][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 20,
+      "EndRow": 20,
+      "FormulaSignature": "A:|B:|F:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "AIR -\u003E",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "0.03",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Enter the actual interest rate earned each year in column E",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

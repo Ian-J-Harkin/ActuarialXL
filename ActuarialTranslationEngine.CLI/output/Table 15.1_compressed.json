@@ -1,0 +1,150 @@
+{
+  "TargetWorksheet": "Table 15.1",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 8,
+      "FormulaSignature": "A:|B:|C:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits for Product 1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits for Product 2",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 9,
+      "EndRow": 9,
+      "FormulaSignature": "A:|B:\u002BCol[B][-1]\u002B50|C:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits for Product 1",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B50",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits for Product 2",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 10,
+      "EndRow": 25,
+      "FormulaSignature": "A:|B:\u002BCol[B][-1]\u002B50|C:\u002BCol[C][-1]\u002B75",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits for Product 1",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B50",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits for Product 2",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]\u002B75",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 26,
+      "EndRow": 26,
+      "FormulaSignature": "A:|B:SUM(Col[B][-20]:Col[B][-1])|C:SUM(Col[C][-20]:Col[C][-1])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits for Product 1",
+          "TokenizedFormulaTemplate": "SUM(Col[B][-20]:Col[B][-1])",
+          "ChronologicalLookbacks": [
+            1,
+            20
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits for Product 2",
+          "TokenizedFormulaTemplate": "SUM(Col[C][-20]:Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 28,
+      "EndRow": 28,
+      "FormulaSignature": "A:|B:IRR(Col[B][-22]:Col[B][-3],0.1)|C:IRR(Col[C][-22]:Col[C][-3],0.1)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Book Profits for Product 1",
+          "TokenizedFormulaTemplate": "IRR(Col[B][-22]:Col[B][-3],0.1)",
+          "ChronologicalLookbacks": [
+            3,
+            22
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Book Profits for Product 2",
+          "TokenizedFormulaTemplate": "IRR(Col[C][-22]:Col[C][-3],0.1)",
+          "ChronologicalLookbacks": [
+            3,
+            22
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

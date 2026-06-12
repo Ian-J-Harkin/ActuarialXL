@@ -1,0 +1,84 @@
+{
+  "TargetWorksheet": "Table 13.9",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 7,
+      "EndRow": 7,
+      "FormulaSignature": "A:|B:PMT(0.0075,36,-10000)*(37-Col[A])|C:PMT(0.0075,36,-10000)*(1-(1.0075^-(37-Col[A])))/0.0075",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Month",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Gross Coverage",
+          "TokenizedFormulaTemplate": "PMT(0.0075,36,-10000)*(37-Col[A])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Net Coverage",
+          "TokenizedFormulaTemplate": "PMT(0.0075,36,-10000)*(1-(1.0075^-(37-Col[A])))/0.0075",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 8,
+      "EndRow": 42,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:PMT(0.0075,36,-10000)*(37-Col[A])|C:PMT(0.0075,36,-10000)*(1-(1.0075^-(37-Col[A])))/0.0075",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Month",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Gross Coverage",
+          "TokenizedFormulaTemplate": "PMT(0.0075,36,-10000)*(37-Col[A])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Net Coverage",
+          "TokenizedFormulaTemplate": "PMT(0.0075,36,-10000)*(1-(1.0075^-(37-Col[A])))/0.0075",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 44,
+      "EndRow": 55,
+      "FormulaSignature": "A:|B:|C:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Month",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Gross Coverage",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Net Coverage",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

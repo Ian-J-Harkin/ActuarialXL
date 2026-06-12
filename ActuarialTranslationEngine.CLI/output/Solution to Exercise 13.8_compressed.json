@@ -1,0 +1,88 @@
+{
+  "TargetWorksheet": "Solution to Exercise 13.8",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 3,
+      "EndRow": 8,
+      "FormulaSignature": "A:|G:|M:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 9,
+      "EndRow": 17,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|G:\u002BCol[G][-1]\u002B1|M:\u002BCol[M][-1]\u002B1",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "\u002BCol[G][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 19,
+      "EndRow": 21,
+      "FormulaSignature": "A:|G:|M:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Solution to Exercise 3.8",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

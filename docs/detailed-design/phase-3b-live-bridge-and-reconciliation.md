@@ -238,7 +238,7 @@ flowchart TD
 The reconciliation engine processes each `VectorRangePartition` independently:
 
 1. Select a **representative row** from the partition (default: `StartRow + 1` to avoid seed rows).
-   * **Structural Error Suppression:** If the target verification row relies on an upstream cell flagged with an `ExtractionWarning` or a native Excel error string (e.g., `#DIV/0!`), the engine must gracefully step down the validation sequence and select the next completely clean row in that partition block as its validation sample.
+   * **Structural Error Suppression:** If the chosen representative verification row references any cell marked with an anomaly exception flag inside the `DisruptiveNodes` collection, the engine must step down the sequence and automatically bind its validation loop to the next structurally clean row within that partition block layout.
 2. Build the `Dictionary<string, decimal> rowInputs` from the `RawWorkbookMap` for that row.
 3. Set `expectedSpreadsheetResult` to the evaluated value of the TARGET column for that row.
 4. Invoke the compilation and verification pipeline.

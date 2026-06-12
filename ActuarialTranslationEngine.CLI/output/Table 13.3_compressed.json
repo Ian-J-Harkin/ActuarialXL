@@ -1,0 +1,328 @@
+{
+  "TargetWorksheet": "Table 13.3",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:\u002BCol[B]\u002BCol[D]\u002BCol[E]|H:|I:|J:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Dividend",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Paid-Up Additions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "One-Year Term Insurance",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Total Death Benefit",
+          "TokenizedFormulaTemplate": "\u002BCol[B]\u002BCol[D]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "1000Ax",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 7,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:\u002BCol[B]\u002BCol[D]\u002BCol[E]|H:\u002BCol[H][-1]\u002B1|I:|J:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Dividend",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Paid-Up Additions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "One-Year Term Insurance",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Total Death Benefit",
+          "TokenizedFormulaTemplate": "\u002BCol[B]\u002BCol[D]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[H][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "1000Ax",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 8,
+      "EndRow": 13,
+      "FormulaSignature": "A:|B:|C:|D:\u002BCol[D][-1]\u002B(Col[C][-1]-Col[E]*Col[J][-1])/Col[I][-1]*1000|E:MAX(((100000-80000-Col[D][-1])*Col[I][-1]/1000-Col[C][-1])/(Col[I][-1]/1000-Col[J][-1]),0)|F:\u002BCol[B]\u002BCol[D]\u002BCol[E]|H:\u002BCol[H][-1]\u002B1|I:|J:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Dividend",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Paid-Up Additions",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]\u002B(Col[C][-1]-Col[E]*Col[J][-1])/Col[I][-1]*1000",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "One-Year Term Insurance",
+          "TokenizedFormulaTemplate": "MAX(((100000-80000-Col[D][-1])*Col[I][-1]/1000-Col[C][-1])/(Col[I][-1]/1000-Col[J][-1]),0)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Total Death Benefit",
+          "TokenizedFormulaTemplate": "\u002BCol[B]\u002BCol[D]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[H][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "1000Ax",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 14,
+      "EndRow": 25,
+      "FormulaSignature": "A:|B:|C:\u002BCol[C][-1]\u002B50|D:\u002BCol[D][-1]\u002B(Col[C][-1]-Col[E]*Col[J][-1])/Col[I][-1]*1000|E:MAX(((100000-80000-Col[D][-1])*Col[I][-1]/1000-Col[C][-1])/(Col[I][-1]/1000-Col[J][-1]),0)|F:\u002BCol[B]\u002BCol[D]\u002BCol[E]|H:\u002BCol[H][-1]\u002B1|I:|J:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Dividend",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]\u002B50",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Paid-Up Additions",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]\u002B(Col[C][-1]-Col[E]*Col[J][-1])/Col[I][-1]*1000",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "One-Year Term Insurance",
+          "TokenizedFormulaTemplate": "MAX(((100000-80000-Col[D][-1])*Col[I][-1]/1000-Col[C][-1])/(Col[I][-1]/1000-Col[J][-1]),0)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Total Death Benefit",
+          "TokenizedFormulaTemplate": "\u002BCol[B]\u002BCol[D]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[H][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "1000Ax",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 27,
+      "EndRow": 39,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|H:|I:|J:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Dividend",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Paid-Up Additions",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "One-Year Term Insurance",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Total Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "1000Ax",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

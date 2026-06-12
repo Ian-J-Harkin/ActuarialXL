@@ -1,0 +1,587 @@
+{
+  "TargetWorksheet": "Table 13.4",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:Col[B]*0.03|D:\u002BCol[B]-Col[C]|E:|F:\u002BCol[G]/1000*0.05|G:|H:(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))|I:0.00112*1000/12|J:\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]|K:\u002BCol[M][-1]\u002BCol[D]-Col[J]|L:\u002BCol[K]*(1.05^(1/12)-1)|M:\u002BCol[K]\u002BCol[L]|O:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Month",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Premium Expense Charge",
+          "TokenizedFormulaTemplate": "Col[B]*0.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Premium",
+          "TokenizedFormulaTemplate": "\u002BCol[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Per policy Expense Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per 1000 Expense Charge",
+          "TokenizedFormulaTemplate": "\u002BCol[G]/1000*0.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Net Amount at Risk",
+          "TokenizedFormulaTemplate": "(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Cost of Insurance Rate Per 1000",
+          "TokenizedFormulaTemplate": "0.00112*1000/12",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Fund Value After Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002BCol[D]-Col[J]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Interest On Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[K]*(1.05^(1/12)-1)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Fund Value End of Month",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[L]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Notes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 17,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:Col[B]*0.03|D:\u002BCol[B]-Col[C]|E:|F:\u002BCol[G]/1000*0.05|G:|H:(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))|I:0.00112*1000/12|J:\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]|K:\u002BCol[M][-1]\u002BCol[D]-Col[J]|L:\u002BCol[K]*(1.05^(1/12)-1)|M:\u002BCol[K]\u002BCol[L]|O:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Month",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Premium Expense Charge",
+          "TokenizedFormulaTemplate": "Col[B]*0.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Premium",
+          "TokenizedFormulaTemplate": "\u002BCol[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Per policy Expense Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per 1000 Expense Charge",
+          "TokenizedFormulaTemplate": "\u002BCol[G]/1000*0.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Net Amount at Risk",
+          "TokenizedFormulaTemplate": "(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Cost of Insurance Rate Per 1000",
+          "TokenizedFormulaTemplate": "0.00112*1000/12",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Fund Value After Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002BCol[D]-Col[J]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Interest On Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[K]*(1.05^(1/12)-1)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Fund Value End of Month",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[L]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Notes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 18,
+      "EndRow": 29,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:Col[B]*0.03|D:\u002BCol[B]-Col[C]|E:|F:\u002BCol[G]/1000*0.05|G:|H:(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))|I:0.00117*1000/12|J:\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]|K:\u002BCol[M][-1]\u002BCol[D]-Col[J]|L:\u002BCol[K]*(1.05^(1/12)-1)|M:\u002BCol[K]\u002BCol[L]|O:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Month",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Premium Expense Charge",
+          "TokenizedFormulaTemplate": "Col[B]*0.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Premium",
+          "TokenizedFormulaTemplate": "\u002BCol[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Per policy Expense Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per 1000 Expense Charge",
+          "TokenizedFormulaTemplate": "\u002BCol[G]/1000*0.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Net Amount at Risk",
+          "TokenizedFormulaTemplate": "(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Cost of Insurance Rate Per 1000",
+          "TokenizedFormulaTemplate": "0.00117*1000/12",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Fund Value After Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002BCol[D]-Col[J]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Interest On Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[K]*(1.05^(1/12)-1)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Fund Value End of Month",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[L]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Notes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 30,
+      "EndRow": 41,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:Col[B]*0.03|D:\u002BCol[B]-Col[C]|E:|F:\u002BCol[G]/1000*0.05|G:|H:(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))|I:0.00124*1000/12|J:\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]|K:\u002BCol[M][-1]\u002BCol[D]-Col[J]|L:\u002BCol[K]*(1.05^(1/12)-1)|M:\u002BCol[K]\u002BCol[L]|O:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Month",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Premium Expense Charge",
+          "TokenizedFormulaTemplate": "Col[B]*0.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Premium",
+          "TokenizedFormulaTemplate": "\u002BCol[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Per policy Expense Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per 1000 Expense Charge",
+          "TokenizedFormulaTemplate": "\u002BCol[G]/1000*0.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Net Amount at Risk",
+          "TokenizedFormulaTemplate": "(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Cost of Insurance Rate Per 1000",
+          "TokenizedFormulaTemplate": "0.00124*1000/12",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Fund Value After Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002BCol[D]-Col[J]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Interest On Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[K]*(1.05^(1/12)-1)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Fund Value End of Month",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[L]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Notes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 42,
+      "EndRow": 53,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:Col[B]*0.03|D:\u002BCol[B]-Col[C]|E:|F:\u002BCol[G]/1000*0.05|G:|H:(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))|I:0.00133*1000/12|J:\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]|K:\u002BCol[M][-1]\u002BCol[D]-Col[J]|L:\u002BCol[K]*(1.05^(1/12)-1)|M:\u002BCol[K]\u002BCol[L]|O:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Month",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Premium Expense Charge",
+          "TokenizedFormulaTemplate": "Col[B]*0.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Premium",
+          "TokenizedFormulaTemplate": "\u002BCol[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Per policy Expense Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per 1000 Expense Charge",
+          "TokenizedFormulaTemplate": "\u002BCol[G]/1000*0.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Net Amount at Risk",
+          "TokenizedFormulaTemplate": "(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Cost of Insurance Rate Per 1000",
+          "TokenizedFormulaTemplate": "0.00133*1000/12",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Fund Value After Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002BCol[D]-Col[J]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Interest On Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[K]*(1.05^(1/12)-1)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Fund Value End of Month",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[L]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Notes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 54,
+      "EndRow": 65,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:|C:Col[B]*0.03|D:\u002BCol[B]-Col[C]|E:|F:\u002BCol[G]/1000*0.05|G:|H:(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))|I:0.00141*1000/12|J:\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]|K:\u002BCol[M][-1]\u002BCol[D]-Col[J]|L:\u002BCol[K]*(1.05^(1/12)-1)|M:\u002BCol[K]\u002BCol[L]|O:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Policy Month",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Premium",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Premium Expense Charge",
+          "TokenizedFormulaTemplate": "Col[B]*0.03",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Net Premium",
+          "TokenizedFormulaTemplate": "\u002BCol[B]-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Per policy Expense Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Per 1000 Expense Charge",
+          "TokenizedFormulaTemplate": "\u002BCol[G]/1000*0.05",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Death Benefit",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Net Amount at Risk",
+          "TokenizedFormulaTemplate": "(Col[G]-Col[M][-1]-Col[D]\u002BCol[E]\u002BCol[F])/(1.04^(1/12))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "Cost of Insurance Rate Per 1000",
+          "TokenizedFormulaTemplate": "0.00141*1000/12",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[H]*Col[I]/1000\u002BCol[F]\u002BCol[E]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Fund Value After Monthly Deduction",
+          "TokenizedFormulaTemplate": "\u002BCol[M][-1]\u002BCol[D]-Col[J]",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Interest On Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[K]*(1.05^(1/12)-1)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Fund Value End of Month",
+          "TokenizedFormulaTemplate": "\u002BCol[K]\u002BCol[L]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Notes",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

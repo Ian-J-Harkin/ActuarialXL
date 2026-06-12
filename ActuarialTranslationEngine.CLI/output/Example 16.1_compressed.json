@@ -1,0 +1,93 @@
+{
+  "TargetWorksheet": "Example 16.1",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 9,
+      "EndRow": 16,
+      "FormulaSignature": "A:|B:|C:|D:|E:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Distribution of Issues",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 18,
+      "EndRow": 18,
+      "FormulaSignature": "A:|B:IRR(Col[B][-6]:Col[B][-2])|C:IRR(Col[C][-6]:Col[C][-2])|D:IRR(Col[D][-6]:Col[D][-2])|E:IRR(Col[E][-6]:Col[E][-2])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Distribution of Issues",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "IRR(Col[B][-6]:Col[B][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            6
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "IRR(Col[C][-6]:Col[C][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            6
+          ]
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "IRR(Col[D][-6]:Col[D][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            6
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "0.25",
+          "TokenizedFormulaTemplate": "IRR(Col[E][-6]:Col[E][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            6
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

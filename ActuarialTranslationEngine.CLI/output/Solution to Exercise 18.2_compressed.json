@@ -1,0 +1,649 @@
+{
+  "TargetWorksheet": "Solution to Exercise 18.2",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:\u002BCol[C]*(1-Col[D])|F:|G:\u002BCol[E]/(1\u002BCol[F])^Col[A]|H:\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]|J:|K:|L:|M:|N:\u002BCol[L]*(1-Col[M])|O:|P:\u002BCol[N]|Q:MAX(Col[L]*(1-Col[M][\u002B1])*((1\u002BCol[M])/(1\u002BCol[O]))^0.5,Col[N])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[E]/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[M])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[N]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "MAX(Col[L]*(1-Col[M][\u002B1])*((1\u002BCol[M])/(1\u002BCol[O]))^0.5,Col[N])",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 7,
+      "FormulaSignature": "A:|B:|C:\u002BCol[C][-1]*(1\u002BCol[B])|D:|E:\u002BCol[C]*(1-Col[D])|F:|G:\u002BCol[E]/(1\u002BCol[F])^Col[A]|H:\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]|J:|K:|L:\u002BCol[L][-1]*(1\u002BCol[K])^0.5|M:|N:\u002BCol[L]*(1-Col[M])|O:|P:\u002BCol[N]/(1\u002BCol[O])^(Col[J]-2.5)|Q:\u002BCol[L]*(1-Col[M][\u002B1])/(1\u002BCol[O])^(Col[J]-2.5)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]*(1\u002BCol[B])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[E]/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L][-1]*(1\u002BCol[K])^0.5",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[M])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[N]/(1\u002BCol[O])^(Col[J]-2.5)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[M][\u002B1])/(1\u002BCol[O])^(Col[J]-2.5)",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 8,
+      "EndRow": 14,
+      "FormulaSignature": "A:|B:|C:\u002BCol[C][-1]*(1\u002BCol[B])|D:|E:\u002BCol[C]*(1-Col[D])|F:|G:\u002BCol[E]/(1\u002BCol[F])^Col[A]|H:\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]|J:|K:|L:\u002BCol[L][-1]*(1\u002BCol[K])|M:|N:\u002BCol[L]*(1-Col[M])|O:|P:\u002BCol[N]/(1\u002BCol[O])^(Col[J]-2.5)|Q:\u002BCol[L]*(1-Col[M][\u002B1])/(1\u002BCol[O])^(Col[J]-2.5)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]*(1\u002BCol[B])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[E]/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L][-1]*(1\u002BCol[K])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[M])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[N]/(1\u002BCol[O])^(Col[J]-2.5)",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[L]*(1-Col[M][\u002B1])/(1\u002BCol[O])^(Col[J]-2.5)",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 15,
+      "EndRow": 15,
+      "FormulaSignature": "A:|B:|C:\u002BCol[C][-1]*(1\u002BCol[B])|D:|E:\u002BCol[C]*(1-Col[D])|F:|G:\u002BCol[E]/(1\u002BCol[F])^Col[A]|H:\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]|J:|K:|L:|M:|N:|O:|P:|Q:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]*(1\u002BCol[B])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[E]/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 16,
+      "EndRow": 16,
+      "FormulaSignature": "A:|B:|C:\u002BCol[C][-1]*(1\u002BCol[B])|D:|E:\u002BCol[C]*(1-Col[D])|F:|G:\u002BCol[E]/(1\u002BCol[F])^Col[A]|H:\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]|J:|K:|L:|M:|N:|O:|P:MAX(Col[P][-10]:Col[P][-2])|Q:MAX(Col[Q][-10]:Col[Q][-2])",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]*(1\u002BCol[B])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[E]/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "\u002BCol[C]*(1-Col[D][\u002B1])/(1\u002BCol[F])^Col[A]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "MAX(Col[P][-10]:Col[P][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            10
+          ]
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "MAX(Col[Q][-10]:Col[Q][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 18,
+      "EndRow": 18,
+      "FormulaSignature": "A:|B:|C:|D:|E:|F:|G:MAX(Col[G][-12]:Col[G][-2])|H:MAX(Col[H][-12]:Col[H][-2])|J:|K:|L:|M:|N:|O:|P:|Q:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "MAX(Col[G][-12]:Col[G][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            12
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "MAX(Col[H][-12]:Col[H][-2])",
+          "ChronologicalLookbacks": [
+            2,
+            12
+          ]
+        },
+        {
+          "ColumnLetter": "J",
+          "ExtractedHeaderName": "End of Policy Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Guaranteed Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "Guaranteed Fund Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "M",
+          "ExtractedHeaderName": "Surrender Charge",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Guaranteed Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Valuation Interest Rate",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "P",
+          "ExtractedHeaderName": "Curtate Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Continuous Present Value of Surrender Value",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

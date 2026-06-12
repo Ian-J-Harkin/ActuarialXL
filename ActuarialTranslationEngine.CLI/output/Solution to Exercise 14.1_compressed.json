@@ -1,0 +1,123 @@
+{
+  "TargetWorksheet": "Solution to Exercise 14.1",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:1.08^-Col[B]|F:10000/SUMPRODUCT(Col[D][\u002B50]:Col[D][\u002B91],Col[E][\u002B50]:Col[E][\u002B91])|G:\u002BCol[F]*(1-SUMPRODUCT(Col[D][\u002B50]:Col[D][\u002B91],Col[E][\u002B50]:Col[E][\u002B91],Col[C][\u002B50]:Col[C][\u002B91])*(1.08^-0.5))|H:\u002BCol[F]*Col[D][\u002B50]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.08^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Premium Annuity 1",
+          "TokenizedFormulaTemplate": "10000/SUMPRODUCT(Col[D][\u002B50]:Col[D][\u002B91],Col[E][\u002B50]:Col[E][\u002B91])",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Premium Annuity 2",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*(1-SUMPRODUCT(Col[D][\u002B50]:Col[D][\u002B91],Col[E][\u002B50]:Col[E][\u002B91],Col[C][\u002B50]:Col[C][\u002B91])*(1.08^-0.5))",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Premium Annuity 3",
+          "TokenizedFormulaTemplate": "\u002BCol[F]*Col[D][\u002B50]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 97,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:\u002BCol[D][-1]*(1-Col[C][-1])|E:1.08^-Col[B]|F:|G:|H:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.08^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Premium Annuity 1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Premium Annuity 2",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Premium Annuity 3",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

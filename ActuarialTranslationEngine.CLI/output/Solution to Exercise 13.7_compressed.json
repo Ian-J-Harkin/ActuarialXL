@@ -1,0 +1,77 @@
+{
+  "TargetWorksheet": "Solution to Exercise 13.7",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 8,
+      "FormulaSignature": "A:|H:|O:|V:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Annuity Scenario 1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Annuity Scenario 2",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Annuity Scenario 3",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "V",
+          "ExtractedHeaderName": "Annuity Scenario 4",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 9,
+      "EndRow": 27,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|H:\u002BCol[H][-1]\u002B1|O:\u002BCol[O][-1]\u002B1|V:\u002BCol[V][-1]\u002B1",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Annuity Scenario 1",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Annuity Scenario 2",
+          "TokenizedFormulaTemplate": "\u002BCol[H][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "Annuity Scenario 3",
+          "TokenizedFormulaTemplate": "\u002BCol[O][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "V",
+          "ExtractedHeaderName": "Annuity Scenario 4",
+          "TokenizedFormulaTemplate": "\u002BCol[V][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

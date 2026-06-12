@@ -1,0 +1,123 @@
+{
+  "TargetWorksheet": "Example 14.1",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 6,
+      "FormulaSignature": "A:|B:|C:|D:|E:1.06^-Col[B]|F:SUMPRODUCT(Col[D][\u002B30]:Col[D][\u002B61],Col[E][\u002B30]:Col[E][\u002B61])*50000|G:\u002BCol[F]/(1-SUMPRODUCT(Col[D]:Col[D][\u002B29],Col[E]:Col[E][\u002B29],Col[C]:Col[C][\u002B29])*(1.06^-0.5))|H:\u002BCol[F]/Col[D][\u002B30]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.06^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Premium Annuity 1",
+          "TokenizedFormulaTemplate": "SUMPRODUCT(Col[D][\u002B30]:Col[D][\u002B61],Col[E][\u002B30]:Col[E][\u002B61])*50000",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Premium Annuity 2",
+          "TokenizedFormulaTemplate": "\u002BCol[F]/(1-SUMPRODUCT(Col[D]:Col[D][\u002B29],Col[E]:Col[E][\u002B29],Col[C]:Col[C][\u002B29])*(1.06^-0.5))",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Premium Annuity 3",
+          "TokenizedFormulaTemplate": "\u002BCol[F]/Col[D][\u002B30]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 7,
+      "EndRow": 67,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:\u002BCol[D][-1]*(1-Col[C][-1])|E:1.06^-Col[B]|F:|G:|H:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Duration",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "tpx",
+          "TokenizedFormulaTemplate": "\u002BCol[D][-1]*(1-Col[C][-1])",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.06^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Premium Annuity 1",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Premium Annuity 2",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Premium Annuity 3",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

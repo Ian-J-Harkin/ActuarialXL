@@ -1,0 +1,801 @@
+{
+  "TargetWorksheet": "Solution to Exercise 18.9",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 6,
+      "EndRow": 28,
+      "FormulaSignature": "B:|C:|E:|F:|H:|I:|K:|L:|N:|O:|Q:|R:|T:|U:|W:|X:|Z:|AA:|AC:|AD:|AF:|AG:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 31,
+      "EndRow": 31,
+      "FormulaSignature": "B:|C:SUM(Col[C][-25]:Col[C][-3])/COUNT(Col[C][-25]:Col[C][-3])/100|E:|F:SUM(Col[F][-25]:Col[F][-3])/COUNT(Col[F][-25]:Col[F][-3])/100|H:|I:SUM(Col[I][-25]:Col[I][-3])/COUNT(Col[I][-25]:Col[I][-3])/100|K:|L:SUM(Col[L][-25]:Col[L][-3])/COUNT(Col[L][-25]:Col[L][-3])/100|N:|O:SUM(Col[O][-25]:Col[O][-3])/COUNT(Col[O][-25]:Col[O][-3])/100|Q:|R:SUM(Col[R][-25]:Col[R][-3])/COUNT(Col[R][-25]:Col[R][-3])/100|T:|U:SUM(Col[U][-25]:Col[U][-3])/COUNT(Col[U][-25]:Col[U][-3])/100|W:|X:SUM(Col[X][-25]:Col[X][-3])/COUNT(Col[X][-25]:Col[X][-3])/100|Z:|AA:SUM(Col[AA][-25]:Col[AA][-3])/COUNT(Col[AA][-25]:Col[AA][-3])/100|AC:|AD:SUM(Col[AD][-25]:Col[AD][-3])/COUNT(Col[AD][-25]:Col[AD][-3])/100|AF:|AG:SUM(Col[AG][-25]:Col[AG][-3])/COUNT(Col[AG][-25]:Col[AG][-3])/100",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[C][-25]:Col[C][-3])/COUNT(Col[C][-25]:Col[C][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[F][-25]:Col[F][-3])/COUNT(Col[F][-25]:Col[F][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[I][-25]:Col[I][-3])/COUNT(Col[I][-25]:Col[I][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[L][-25]:Col[L][-3])/COUNT(Col[L][-25]:Col[L][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[O][-25]:Col[O][-3])/COUNT(Col[O][-25]:Col[O][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[R][-25]:Col[R][-3])/COUNT(Col[R][-25]:Col[R][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[U][-25]:Col[U][-3])/COUNT(Col[U][-25]:Col[U][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[X][-25]:Col[X][-3])/COUNT(Col[X][-25]:Col[X][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[AA][-25]:Col[AA][-3])/COUNT(Col[AA][-25]:Col[AA][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[AD][-25]:Col[AD][-3])/COUNT(Col[AD][-25]:Col[AD][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "SUM(Col[AG][-25]:Col[AG][-3])/COUNT(Col[AG][-25]:Col[AG][-3])/100",
+          "ChronologicalLookbacks": [
+            3,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 32,
+      "EndRow": 32,
+      "FormulaSignature": "B:|C:(ROUND(Col[C][-1]*2000,0)/2000)|E:|F:(ROUND(Col[F][-1]*2000,0)/2000)|H:|I:(ROUND(Col[I][-1]*2000,0)/2000)|K:|L:(ROUND(Col[L][-1]*2000,0)/2000)|N:|O:(ROUND(Col[O][-1]*2000,0)/2000)|Q:|R:(ROUND(Col[R][-1]*2000,0)/2000)|T:|U:(ROUND(Col[U][-1]*2000,0)/2000)|W:|X:(ROUND(Col[X][-1]*2000,0)/2000)|Z:|AA:(ROUND(Col[AA][-1]*2000,0)/2000)|AC:|AD:(ROUND(Col[AD][-1]*2000,0)/2000)|AF:|AG:(ROUND(Col[AG][-1]*2000,0)/2000)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[C][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[F][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[I][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[L][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[O][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[R][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[U][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[X][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[AA][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[AD][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "(ROUND(Col[AG][-1]*2000,0)/2000)",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 33,
+      "EndRow": 33,
+      "FormulaSignature": "B:|C:\u002BCol[C][-1]-0.0125|E:|F:\u002BCol[F][-1]-0.0125|H:|I:\u002BCol[I][-1]-0.0125|K:|L:\u002BCol[L][-1]-0.0125|N:|O:\u002BCol[O][-1]-0.0125|Q:|R:\u002BCol[R][-1]-0.0125|T:|U:\u002BCol[U][-1]-0.0125|W:|X:\u002BCol[X][-1]-0.0125|Z:|AA:\u002BCol[AA][-1]-0.0125|AC:|AD:\u002BCol[AD][-1]-0.0125|AF:|AG:\u002BCol[AG][-1]-0.0125",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[C][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[F][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[I][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[L][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[O][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[R][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[U][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[X][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[AA][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[AD][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "\u002BCol[AG][-1]-0.0125",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "StartRow": 34,
+      "EndRow": 34,
+      "FormulaSignature": "B:|C:MAX(0.01,MIN(0.03,Col[C][-1]))|E:|F:MAX(0.01,MIN(0.03,Col[F][-1]))|H:|I:MAX(0.01,MIN(0.03,Col[I][-1]))|K:|L:MAX(0.01,MIN(0.03,Col[L][-1]))|N:|O:MAX(0.01,MIN(0.03,Col[O][-1]))|Q:|R:MAX(0.01,MIN(0.03,Col[R][-1]))|T:|U:MAX(0.01,MIN(0.03,Col[U][-1]))|W:|X:MAX(0.01,MIN(0.03,Col[X][-1]))|Z:|AA:MAX(0.01,MIN(0.03,Col[AA][-1]))|AC:|AD:MAX(0.01,MIN(0.03,Col[AD][-1]))|AF:|AG:MAX(0.01,MIN(0.03,Col[AG][-1]))",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[C][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[F][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "H",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "I",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[I][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "K",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "L",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[L][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "N",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "O",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[O][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Q",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "R",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[R][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "T",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "U",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[U][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "W",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "X",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[X][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "Z",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AA",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[AA][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "AC",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AD",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[AD][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "AF",
+          "ExtractedHeaderName": "Date",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "AG",
+          "ExtractedHeaderName": "CMT",
+          "TokenizedFormulaTemplate": "MAX(0.01,MIN(0.03,Col[AG][-1]))",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

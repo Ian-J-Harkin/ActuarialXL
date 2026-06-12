@@ -22,6 +22,11 @@ public class VectorCompressionEngine : IVectorCompressionEngine
 
         foreach (var row in sourceMap.DataRows.OrderBy(r => r.RowIndex))
         {
+            if (row.DisruptiveNodes != null && row.DisruptiveNodes.Any())
+            {
+                block.DisruptiveNodes.AddRange(row.DisruptiveNodes);
+            }
+
             var rowSignatureList = new List<string>();
             var rowColumns = new List<ColumnDefinition>();
 

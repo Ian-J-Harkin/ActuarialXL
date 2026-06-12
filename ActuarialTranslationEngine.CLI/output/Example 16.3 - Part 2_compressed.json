@@ -1,0 +1,71 @@
+{
+  "TargetWorksheet": "Example 16.3 - Part 2",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 10,
+      "EndRow": 10,
+      "FormulaSignature": "A:|C:STDEVP(Col[A][-4]:Col[A][\u002B9995])|F:|G:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "24026.642671874997",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Standard Deviation",
+          "TokenizedFormulaTemplate": "STDEVP(Col[A][-4]:Col[A][\u002B9995])",
+          "ChronologicalLookbacks": [
+            4
+          ]
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "3",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "46176.282850460004",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 11,
+      "EndRow": 10006,
+      "FormulaSignature": "A:|C:|F:|G:",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "24026.642671874997",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "Standard Deviation",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "3",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "46176.282850460004",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

@@ -1,0 +1,215 @@
+{
+  "TargetWorksheet": "Example 18.6",
+  "ProcessingArchetype": "",
+  "Partitions": [
+    {
+      "StartRow": 7,
+      "EndRow": 7,
+      "FormulaSignature": "A:|B:|C:|D:1-Col[C]|E:1.06^-Col[B]|F:\u002BCol[F][\u002B1]*Col[D]/1.06\u002B1|G:SUM(Col[E]:$E$16)/Col[E]\u002B$F$17*$E$17/Col[E]*PRODUCT(Col[D]:$D$16)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "px",
+          "TokenizedFormulaTemplate": "1-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.06^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Life Only Annuity Due",
+          "TokenizedFormulaTemplate": "\u002BCol[F][\u002B1]*Col[D]/1.06\u002B1",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Life Annuity Due with 10 Years Certain",
+          "TokenizedFormulaTemplate": "SUM(Col[E]:$E$16)/Col[E]\u002B$F$17*$E$17/Col[E]*PRODUCT(Col[D]:$D$16)",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 8,
+      "EndRow": 16,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:1-Col[C]|E:1.06^-Col[B]|F:\u002BCol[F][\u002B1]*Col[D]/1.06\u002B1|G:SUM(Col[E]:$E$16)/Col[E]\u002B$F$17*$E$17/Col[E]*PRODUCT(Col[D]:$D$16)",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "px",
+          "TokenizedFormulaTemplate": "1-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.06^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Life Only Annuity Due",
+          "TokenizedFormulaTemplate": "\u002BCol[F][\u002B1]*Col[D]/1.06\u002B1",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Life Annuity Due with 10 Years Certain",
+          "TokenizedFormulaTemplate": "SUM(Col[E]:$E$16)/Col[E]\u002B$F$17*$E$17/Col[E]*PRODUCT(Col[D]:$D$16)",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 17,
+      "EndRow": 56,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:1-Col[C]|E:1.06^-Col[B]|F:\u002BCol[F][\u002B1]*Col[D]/1.06\u002B1|G:\u002BCol[F]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "px",
+          "TokenizedFormulaTemplate": "1-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.06^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Life Only Annuity Due",
+          "TokenizedFormulaTemplate": "\u002BCol[F][\u002B1]*Col[D]/1.06\u002B1",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Life Annuity Due with 10 Years Certain",
+          "TokenizedFormulaTemplate": "\u002BCol[F]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    },
+    {
+      "StartRow": 57,
+      "EndRow": 57,
+      "FormulaSignature": "A:\u002BCol[A][-1]\u002B1|B:\u002BCol[B][-1]\u002B1|C:|D:1-Col[C]|E:1.06^-Col[B]|F:|G:\u002BCol[F]",
+      "StructuralColumns": [
+        {
+          "ColumnLetter": "A",
+          "ExtractedHeaderName": "Attained Age",
+          "TokenizedFormulaTemplate": "\u002BCol[A][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "B",
+          "ExtractedHeaderName": "End of Year",
+          "TokenizedFormulaTemplate": "\u002BCol[B][-1]\u002B1",
+          "ChronologicalLookbacks": [
+            1
+          ]
+        },
+        {
+          "ColumnLetter": "C",
+          "ExtractedHeaderName": "qx",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "D",
+          "ExtractedHeaderName": "px",
+          "TokenizedFormulaTemplate": "1-Col[C]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "E",
+          "ExtractedHeaderName": "vt",
+          "TokenizedFormulaTemplate": "1.06^-Col[B]",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "F",
+          "ExtractedHeaderName": "Life Only Annuity Due",
+          "TokenizedFormulaTemplate": "",
+          "ChronologicalLookbacks": []
+        },
+        {
+          "ColumnLetter": "G",
+          "ExtractedHeaderName": "Life Annuity Due with 10 Years Certain",
+          "TokenizedFormulaTemplate": "\u002BCol[F]",
+          "ChronologicalLookbacks": []
+        }
+      ]
+    }
+  ],
+  "DisruptiveNodes": []
+}

@@ -11,6 +11,13 @@ namespace ActuarialTranslationEngine.Engine;
 
 public class ActuarialExtractionEngine : IActuarialExtractionEngine
 {
+    public List<string> GetWorksheetNames(Stream fileStream)
+    {
+        if (fileStream == null) throw new ArgumentNullException(nameof(fileStream));
+        using var workbook = new XLWorkbook(fileStream);
+        return workbook.Worksheets.Select(s => s.Name).ToList();
+    }
+
     public RawWorkbookMap ExtractSheetData(Stream fileStream, string sheetName)
     {
         if (fileStream == null) throw new ArgumentNullException(nameof(fileStream));
@@ -93,7 +100,25 @@ public class ActuarialExtractionEngine : IActuarialExtractionEngine
                 // Extract formula
                 if (cell.HasFormula)
                 {
-                    rowMetadata.CellFormulas[header.ColumnLetter] = cell.FormulaA1;
+                    string formula = cell.FormulaA1;
+                    rowMetadata.CellFormulas[header.ColumnLetter] = formula;
+
+                    // Check for Volatile functions
+                    if (formula.Contains("RAND()") || formula.Contains("OFFSET(") || formula.Contains("NOW(") || formula.Contains("INDIRECT("))
+                    {
+                        rowMetadata.DisruptiveNodes.Add(new DisruptiveNode
+                        {
+                            Coordinate = $"{sheetName}!{header.ColumnLetter}{r}",
+                            RawFormula = formula,
+                            EvaluatedValue = cell.CachedValue.ToString(), // Hard-lock the frozen value
+                            ExceptionFlag = ActuarialNodeExceptionType.VolatileFunction,
+                            Telemetry = new Dictionary<string, object> { { "IsVolatile", true } }
+                        });
+                        // Hard-lock the sample evaluated value in the output
+                        rowMetadata.CellValues[header.ColumnLetter] = cell.CachedValue.ToString();
+                        hasAnyData = true;
+                        continue;
+                    }
                 }
 
                 // Extract value (handling native Excel errors safely without throwing)
@@ -103,13 +128,23 @@ public class ActuarialExtractionEngine : IActuarialExtractionEngine
                     if (val.IsError)
                     {
                         string errorStr = val.GetError().ToString();
-                        rowMetadata.CellValues[header.ColumnLetter] = errorStr;
-                        rowMetadata.ExtractionWarnings.Add($"Cell {header.ColumnLetter}{r} contains native error: {errorStr}");
+                        rowMetadata.CellValues[header.ColumnLetter] = $"<ERROR_STATE: {errorStr}>";
+                        
+                        var node = new DisruptiveNode
+                        {
+                            Coordinate = $"{sheetName}!{header.ColumnLetter}{r}",
+                            RawFormula = cell.HasFormula ? cell.FormulaA1 : string.Empty,
+                            EvaluatedValue = $"<ERROR_STATE: {errorStr}>",
+                            ExceptionFlag = ActuarialNodeExceptionType.ExcelNativeError
+                        };
                         
                         if (val.GetError() == XLError.CellReference)
                         {
-                            rowMetadata.ExtractionWarnings.Add($"CRITICAL: Cell {header.ColumnLetter}{r} contains broken #REF! reference.");
+                            node.Telemetry.Add("Severity", "CRITICAL");
+                            node.Telemetry.Add("Message", "Contains broken #REF! reference");
                         }
+
+                        rowMetadata.DisruptiveNodes.Add(node);
                     }
                     else
                     {
@@ -118,8 +153,13 @@ public class ActuarialExtractionEngine : IActuarialExtractionEngine
                 }
                 catch (Exception ex)
                 {
-                    rowMetadata.CellValues[header.ColumnLetter] = "ERROR";
-                    rowMetadata.ExtractionWarnings.Add($"Cell {header.ColumnLetter}{r} read error: {ex.Message}");
+                    rowMetadata.CellValues[header.ColumnLetter] = "<ERROR_STATE: READ_EXCEPTION>";
+                    rowMetadata.DisruptiveNodes.Add(new DisruptiveNode
+                    {
+                        Coordinate = $"{sheetName}!{header.ColumnLetter}{r}",
+                        ExceptionFlag = ActuarialNodeExceptionType.ExcelNativeError,
+                        Telemetry = new Dictionary<string, object> { { "ExceptionMessage", ex.Message } }
+                    });
                 }
             }
 
