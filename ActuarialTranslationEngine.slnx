@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ActuarialTranslationEngine.Core/ActuarialTranslationEngine.Core.csproj" />
+  <Project Path="ActuarialTranslationEngine.Engine/ActuarialTranslationEngine.Engine.csproj" />
+  <Project Path="ActuarialTranslationEngine.Tests.Unit/ActuarialTranslationEngine.Tests.Unit.csproj" />
+</Solution>

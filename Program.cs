@@ -1,0 +1,1 @@
+using System; using ClosedXML.Excel; var wb = new XLWorkbook(@"c:\Github\ActuarialXLpoc\edu-2012-c13-01.xlsx"); foreach(var sheet in wb.Worksheets) { Console.WriteLine(sheet.Name); }

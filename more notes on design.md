@@ -1,0 +1,9 @@
+Yes, the `architectural-blueprint.md` is the absolute best document to share. It contains the exact data structures and user flows that the UI will need to support.
+
+If you are feeding this to a UX/UI Designer Agent (like the `bmad-agent-ux-designer`), I highly recommend specifically pointing them to these three sections within the blueprint:
+
+1. **Section 1 & 8 (The Input/Output Loop):** This explains that the UI dashboard isn't just a static report—it's a hot-reloading interface powered by the SQLite database. The designer needs to know they are designing a screen that displays **Auditable Markdown** side-by-side with **Stateless C# Source Code**, allowing the actuary to view, audit, and potentially trigger rule regenerations.
+2. **Section 6 (Automated Reconciliation Loop):** This tells the designer that the UI needs a clear visual indicator for the validation status. They need to design states for **"Mathematically Certified"** (Green/Pass) versus **"Logic Leak Error"** (Red/Fail with Variance Delta).
+3. **Section 7 (Exception Handling Core):** This is critical for UX. The designer needs to know that the system will occasionally throw `DisruptiveNodes` (like `#REF!` errors or Volatile `RAND()` functions). The UI will need warning banners or Jira-style alerts to surface these spreadsheet anomalies to the actuary.
+
+**In short:** Pasting the `architectural-blueprint.md` and telling the designer agent, *"Design the Actuary Review Dashboard based on the data outputs and governance loops defined in this blueprint,"* will give them everything they need to create a pixel-perfect, highly functional wireframe!
