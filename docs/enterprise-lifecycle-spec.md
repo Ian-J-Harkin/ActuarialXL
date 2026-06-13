@@ -437,9 +437,9 @@ namespace ActuarialTranslationEngine.Engine.Roslyn
                 throw new ActuarialDynamicCompilationException(emitResult.Diagnostics);
             }
 
-            // Standardize on AssemblyLoadContext immediately to establish non-default context patterns
-            // NOTE: isCollectible shifts to true via 'using' scopes during Phase IV scaling transformations
-            var isolatedContext = new AssemblyLoadContext("ActuarialValidationScope", isCollectible: false);
+            // ARCHITECT OVERRIDE (Phase III-B Risk Analysis): isCollectible is true from Phase III-B onwards
+            // See architectural-blueprint.md §9.4 for rationale
+            using var isolatedContext = new AssemblyLoadContext("ActuarialValidationScope", isCollectible: true);
 
             ms.Position = 0;
             Assembly assembly = isolatedContext.LoadFromStream(ms);

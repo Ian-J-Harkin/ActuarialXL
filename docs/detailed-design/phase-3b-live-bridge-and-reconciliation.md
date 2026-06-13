@@ -244,9 +244,12 @@ The reconciliation engine processes each `VectorRangePartition` independently:
 4. Invoke the compilation and verification pipeline.
 5. If the partition passes, mark it as verified. If it fails, the entire block is flagged.
 
-### Why Only One Representative Row?
+### ~~Why Only One Representative Row?~~ Multi-Row Sampling (RISK-A1 Override)
 
-If the `VectorCompressionEngine` correctly identified the partition boundaries (i.e., all rows within the partition share the same abstract formula signature), then mathematically any row should produce the same structural calculation path. Testing one row per partition is sufficient because the formula structure is proven identical. The variance test catches any semantic drift.
+> [!CAUTION]
+> **SUPERSEDED:** The original rationale has been overturned by the Phase III-B Risk Analysis. See architectural-blueprint.md Section 9.3 for the full rationale.
+
+**Corrected Requirement:** The reconciliation loop must pull **three distinct verification scalar sets** from the Excel database for each `VectorRangePartition`: the **First Row** (catches initialization boundary errors), the **Mid-Point Row** (validates the general recurrence rule), and the **Last Row** (catches terminal boundary errors). All three must pass the variance ceiling. This mathematically proves the LLM generated a generalized algorithmic rule and did not hardcode a scalar from the sample payload.
 
 > [!WARNING]
 > **Archetype C (Multi-Ledger) Target Heuristic:** For wide balancing tables with 20+ columns, the system cannot assume which column is the "answer". Relying on the "rightmost formula column" will cause false variance failures. 
