@@ -54,8 +54,9 @@ public class PipelineIntegrationTests
         Assert.Equal(6, compressedBlock.Partitions.Count);
 
         Assert.NotNull(finalTranslation);
-        // The mock bridge embeds the partition count into the C# and Markdown outputs
+        // The mock bridge embeds the valid C# and Markdown outputs, PLUS the dynamic partition count validation
         Assert.Contains("Received 6 partitions for Table 13.4", finalTranslation.GeneratedCSharpMirrorCode);
+        Assert.Contains("public class DynamicReconciliationUnit", finalTranslation.GeneratedCSharpMirrorCode);
         Assert.Contains("Partitions: 6", finalTranslation.FinalAuditableMarkdown);
     }
 }

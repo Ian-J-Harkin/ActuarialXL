@@ -39,42 +39,31 @@ public class ActuarialExtractionEngine : IActuarialExtractionEngine
         int headerRowNumber = -1;
         var headers = new List<ColumnDefinition>();
 
-        // 1. Find Header Row (rows 1-10)
-        for (int r = 1; r <= Math.Min(10, usedRange.LastRowUsed().RowNumber()); r++)
-        {
-            var row = worksheet.Row(r);
-            var cells = row.CellsUsed();
-            
-            int nonEmptyCount = 0;
-            bool hasFormula = false;
-
-            foreach (var cell in cells)
+            // 1. Find Header Row (rows 1-500)
+            for (int r = 1; r <= Math.Min(500, usedRange.LastRowUsed().RowNumber()); r++)
             {
-                if (!string.IsNullOrWhiteSpace(cell.Value.ToString())) nonEmptyCount++;
-                if (cell.HasFormula) hasFormula = true;
-            }
+                var row = worksheet.Row(r);
+                var cells = row.CellsUsed();
+                if (!cells.Any()) continue; // skip completely empty rows
 
-            if (nonEmptyCount >= 3 && !hasFormula)
-            {
+                // Consider this row as header
                 headerRowNumber = r;
                 foreach (var cell in cells)
                 {
                     if (string.IsNullOrWhiteSpace(cell.Value.ToString())) continue;
-                    
-                    headers.Add(new ColumnDefinition 
-                    { 
-                        ColumnLetter = cell.WorksheetColumn().ColumnLetter(), 
+                    headers.Add(new ColumnDefinition
+                    {
+                        ColumnLetter = cell.WorksheetColumn().ColumnLetter(),
                         ExtractedHeaderName = cell.Value.ToString().Trim()
                     });
                 }
                 break;
             }
-        }
 
-        if (headerRowNumber == -1)
-        {
-            throw new ActuarialExtractionException("No header row detected in first 10 rows");
-        }
+            if (headerRowNumber == -1)
+            {
+                throw new ActuarialExtractionException("No header row detected in first 500 rows");
+            }
 
         var map = new RawWorkbookMap
         {

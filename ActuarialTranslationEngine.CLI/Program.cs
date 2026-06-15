@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ActuarialTranslationEngine.Core.Interfaces;
 using ActuarialTranslationEngine.Engine;
-
+using ActuarialTranslationEngine.Engine.LlmBridge;
+using ActuarialTranslationEngine.Core.Models;
 namespace ActuarialTranslationEngine.CLI
 {
     class Program
@@ -53,7 +54,21 @@ namespace ActuarialTranslationEngine.CLI
                     services.AddSingleton<IVectorCompressionEngine, VectorCompressionEngine>();
                     
                     // Enforce Phase III-A Boundary Rule (Mock Bridge only)
-                    services.AddSingleton<IDomainInterrogationBridge, MockDomainInterrogationBridge>();
+                    // Register LLM bridge configuration from env var
+                    services.AddSingleton<LlmBridgeConfiguration>(provider =>
+                    {
+                        var cfg = new LlmBridgeConfiguration();
+                        var key = Environment.GetEnvironmentVariable("OPENROUTER_API_KEY");
+                        if (!string.IsNullOrWhiteSpace(key))
+                            cfg.ApiKey = key;
+                        else
+                            throw new InvalidOperationException("OpenRouter API key not set in environment variable OPENROUTER_API_KEY");
+                        return cfg;
+                    });
+                    
+                    // Register HttpClient for LiveDomainInterrogationBridge
+                    services.AddHttpClient<ActuarialTranslationEngine.Engine.LlmBridge.LiveDomainInterrogationBridge>();
+                    services.AddSingleton<IDomainInterrogationBridge, ActuarialTranslationEngine.Engine.LlmBridge.LiveDomainInterrogationBridge>();
 
                     services.AddSingleton<CLIOrchestrator>();
                 })

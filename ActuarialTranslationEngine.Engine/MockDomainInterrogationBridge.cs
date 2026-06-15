@@ -6,15 +6,22 @@ namespace ActuarialTranslationEngine.Engine;
 
 public class MockDomainInterrogationBridge : IDomainInterrogationBridge
 {
-    public Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload)
+    public Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
     {
-        // In a mock, we just echo back some metadata based on the payload to prove we received it intact
-        var output = new TranslationOutput
+        return Task.FromResult(new TranslationOutput
         {
-            GeneratedCSharpMirrorCode = $"// MOCK: Received {payload.Partitions.Count} partitions for {payload.TargetWorksheet}",
-            FinalAuditableMarkdown = $"# Mock Specification\nTarget: {payload.TargetWorksheet}\nPartitions: {payload.Partitions.Count}"
-        };
-
-        return Task.FromResult(output);
+            FinalAuditableMarkdown = $"# Mock Specification\nTarget: {payload.TargetWorksheet}\nPartitions: {payload.Partitions.Count}",
+            GeneratedCSharpMirrorCode = $$"""
+                // Received {{payload.Partitions.Count}} partitions for {{payload.TargetWorksheet}}
+                using System;
+                using System.Collections.Generic;
+                using ActuarialTranslationEngine.Core.Interfaces;
+                
+                public class DynamicReconciliationUnit : IActuarialReconciliationUnit
+                {
+                    public decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs) => 42m;
+                }
+                """
+        });
     }
 }

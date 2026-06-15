@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 
 namespace ActuarialTranslationEngine.Core.Exceptions;
 
@@ -16,8 +18,17 @@ public class ActuarialLogicLeakException : Exception
 
 public class ActuarialDynamicCompilationException : Exception
 {
-    public ActuarialDynamicCompilationException(string message) : base(message) { }
-    public ActuarialDynamicCompilationException(string message, Exception inner) : base(message, inner) { }
+    public IEnumerable<Diagnostic> Diagnostics { get; }
+
+    public ActuarialDynamicCompilationException(string message) : base(message) 
+    {
+        Diagnostics = Array.Empty<Diagnostic>();
+    }
+    
+    public ActuarialDynamicCompilationException(string message, IEnumerable<Diagnostic> diagnostics) : base(message) 
+    {
+        Diagnostics = diagnostics;
+    }
 }
 
 public class ActuarialLlmBridgeException : Exception
