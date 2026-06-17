@@ -113,6 +113,16 @@ public class MockBridge : IDomainInterrogationBridge
             GeneratedCSharpMirrorCode = ReturnCode 
         });
     }
+
+    public Task<TranslationOutput> ProcessVbaPayloadAsync(VbaModuleCode payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
+    {
+        CallCount++;
+        return Task.FromResult(new TranslationOutput 
+        { 
+            FinalAuditableMarkdown = "Test VBA", 
+            GeneratedCSharpMirrorCode = ReturnCode 
+        });
+    }
 }
 
 public class MockRoslynEngine : IRoslynReconciliationEngine

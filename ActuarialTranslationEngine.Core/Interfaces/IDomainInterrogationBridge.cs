@@ -7,4 +7,5 @@ namespace ActuarialTranslationEngine.Core.Interfaces;
 public interface IDomainInterrogationBridge
 {
     Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string? previousCompilerError = null, CancellationToken cancellationToken = default);
+    Task<TranslationOutput> ProcessVbaPayloadAsync(VbaModuleCode payload, string? previousCompilerError = null, CancellationToken cancellationToken = default);
 }

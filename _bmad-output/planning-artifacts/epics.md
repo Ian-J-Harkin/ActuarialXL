@@ -46,6 +46,8 @@ None.
 ### FR Coverage Map
 
 
+FR8: Epic 5 - Read raw text code of `.vbaProject.bin` using `DocumentFormat.OpenXml`.
+FR9: Epic 5 - Translate VBA logic into C# methods using an LLM code-compiler.
 FR10: Epic 4 - Expose parsing, compression, and reconciliation core as an ASP.NET Core WebAPI.
 
 ## Epic List
@@ -93,3 +95,43 @@ So that I can submit Excel files and retrieve evaluated logic without needing to
 **Then** the API must immediately return a 400 Bad Request with a clear validation error,
 **And** still properly invoke AssemblyLoadContext.Unload() to ensure no orphan memory partitions remain.
 
+## Epic 5: Imperative VBA Logic Extraction & Translation
+**Goal:** Extract and translate legacy, imperative VBA macro logic (`.vbaProject.bin`) instead of just declarative cell formulas, vastly expanding the types of actuarial models supported.
+**FRs covered:** FR8, FR9
+
+### Story 5.1: OpenXml VBA Binary Extraction
+As a system orchestrator,
+I want to extract the raw macro binary stream from legacy .xlsm/.xlsb workbooks using DocumentFormat.OpenXml,
+So that the LLM has access to the imperative logic that cannot be parsed by ClosedXML.
+
+**Acceptance Criteria:**
+**Given** an uploaded .xlsm or .xlsb file containing macros,
+**When** the new IVbaExtractionEngine processes the stream,
+**Then** it must successfully extract the `.vbaProject.bin` stream as raw text,
+**And** it must not throw an OpenXmlPackageException or lock the file stream.
+
+### Story 5.2: LLM Imperative Code-to-Code Translation
+As an Actuary,
+I want the LLM to translate procedural VBA loops into deterministic C# execution rules,
+So that imperative logic (like Monte Carlo simulations) can be evaluated by the Roslyn engine.
+
+**Acceptance Criteria:**
+**Given** the raw VBA text extracted from the workbook,
+**When** the IDomainInterrogationBridge processes the payload with the VBA flag enabled,
+**Then** the LLM must return stateless, pure C# code implementing `IActuarialReconciliationUnit`,
+**And** the Roslyn engine must successfully compile and execute it with a variance Delta $\le 0.00001m$.
+
+## Epic 6: Governance UI (Blazor Frontend)
+**Goal:** Build the user-facing web application (Blazor WASM / Server) to interact with the core WebAPI. Users can upload models, view translations, and formally sign-off on the generated C# code via a dashboard.
+**FRs covered:** Governance UI and UAT Sign-off
+
+### Story 6.1: Blazor Web Application Scaffold
+As an Actuary,
+I want a web interface to interact with the translation engine,
+So that I don't have to use API testing tools to upload files or review SQLite results.
+
+**Acceptance Criteria:**
+**Given** the running ASP.NET Core WebAPI,
+**When** a user navigates to the new Blazor application,
+**Then** they must be presented with a file upload dashboard capable of handling `.xlsx` and `.xlsm` files,
+**And** the application must successfully route the file to the WebAPI and display the returned TranslationOutput visually.

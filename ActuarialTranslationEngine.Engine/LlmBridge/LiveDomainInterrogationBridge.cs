@@ -83,6 +83,64 @@ public class LiveDomainInterrogationBridge : IDomainInterrogationBridge
         }
     }
 
+    public async Task<TranslationOutput> ProcessVbaPayloadAsync(VbaModuleCode payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
+    {
+        var userContent = $"VBA Source Code for module '{payload.ModuleName}':\n```vba\n{payload.RawVbaTextString}\n```";
+        
+        if (!string.IsNullOrEmpty(previousCompilerError))
+        {
+            userContent += $"\n\nYOUR PREVIOUS ATTEMPT FAILED WITH COMPILER ERRORS:\n{previousCompilerError}\n\nPlease fix the errors and try again. Output the corrected class.";
+        }
+
+        var requestBody = new
+        {
+            model = _config.ModelName,
+            temperature = 0.0,
+            messages = new[]
+            {
+                new { role = "system", content = string.IsNullOrEmpty(_config.VbaSystemPrompt) ? _config.SystemPrompt : _config.VbaSystemPrompt },
+                new { role = "user", content = userContent }
+            }
+        };
+
+        using var requestMessage = new HttpRequestMessage(HttpMethod.Post, _config.EndpointUrl);
+        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _config.ApiKey);
+        requestMessage.Headers.Add("HTTP-Referer", "https://github.com/Ian-J-Harkin/ActuarialXL");
+        requestMessage.Headers.Add("X-Title", "ActuarialXL Translation Engine");
+        requestMessage.Content = JsonContent.Create(requestBody);
+
+        var response = await _httpClient.SendAsync(requestMessage, cancellationToken);
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorBody = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new ActuarialLlmBridgeException($"OpenRouter API returned {response.StatusCode}: {errorBody}");
+        }
+
+        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+        
+        try
+        {
+            using var jsonDocument = JsonDocument.Parse(responseBody);
+            var content = jsonDocument.RootElement
+                .GetProperty("choices")[0]
+                .GetProperty("message")
+                .GetProperty("content")
+                .GetString();
+
+            if (content == null)
+            {
+                throw new ActuarialLlmBridgeException("LLM returned an empty content string.");
+            }
+
+            return ParseLlmOutput(content);
+        }
+        catch (JsonException ex)
+        {
+            throw new ActuarialLlmBridgeException("Failed to parse LLM JSON response.", ex);
+        }
+    }
+
     private TranslationOutput ParseLlmOutput(string rawOutput)
     {
         var delimiter = "===CSHARP_MIRROR===";
