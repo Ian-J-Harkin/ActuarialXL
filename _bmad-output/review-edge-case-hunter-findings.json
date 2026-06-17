@@ -1,0 +1,50 @@
+[
+  {
+    "location": "ActuarialTranslationEngine.CLI/Program.cs:68",
+    "trigger_condition": "Prompt engineering log file is locked by another process during ReadAllText",
+    "guard_snippet": "try { logContent = File.ReadAllText(promptPath); } catch (IOException ex) { throw; }",
+    "potential_consequence": "Unhandled IOException crashes the CLI application during startup dependency injection resolution"
+  },
+  {
+    "location": "ActuarialTranslationEngine.CLI/Program.cs:72",
+    "trigger_condition": "System prompt regex matches an empty or whitespace-only code block",
+    "guard_snippet": "if (string.IsNullOrWhiteSpace(cfg.SystemPrompt)) throw new InvalidOperationException();",
+    "potential_consequence": "API configuration is initialized with empty prompt constraints, breaking downstream translations"
+  },
+  {
+    "location": "ActuarialTranslationEngine.CLI/Program.cs:70",
+    "trigger_condition": "Regex match takes excessive time on unstructured or maliciously formatted log content",
+    "guard_snippet": "Regex.Match(logContent, @\"...\", RegexOptions.Singleline, TimeSpan.FromSeconds(1))",
+    "potential_consequence": "Startup thread hangs indefinitely due to catastrophic regex backtracking"
+  },
+  {
+    "location": "ActuarialTranslationEngine.Engine/Orchestration/ReconciliationOrchestrator.cs:23",
+    "trigger_condition": "block input parameter is null",
+    "guard_snippet": "if (block == null) throw new ArgumentNullException(nameof(block));",
+    "potential_consequence": "NullReferenceException thrown when accessing partitions list during execution loop"
+  },
+  {
+    "location": "ActuarialTranslationEngine.Engine/Orchestration/ReconciliationOrchestrator.cs:25",
+    "trigger_condition": "cancellationToken is cancelled before completing all partitions",
+    "guard_snippet": "cancellationToken.ThrowIfCancellationRequested();",
+    "potential_consequence": "Process loop continues iterating over remaining partitions despite cancellation request"
+  },
+  {
+    "location": "ActuarialTranslationEngine.Engine/Orchestration/ReconciliationOrchestrator.cs:76",
+    "trigger_condition": "llmOutput reference returned by the interrogation bridge is null",
+    "guard_snippet": "if (llmOutput != null) results.Add(llmOutput);",
+    "potential_consequence": "Null reference added to results list, causing NullReferenceException downstream"
+  },
+  {
+    "location": "ActuarialTranslationEngine.Engine/Orchestration/ReconciliationOrchestrator.cs:94",
+    "trigger_condition": "Dynamic compilation fails on later partitions after some succeeded",
+    "guard_snippet": "throw new ActuarialDynamicCompilationException(\"Failed\", results);",
+    "potential_consequence": "Successfully compiled outputs from earlier partitions are lost when exception throws"
+  },
+  {
+    "location": "docs/enterprise-lifecycle-spec.md:158",
+    "trigger_condition": "Deserialization library processes ColumnDefinition with missing required properties",
+    "guard_snippet": "if (definition.ColumnLetter == null) throw new JsonException();",
+    "potential_consequence": "Null values bypass compiler checks and trigger NullReferenceException in logic"
+  }
+]
