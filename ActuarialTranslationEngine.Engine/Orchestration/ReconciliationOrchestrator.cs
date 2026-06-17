@@ -22,9 +22,12 @@ public class ReconciliationOrchestrator : IReconciliationOrchestrator
 
     public async Task<List<TranslationOutput>> ProcessBlockAsync(CompressedVectorBlock block, RawWorkbookMap workbookMap, CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(block);
+        
         var results = new List<TranslationOutput>();
         foreach (var partition in block.Partitions)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             // 1. Identify Target Column
             string targetColumn = DetermineTargetColumn(partition);
 
@@ -73,7 +76,10 @@ public class ReconciliationOrchestrator : IReconciliationOrchestrator
                         await _roslynEngine.CompileAndVerifyAsync(csharpCode, inputs, expectedResult, cancellationToken);
                     }
 
-                    results.Add(llmOutput);
+                    if (llmOutput != null)
+                    {
+                        results.Add(llmOutput);
+                    }
                     success = true;
                     break; // Success! Break out of the retry loop.
                 }
@@ -91,7 +97,9 @@ public class ReconciliationOrchestrator : IReconciliationOrchestrator
 
             if (!success)
             {
-                throw new ActuarialDynamicCompilationException("Failed to compile valid C# after 3 attempts.");
+                // To avoid losing all progress, attach results to the exception if it supports it, 
+                // or just throw with the info. Assuming ActuarialDynamicCompilationException doesn't take results in constructor yet.
+                throw new ActuarialDynamicCompilationException($"Failed to compile valid C# after 3 attempts. {results.Count} successful partitions were lost.");
             }
         }
         

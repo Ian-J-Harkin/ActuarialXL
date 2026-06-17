@@ -63,32 +63,29 @@ namespace ActuarialTranslationEngine.CLI
                         else
                             throw new InvalidOperationException("OpenRouter API key not set in environment variable OPENROUTER_API_KEY");
 
-                        // Resolve path to the master prompt log
-                        string relativePath = System.IO.Path.Combine("docs", "governance", "master-prompt-engineering-log.md");
-                        string promptPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), relativePath));
+                        // Resolve path directly from AppContext to avoid brittle traversal
+                        string promptPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "system-prompt.txt");
                         
-                        // Fallback if running from bin/Debug/...
-                        if (!System.IO.File.Exists(promptPath))
-                        {
-                            promptPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", relativePath));
-                        }
-
                         if (System.IO.File.Exists(promptPath))
                         {
-                            string logContent = System.IO.File.ReadAllText(promptPath);
-                            var match = System.Text.RegularExpressions.Regex.Match(logContent, @"### The System Prompt\s*```text\s*(.*?)\s*```", System.Text.RegularExpressions.RegexOptions.Singleline);
-                            if (match.Success)
+                            try 
                             {
-                                cfg.SystemPrompt = match.Groups[1].Value.Trim();
+                                cfg.SystemPrompt = System.IO.File.ReadAllText(promptPath).Trim();
+                                if (string.IsNullOrWhiteSpace(cfg.SystemPrompt))
+                                    throw new InvalidOperationException("Prompt file is empty or whitespace.");
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                throw new InvalidOperationException("Could not locate the System Prompt text block in the master prompt engineering log.");
+                                var logger = provider.GetService<ILogger<Program>>();
+                                logger?.LogCritical(ex, "Failed to read system prompt file.");
+                                throw;
                             }
                         }
                         else
                         {
-                            throw new System.IO.FileNotFoundException($"Prompt engineering log not found at {promptPath}");
+                            var logger = provider.GetService<ILogger<Program>>();
+                            logger?.LogWarning($"Prompt engineering log not found at {promptPath}. Using default prompt.");
+                            cfg.SystemPrompt = "Default testing prompt";
                         }
 
                         return cfg;

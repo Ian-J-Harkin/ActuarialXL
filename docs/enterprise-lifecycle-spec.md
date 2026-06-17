@@ -120,7 +120,7 @@ namespace ActuarialTranslationEngine.PoC
 ### 5. Phase I Exit & Knowledge Capture Criteria
 
 * **Execution Pass:** Test passes successfully with zero manual source file mutations.
-* **Persistent Artifact Capture:** The validated prompt syntax, structural configuration formats, and LLM reasoning quirks must be committed to the root repository as a persistent markdown file named `/docs/governance/master-prompt-engineering-log.md` before archiving or removing the scratchpad project.
+* **Persistent Artifact Capture:** The validated prompt syntax, structural configuration formats, and LLM reasoning quirks must be committed to the root repository as a persistent file named `system-prompt.txt` before archiving or removing the scratchpad project.
 
 ---
 
@@ -155,23 +155,23 @@ namespace ActuarialTranslationEngine.Core.Models
 {
     using System.Collections.Generic;
 
-    public class ColumnDefinition
+    public class ColumnDefinition(string columnLetter, string cleanHeaderName, string tokenizedFormulaTemplate, List<int> chronologicalLookbacks)
     {
-        public required string ColumnLetter { get; init; }
-        public required string ExtractedHeaderName { get; init; }
-        public string TokenizedFormulaTemplate { get; set; } = string.Empty;
-        public List<int> ChronologicalLookbacks { get; set; } = new();
+        public string ColumnLetter { get; set; } = columnLetter;
+        public string CleanHeaderName { get; set; } = cleanHeaderName;
+        public string TokenizedFormulaTemplate { get; set; } = tokenizedFormulaTemplate;
+        public List<int> ChronologicalLookbacks { get; set; } = chronologicalLookbacks;
     }
 
     public class RawWorkbookMap
     {
         public string SheetName { get; set; } = string.Empty;
-        public List<RawRowMetadata> DataRows { get; init; } = new();
+        public List<RawRowMetadata> Rows { get; set; } = new();
     }
 
     public class RawRowMetadata
     {
-        public int RowIndex { get; set; }
+        public int RowNumber { get; set; }
         public Dictionary<string, string> CellFormulas { get; set; } = new(); // Key: ColumnLetter
         public Dictionary<string, string> CellValues { get; set; } = new();   // Key: ColumnLetter
     }
@@ -224,7 +224,7 @@ namespace ActuarialTranslationEngine.Core.Interfaces
 
     public interface IDomainInterrogationBridge
     {
-        Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string? previousCompilerError = null, CancellationToken cancellationToken = default);
+        Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, CancellationToken cancellationToken = default);
     }
 
     public interface IActuarialReconciliationUnit
@@ -386,7 +386,7 @@ namespace ActuarialTranslationEngine.Engine.Compression
 
 To light up the automated mathematical validation layer. This phase introduces live generative capabilities and verifies that the system can compile code strings dynamically in memory and execute them against spreadsheet baselines down to a fraction of a penny.
 
-* **LLM Boundary Rule:** **Live Bridge Active.** Swap the mock integration layer for the live endpoint. The live bridge reads and compiles the markdown-based prompt template from the path `/docs/governance/master-prompt-engineering-log.md` into memory during service initialization.
+* **LLM Boundary Rule:** **Live Bridge Active.** Swap the mock integration layer for the live endpoint. The live bridge reads and compiles the prompt template from the path `system-prompt.txt` into memory during service initialization.
 * **Runtime Sandbox Rule:** Initialize the isolated `AssemblyLoadContext` pattern immediately from the start of this phase. The transition to Phase IV will merely append the `isCollectible: true` constructor flag and wrap the context lifecycle inside a standard `using` block, completely avoiding downstream structural code rewrites.
 
 ### 2. Solution Topology & Dependencies

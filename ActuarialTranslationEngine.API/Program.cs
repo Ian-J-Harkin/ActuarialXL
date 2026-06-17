@@ -37,25 +37,10 @@ builder.Services.AddSingleton<LlmBridgeConfiguration>(provider =>
     else
         cfg.ApiKey = "dummy_for_testing"; // Default dummy key for integration test
 
-    string relativePath = Path.Combine("docs", "governance", "master-prompt-engineering-log.md");
-    string promptPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
-    if (!File.Exists(promptPath))
-    {
-        promptPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", relativePath));
-    }
-
+    string promptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "system-prompt.txt");
     if (File.Exists(promptPath))
     {
-        string logContent = File.ReadAllText(promptPath);
-        var match = System.Text.RegularExpressions.Regex.Match(logContent, @"### The System Prompt\s*```text\s*(.*?)\s*```", System.Text.RegularExpressions.RegexOptions.Singleline);
-        if (match.Success)
-        {
-            cfg.SystemPrompt = match.Groups[1].Value.Trim();
-        }
-        else
-        {
-            cfg.SystemPrompt = string.Empty;
-        }
+        cfg.SystemPrompt = File.ReadAllText(promptPath).Trim();
     }
     else
     {
@@ -118,8 +103,8 @@ app.MapPost("/api/evaluate", async (HttpRequest request,
         var compressedBlock = compressionEngine.CompressTopology(sheetRawMap);
 
         // Phase 3 & 4: Translation, Reconciliation & Assembly Sandboxing
-        // 1. Process translation block
-        var translationOutputs = await orchestrator.ProcessBlockAsync(compressedBlock, sheetRawMap, cancellationToken);
+        // 1. Process translation block (Offloaded to background thread pool to prevent request thread starvation)
+        var translationOutputs = await Task.Run(() => orchestrator.ProcessBlockAsync(compressedBlock, sheetRawMap, cancellationToken));
 
         // Phase 5: Persistence
         var record = new TranslatedModelRecord

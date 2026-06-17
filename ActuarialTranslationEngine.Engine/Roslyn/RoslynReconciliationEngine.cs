@@ -25,51 +25,13 @@ public class RoslynReconciliationEngine : IRoslynReconciliationEngine
 
     public async Task CompileAndVerifyAsync(string csharpCode, Dictionary<string, decimal> rowInputs, decimal expectedSpreadsheetResult, CancellationToken cancellationToken = default)
     {
-        // 1. AST Safety Check
-        var syntaxTree = CSharpSyntaxTree.ParseText(csharpCode, cancellationToken: cancellationToken);
-        var root = await syntaxTree.GetRootAsync(cancellationToken);
-
-        var scanner = new AstSafetyScanner(_config);
-        scanner.Visit(root);
-        if (scanner.Violations.Any())
-        {
-            var diagnostic = Diagnostic.Create(
-                new DiagnosticDescriptor("AST001", "Security", "Dangerous code: " + string.Join("; ", scanner.Violations), "Security", DiagnosticSeverity.Error, true), Location.None);
-            throw new ActuarialDynamicCompilationException("Security scan failed.", new[] { diagnostic });
-        }
-
-        // 2. Compilation Setup
-        var references = new List<MetadataReference>
-        {
-            MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(Dictionary<,>).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(IActuarialReconciliationUnit).Assembly.Location),
-            MetadataReference.CreateFromFile(Assembly.Load("System.Runtime").Location),
-            MetadataReference.CreateFromFile(Assembly.Load("System.Collections").Location)
-        };
-
-        var compilation = CSharpCompilation.Create(
-            $"ActuarialDynamicAssembly_{Guid.NewGuid()}",
-            new[] { syntaxTree }, references,
-            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel: OptimizationLevel.Release));
-
-        using var ms = new MemoryStream();
-        var emitResult = compilation.Emit(ms, cancellationToken: cancellationToken);
-
-        // 3. Evaluate Compilation Status
-        if (!emitResult.Success)
-        {
-            var errors = emitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error);
-            throw new ActuarialDynamicCompilationException("Failed to compile LLM generated code.", errors);
-        }
-
-        // 4. Memory Stream Reset
-        ms.Seek(0, SeekOrigin.Begin);
+        byte[] assemblyBytes = await CompileToBytesAsync(csharpCode, cancellationToken);
 
         // 5. Load Assembly in Collectible Context
         var loadContext = new AssemblyLoadContext("ActuarialReconciliationContext", isCollectible: true);
         try
         {
+            using var ms = new MemoryStream(assemblyBytes);
             var assembly = loadContext.LoadFromStream(ms);
             var type = assembly.GetType("DynamicReconciliationUnit");
 
@@ -112,5 +74,45 @@ public class RoslynReconciliationEngine : IRoslynReconciliationEngine
             // Ensure unloading to prevent memory leaks across thousands of rows
             loadContext.Unload();
         }
+    }
+
+    private async Task<byte[]> CompileToBytesAsync(string csharpCode, CancellationToken cancellationToken)
+    {
+        var syntaxTree = CSharpSyntaxTree.ParseText(csharpCode, cancellationToken: cancellationToken);
+        var root = await syntaxTree.GetRootAsync(cancellationToken);
+
+        var scanner = new AstSafetyScanner(_config);
+        scanner.Visit(root);
+        if (scanner.Violations.Any())
+        {
+            var diagnostic = Diagnostic.Create(
+                new DiagnosticDescriptor("AST001", "Security", "Dangerous code: " + string.Join("; ", scanner.Violations), "Security", DiagnosticSeverity.Error, true), Location.None);
+            throw new ActuarialDynamicCompilationException("Security scan failed.", new[] { diagnostic });
+        }
+
+        var references = new List<MetadataReference>
+        {
+            MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(Dictionary<,>).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(IActuarialReconciliationUnit).Assembly.Location),
+            MetadataReference.CreateFromFile(Assembly.Load("System.Runtime").Location),
+            MetadataReference.CreateFromFile(Assembly.Load("System.Collections").Location)
+        };
+
+        var compilation = CSharpCompilation.Create(
+            $"ActuarialDynamicAssembly_{Guid.NewGuid()}",
+            new[] { syntaxTree }, references,
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel: OptimizationLevel.Release));
+
+        using var ms = new MemoryStream();
+        var emitResult = compilation.Emit(ms, cancellationToken: cancellationToken);
+
+        if (!emitResult.Success)
+        {
+            var errors = emitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error);
+            throw new ActuarialDynamicCompilationException("Failed to compile LLM generated code.", errors);
+        }
+
+        return ms.ToArray();
     }
 }
