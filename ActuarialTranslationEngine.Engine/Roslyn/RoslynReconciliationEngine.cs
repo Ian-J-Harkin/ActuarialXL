@@ -25,22 +25,20 @@ public class RoslynReconciliationEngine : IRoslynReconciliationEngine
 
     public async Task CompileAndVerifyAsync(string csharpCode, Dictionary<string, decimal> rowInputs, decimal expectedSpreadsheetResult, CancellationToken cancellationToken = default)
     {
-        // 1. Parse into AST
+        // 1. AST Safety Check
         var syntaxTree = CSharpSyntaxTree.ParseText(csharpCode, cancellationToken: cancellationToken);
         var root = await syntaxTree.GetRootAsync(cancellationToken);
 
-        // 2. Safety Scan
         var scanner = new AstSafetyScanner(_config);
         scanner.Visit(root);
         if (scanner.Violations.Any())
         {
             var diagnostic = Diagnostic.Create(
-                new DiagnosticDescriptor("AST001", "Security Violation", "Dangerous code detected: " + string.Join("; ", scanner.Violations), "Security", DiagnosticSeverity.Error, true), 
-                Location.None);
+                new DiagnosticDescriptor("AST001", "Security", "Dangerous code: " + string.Join("; ", scanner.Violations), "Security", DiagnosticSeverity.Error, true), Location.None);
             throw new ActuarialDynamicCompilationException("Security scan failed.", new[] { diagnostic });
         }
 
-        // 3. Setup Compilation Context (Restrictive)
+        // 2. Compilation Setup
         var references = new List<MetadataReference>
         {
             MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
@@ -52,20 +50,20 @@ public class RoslynReconciliationEngine : IRoslynReconciliationEngine
 
         var compilation = CSharpCompilation.Create(
             $"ActuarialDynamicAssembly_{Guid.NewGuid()}",
-            new[] { syntaxTree },
-            references,
+            new[] { syntaxTree }, references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel: OptimizationLevel.Release));
 
-        // 4. Emit to Memory Stream
         using var ms = new MemoryStream();
         var emitResult = compilation.Emit(ms, cancellationToken: cancellationToken);
 
+        // 3. Evaluate Compilation Status
         if (!emitResult.Success)
         {
             var errors = emitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error);
             throw new ActuarialDynamicCompilationException("Failed to compile LLM generated code.", errors);
         }
 
+        // 4. Memory Stream Reset
         ms.Seek(0, SeekOrigin.Begin);
 
         // 5. Load Assembly in Collectible Context

@@ -1,6 +1,8 @@
 <Solution>
+  <Project Path="ActuarialTranslationEngine.API/ActuarialTranslationEngine.API.csproj" />
   <Project Path="ActuarialTranslationEngine.CLI/ActuarialTranslationEngine.CLI.csproj" />
   <Project Path="ActuarialTranslationEngine.Core/ActuarialTranslationEngine.Core.csproj" />
   <Project Path="ActuarialTranslationEngine.Engine/ActuarialTranslationEngine.Engine.csproj" />
   <Project Path="ActuarialTranslationEngine.Tests.Unit/ActuarialTranslationEngine.Tests.Unit.csproj" />
+  <Project Path="ActuarialTranslationEngine.Persistence/ActuarialTranslationEngine.Persistence.csproj" />
 </Solution>

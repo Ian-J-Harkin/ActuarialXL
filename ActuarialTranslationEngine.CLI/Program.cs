@@ -53,8 +53,7 @@ namespace ActuarialTranslationEngine.CLI
                     services.AddSingleton<IActuarialExtractionEngine, ActuarialExtractionEngine>();
                     services.AddSingleton<IVectorCompressionEngine, VectorCompressionEngine>();
                     
-                    // Enforce Phase III-A Boundary Rule (Mock Bridge only)
-                    // Register LLM bridge configuration from env var
+                    // Enforce Phase III-B Boundary Rule: Load Prompt from Governance Log
                     services.AddSingleton<LlmBridgeConfiguration>(provider =>
                     {
                         var cfg = new LlmBridgeConfiguration();
@@ -63,6 +62,35 @@ namespace ActuarialTranslationEngine.CLI
                             cfg.ApiKey = key;
                         else
                             throw new InvalidOperationException("OpenRouter API key not set in environment variable OPENROUTER_API_KEY");
+
+                        // Resolve path to the master prompt log
+                        string relativePath = System.IO.Path.Combine("docs", "governance", "master-prompt-engineering-log.md");
+                        string promptPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), relativePath));
+                        
+                        // Fallback if running from bin/Debug/...
+                        if (!System.IO.File.Exists(promptPath))
+                        {
+                            promptPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", relativePath));
+                        }
+
+                        if (System.IO.File.Exists(promptPath))
+                        {
+                            string logContent = System.IO.File.ReadAllText(promptPath);
+                            var match = System.Text.RegularExpressions.Regex.Match(logContent, @"### The System Prompt\s*```text\s*(.*?)\s*```", System.Text.RegularExpressions.RegexOptions.Singleline);
+                            if (match.Success)
+                            {
+                                cfg.SystemPrompt = match.Groups[1].Value.Trim();
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException("Could not locate the System Prompt text block in the master prompt engineering log.");
+                            }
+                        }
+                        else
+                        {
+                            throw new System.IO.FileNotFoundException($"Prompt engineering log not found at {promptPath}");
+                        }
+
                         return cfg;
                     });
                     

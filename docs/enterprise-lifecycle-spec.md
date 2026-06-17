@@ -155,23 +155,23 @@ namespace ActuarialTranslationEngine.Core.Models
 {
     using System.Collections.Generic;
 
-    public class ColumnDefinition(string columnLetter, string cleanHeaderName, string tokenizedFormulaTemplate, List<int> chronologicalLookbacks)
+    public class ColumnDefinition
     {
-        public string ColumnLetter { get; set; } = columnLetter;
-        public string CleanHeaderName { get; set; } = cleanHeaderName;
-        public string TokenizedFormulaTemplate { get; set; } = tokenizedFormulaTemplate;
-        public List<int> ChronologicalLookbacks { get; set; } = chronologicalLookbacks;
+        public required string ColumnLetter { get; init; }
+        public required string ExtractedHeaderName { get; init; }
+        public string TokenizedFormulaTemplate { get; set; } = string.Empty;
+        public List<int> ChronologicalLookbacks { get; set; } = new();
     }
 
     public class RawWorkbookMap
     {
         public string SheetName { get; set; } = string.Empty;
-        public List<RawRowMetadata> Rows { get; set; } = new();
+        public List<RawRowMetadata> DataRows { get; init; } = new();
     }
 
     public class RawRowMetadata
     {
-        public int RowNumber { get; set; }
+        public int RowIndex { get; set; }
         public Dictionary<string, string> CellFormulas { get; set; } = new(); // Key: ColumnLetter
         public Dictionary<string, string> CellValues { get; set; } = new();   // Key: ColumnLetter
     }
@@ -220,9 +220,11 @@ namespace ActuarialTranslationEngine.Core.Interfaces
         CompressedVectorBlock CompressTopology(RawWorkbookMap rawMap);
     }
 
+    using System.Threading;
+
     public interface IDomainInterrogationBridge
     {
-        Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload);
+        Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string? previousCompilerError = null, CancellationToken cancellationToken = default);
     }
 
     public interface IActuarialReconciliationUnit
@@ -230,9 +232,12 @@ namespace ActuarialTranslationEngine.Core.Interfaces
         decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs);
     }
 
+    // NOTE: Evolved from synchronous to asynchronous (Task-based) in Phase III-B 
+    // to properly support non-blocking syntax tree parsing, compilation steps, 
+    // and cancellation token support during execution timeouts.
     public interface IRoslynReconciliationEngine
     {
-        void CompileAndVerify(string cSharpSourceCode, decimal expectedSpreadsheetResult, Dictionary<string, decimal> rowInputs);
+        Task CompileAndVerifyAsync(string csharpCode, Dictionary<string, decimal> rowInputs, decimal expectedSpreadsheetResult, CancellationToken cancellationToken = default);
     }
 }
 ```

@@ -6,5 +6,5 @@ using ActuarialTranslationEngine.Core.Models;
 
 public interface IReconciliationOrchestrator
 {
-    Task ProcessBlockAsync(CompressedVectorBlock block, RawWorkbookMap workbookMap, CancellationToken cancellationToken = default);
+    Task<List<TranslationOutput>> ProcessBlockAsync(CompressedVectorBlock block, RawWorkbookMap workbookMap, CancellationToken cancellationToken = default);
 }

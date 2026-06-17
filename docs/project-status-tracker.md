@@ -48,7 +48,7 @@ This document tracks the execution and completion status of the phases defined i
 ---
 
 ## Phase III-B: Live Bridge & Reconciliation Validation
-**Status:** ⏳ **PENDING**
+**Status:** ✅ **COMPLETED**
 * **Goal:** Orchestrate the LLM to write stateless C# strings, execute them dynamically via an in-memory Roslyn compiler, and test the outputs against the raw spreadsheet data (Penny-Perfect Balance).
 * **Reference:** [Phase III-B Detailed Design](detailed-design/phase-3b-live-bridge-and-reconciliation.md)
 
@@ -57,4 +57,12 @@ This document tracks the execution and completion status of the phases defined i
 ## Phase IV: Persistence & Storage Layer (Database Metadata Pattern)
 **Status:** ⏳ **PENDING**
 * **Goal:** Implement the embedded `SQLite` database using `Entity Framework Core` to store the versioned C# code and Auditable Markdown payloads in `JSONB` format for hot-reloading.
+* **Requirement:** Must be defined as vertically-sliced BDD user stories before implementation begins.
 * **Reference:** [Architectural Blueprint: Section 8](../architectural-blueprint.md#8-persistence--storage-layer-the-hybrid-database-metadata-pattern)
+
+---
+
+## Phase V: Enterprise API & Governance Sandboxing
+**Status:** ⏳ **PENDING**
+* **Goal:** Expose the parsing, compression, and reconciliation core as an ASP.NET Core WebAPI (FR10). Implement asynchronous task offloading via channels (NFR3) and Collectible Memory Sandboxing (NFR4) for high-throughput multi-tenant processing (NFR2).
+* **Requirement:** Must be defined as vertically-sliced BDD user stories before implementation begins.

@@ -20,8 +20,9 @@ public class ReconciliationOrchestrator : IReconciliationOrchestrator
         _roslynEngine = roslynEngine ?? throw new ArgumentNullException(nameof(roslynEngine));
     }
 
-    public async Task ProcessBlockAsync(CompressedVectorBlock block, RawWorkbookMap workbookMap, CancellationToken cancellationToken = default)
+    public async Task<List<TranslationOutput>> ProcessBlockAsync(CompressedVectorBlock block, RawWorkbookMap workbookMap, CancellationToken cancellationToken = default)
     {
+        var results = new List<TranslationOutput>();
         foreach (var partition in block.Partitions)
         {
             // 1. Identify Target Column
@@ -72,6 +73,7 @@ public class ReconciliationOrchestrator : IReconciliationOrchestrator
                         await _roslynEngine.CompileAndVerifyAsync(csharpCode, inputs, expectedResult, cancellationToken);
                     }
 
+                    results.Add(llmOutput);
                     success = true;
                     break; // Success! Break out of the retry loop.
                 }
@@ -92,6 +94,8 @@ public class ReconciliationOrchestrator : IReconciliationOrchestrator
                 throw new ActuarialDynamicCompilationException("Failed to compile valid C# after 3 attempts.");
             }
         }
+        
+        return results;
     }
 
     private string DetermineTargetColumn(VectorRangePartition partition)

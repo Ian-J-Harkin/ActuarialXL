@@ -40,6 +40,7 @@ Risk considerations for the live bridge are documented in [Phase3B_Risk_Analysis
 - Potential latency and rate‑limit impacts when calling OpenRouter.
 - Failure‑mode handling for transient network errors (currently a simple retry count; future work will introduce Polly policies).
 - Security review of the API key handling (environment variable vs. configuration file).
+- **Prompt Governance Implementation:** Enforced Phase III-B intent by updating `Program.cs` to dynamically load the LLM system prompt from `docs/governance/master-prompt-engineering-log.md` during DI initialization instead of defaulting to an empty string. This ensures the Live Bridge sends the rigorously tested prompt persona constraints to OpenRouter, maintaining architectural and semantic integrity.
 
 The accompanying spec and decision‑log files provide the concrete implementation guidance:
 - [spec‑phase‑3b‑live‑bridge/SPEC.md](file:///C:/Github/ActuarialXLpoc/_bmad-output/specs/spec-phase-3b-live-bridge/SPEC.md)
