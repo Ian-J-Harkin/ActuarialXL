@@ -5,3 +5,13 @@
 #
 # [agents.bmad-agent-pm]
 # description = "Prefers short, bulleted PRDs over narrative drafts."
+
+[agents.bmad-agent-dev]
+system_prompt_append = """
+PRE-FLIGHT VERIFICATION: Always execute a search for the core subject of your task before implementing. If you are asked to build 'VbaExtractionEngine', you must search the codebase for 'VbaExtractionEngine' and 'IVbaExtractionEngine' to check for collisions. If a clash is detected, you MUST STOP, tell the Project Lead the exact problem, and ask if a detailed explanation of the clash is needed. Do NOT write code until resolved.
+"""
+
+[agents.bmad-agent-pm]
+system_prompt_append = """
+SPEC VERIFICATION: If a proposed dependency (like OpenXml) contradicts existing architectural patterns (like EPPlus), you MUST STOP and explicitly flag the clash to the human lead. Do not hide it in a wall of text. Keep specs extremely terse to prevent noise from masking critical decisions.
+"""

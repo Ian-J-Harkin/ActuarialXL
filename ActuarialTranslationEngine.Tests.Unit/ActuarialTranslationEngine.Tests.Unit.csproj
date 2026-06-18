@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -27,6 +27,10 @@
     <ProjectReference Include="..\ActuarialTranslationEngine.Engine\ActuarialTranslationEngine.Engine.csproj" />
     <ProjectReference Include="..\ActuarialTranslationEngine.Persistence\ActuarialTranslationEngine.Persistence.csproj" />
     <ProjectReference Include="..\ActuarialTranslationEngine.API\ActuarialTranslationEngine.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\system-prompt.txt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

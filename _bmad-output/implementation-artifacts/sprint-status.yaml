@@ -46,7 +46,7 @@ development_status:
   4-1-persistent-actuarial-audit-trail-sqlite: done
   4-2-aspnet-core-webapi-wrapper: done
   epic-4-retrospective: done
-  epic-5: in-progress
-  5-1-openxml-vba-binary-extraction: review
-  5-2-llm-imperative-code-to-code-translation: review
+  epic-5: done
+  5-1-openxml-vba-binary-extraction: done
+  5-2-llm-imperative-code-to-code-translation: done
   epic-5-retrospective: optional

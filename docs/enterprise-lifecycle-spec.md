@@ -496,42 +496,42 @@ namespace ActuarialTranslationEngine.Core.Interfaces
 
     public interface IVbaExtractionEngine
     {
-        // Returns a dictionary where Key = Module Name, Value = Raw VBA Source Text
-        Dictionary<string, string> ExtractMacroModules(Stream fileStream);
+        // Returns a list of extracted VBA modules
+        List<Models.VbaModuleCode> ExtractVbaCodeStreams(Stream fileStream);
     }
 }
 ```
 
-#### The OpenXml Extraction Implementation (`ActuarialTranslationEngine.Engine/Parsers`)
+#### The EPPlus Extraction Implementation (`ActuarialTranslationEngine.Engine/VbaExtractionEngine.cs`)
+> **Architectural Note (Deviation from OpenXml):** The initial spec mandated `DocumentFormat.OpenXml` for extraction. However, OpenXml only extracts the raw compressed `.vbaProject.bin` stream and cannot natively decompress OLE container formats where the actual readable VBA strings reside. Therefore, the implementation was shifted to `EPPlus`, which natively handles OLE decompression and provides a working extraction layer.
 
 ```csharp
-namespace ActuarialTranslationEngine.Engine.Parsers
+namespace ActuarialTranslationEngine.Engine
 {
     using System.IO;
     using System.Collections.Generic;
-    using DocumentFormat.OpenXml.Packaging;
+    using OfficeOpenXml;
     using ActuarialTranslationEngine.Core.Interfaces;
+    using ActuarialTranslationEngine.Core.Models;
 
     public class VbaExtractionEngine : IVbaExtractionEngine
     {
-        public Dictionary<string, string> ExtractMacroModules(Stream fileStream)
+        public List<VbaModuleCode> ExtractVbaCodeStreams(Stream fileStream)
         {
-            var modules = new Dictionary<string, string>();
+            var modules = new List<VbaModuleCode>();
+            using var package = new ExcelPackage(fileStream);
             
-            // OpenXml targets the vbaProject.bin part natively
-            using var spreadsheetDocument = SpreadsheetDocument.Open(fileStream, isEditable: false);
-            var vbaProjectPart = spreadsheetDocument.WorkbookPart?.VbaProjectPart;
-
-            if (vbaProjectPart == null) return modules; // No macros present
-
-            using var vbaStream = vbaProjectPart.GetStream();
-            using var reader = new StreamReader(vbaStream);
-            string rawVbaBinaryText = reader.ReadToEnd();
-
-            // NOTE: Agent must implement standard binary regex/parsing here 
-            // to split rawVbaBinaryText into distinct Module blocks (e.g., "Attribute VB_Name = ...")
-            modules.Add("Extracted_VBA_Payload", rawVbaBinaryText); 
-            
+            if (package.Workbook.VbaProject != null)
+            {
+                foreach (var module in package.Workbook.VbaProject.Modules)
+                {
+                    modules.Add(new VbaModuleCode
+                    {
+                        ModuleName = module.Name,
+                        SourceCode = module.Code
+                    });
+                }
+            }
             return modules;
         }
     }

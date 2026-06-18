@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ActuarialTranslationEngine.Persistence\ActuarialTranslationEngine.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\system-prompt.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

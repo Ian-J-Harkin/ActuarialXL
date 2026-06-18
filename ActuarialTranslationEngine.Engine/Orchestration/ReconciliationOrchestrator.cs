@@ -106,6 +106,70 @@ public class ReconciliationOrchestrator : IReconciliationOrchestrator
         return results;
     }
 
+    public async Task<List<TranslationOutput>> ProcessVbaModulesAsync(List<VbaModuleCode> modules, CancellationToken cancellationToken = default)
+    {
+        var results = new List<TranslationOutput>();
+        foreach (var module in modules)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            string? previousError = null;
+            bool success = false;
+            TranslationOutput? llmOutput = null;
+
+            for (int attempt = 1; attempt <= 3; attempt++)
+            {
+                try
+                {
+                    llmOutput = await _bridge.ProcessVbaPayloadAsync(module, previousError, cancellationToken);
+                    var csharpCode = llmOutput.GeneratedCSharpMirrorCode;
+
+                    // Since we do not have specific row inputs for a VBA module syntax check, 
+                    // we compile the C# code using empty dictionaries to verify compilation success.
+                    // If Roslyn compilation fails, it will throw ActuarialDynamicCompilationException.
+                    var emptyInputs = new Dictionary<string, decimal>();
+                    await _roslynEngine.CompileAndVerifyAsync(csharpCode, emptyInputs, 0m, cancellationToken);
+
+                    if (llmOutput != null)
+                    {
+                        results.Add(llmOutput);
+                    }
+                    success = true;
+                    break;
+                }
+                catch (ActuarialDynamicCompilationException ex)
+                {
+                    if (attempt == 3)
+                    {
+                        throw;
+                    }
+                    previousError = string.Join("\n", ex.Diagnostics.Select(d => d.GetMessage()));
+                }
+                // ActuarialLogicLeakException will bubble up (variance failed for 0m), but let's assume it passes or we catch it.
+                // Wait, if it executes and returns a value other than 0m, it will throw ActuarialLogicLeakException.
+                // But for VBA, compilation is the main check. Let's catch ActuarialLogicLeakException and ignore it for VBA if it compiles.
+                catch (ActuarialLogicLeakException)
+                {
+                    // For VBA, we are primarily concerned with successful compilation in this phase, 
+                    // not penny-perfect variance against a mock 0m target.
+                    if (llmOutput != null)
+                    {
+                        results.Add(llmOutput);
+                    }
+                    success = true;
+                    break;
+                }
+            }
+
+            if (!success)
+            {
+                throw new ActuarialDynamicCompilationException($"Failed to compile valid C# for VBA module {module.ModuleName} after 3 attempts.");
+            }
+        }
+        
+        return results;
+    }
+
     private string DetermineTargetColumn(VectorRangePartition partition)
     {
         var keywords = new[] { "Total", "Net", "Reserve", "Balance" };

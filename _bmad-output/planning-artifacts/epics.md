@@ -20,7 +20,7 @@ FR4: Implement automated structural serialization and vertical column-collapsing
 FR5: Implement continuous change-point algorithms for compression.
 FR6: Dynamically load compiled byte arrays into runtime assemblies via `Roslyn`.
 FR7: Integrate live endpoint that reads and compiles the markdown-based prompt template.
-FR8: Read raw text code of `.vbaProject.bin` using `DocumentFormat.OpenXml`.
+FR8: Read raw text code of `.vbaProject.bin` using `EPPlus`.
 FR9: Translate VBA logic into C# methods using an LLM code-compiler.
 FR10: Expose parsing, compression, and reconciliation core as an ASP.NET Core WebAPI.
 
@@ -46,7 +46,7 @@ None.
 ### FR Coverage Map
 
 
-FR8: Epic 5 - Read raw text code of `.vbaProject.bin` using `DocumentFormat.OpenXml`.
+FR8: Epic 5 - Read raw text code of `.vbaProject.bin` using `EPPlus`.
 FR9: Epic 5 - Translate VBA logic into C# methods using an LLM code-compiler.
 FR10: Epic 4 - Expose parsing, compression, and reconciliation core as an ASP.NET Core WebAPI.
 
@@ -99,16 +99,16 @@ So that I can submit Excel files and retrieve evaluated logic without needing to
 **Goal:** Extract and translate legacy, imperative VBA macro logic (`.vbaProject.bin`) instead of just declarative cell formulas, vastly expanding the types of actuarial models supported.
 **FRs covered:** FR8, FR9
 
-### Story 5.1: OpenXml VBA Binary Extraction
+### Story 5.1: EPPlus VBA Binary Extraction
 As a system orchestrator,
-I want to extract the raw macro binary stream from legacy .xlsm/.xlsb workbooks using DocumentFormat.OpenXml,
+I want to extract the raw macro binary stream from legacy .xlsm/.xlsb workbooks using EPPlus,
 So that the LLM has access to the imperative logic that cannot be parsed by ClosedXML.
 
 **Acceptance Criteria:**
 **Given** an uploaded .xlsm or .xlsb file containing macros,
 **When** the new IVbaExtractionEngine processes the stream,
-**Then** it must successfully extract the `.vbaProject.bin` stream as raw text,
-**And** it must not throw an OpenXmlPackageException or lock the file stream.
+**Then** it must successfully extract the `.vbaProject.bin` stream as a list of VBA modules,
+**And** it must natively decompress the OLE stream using EPPlus without locking the file stream.
 
 ### Story 5.2: LLM Imperative Code-to-Code Translation
 As an Actuary,

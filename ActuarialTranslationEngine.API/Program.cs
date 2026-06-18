@@ -27,6 +27,7 @@ builder.Services.AddSingleton(new SemaphoreSlim(Environment.ProcessorCount));
 // Engine registrations
 builder.Services.AddSingleton<IActuarialExtractionEngine, ActuarialExtractionEngine>();
 builder.Services.AddSingleton<IVectorCompressionEngine, VectorCompressionEngine>();
+builder.Services.AddSingleton<IVbaExtractionEngine, VbaExtractionEngine>();
 
 builder.Services.AddSingleton<LlmBridgeConfiguration>(provider =>
 {
@@ -72,22 +73,25 @@ app.MapPost("/api/evaluate", async (HttpRequest request,
     SemaphoreSlim concurrencyGate,
     CancellationToken cancellationToken) =>
 {
-    if (!request.HasFormContentType || !request.Form.Files.Any())
-    {
-        return Results.BadRequest(new { Error = "No file uploaded." });
-    }
-
-    var file = request.Form.Files.First();
-    var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-    
-    if (ext != ".xlsx" && ext != ".xlsm")
-    {
-        return Results.BadRequest(new { Error = "Unsupported file type. Only .xlsx and .xlsm are supported." });
-    }
-
-    await concurrencyGate.WaitAsync(cancellationToken);
+    bool gateAcquired = false;
     try
     {
+        if (!request.HasFormContentType || !request.Form.Files.Any())
+        {
+            return Results.BadRequest(new { Error = "No file uploaded." });
+        }
+
+        var file = request.Form.Files.First();
+        var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+        
+        if (ext != ".xlsx" && ext != ".xlsm")
+        {
+            return Results.BadRequest(new { Error = "Unsupported file type. Only .xlsx and .xlsm are supported." });
+        }
+
+        await concurrencyGate.WaitAsync(cancellationToken);
+        gateAcquired = true;
+        
         using var stream = new MemoryStream();
         await file.CopyToAsync(stream, cancellationToken);
         
@@ -105,6 +109,19 @@ app.MapPost("/api/evaluate", async (HttpRequest request,
         // Phase 3 & 4: Translation, Reconciliation & Assembly Sandboxing
         // 1. Process translation block (Offloaded to background thread pool to prevent request thread starvation)
         var translationOutputs = await Task.Run(() => orchestrator.ProcessBlockAsync(compressedBlock, sheetRawMap, cancellationToken));
+
+        // Extract VBA logic
+        stream.Position = 0;
+        var vbaEngine = request.HttpContext.RequestServices.GetService<IVbaExtractionEngine>();
+        if (vbaEngine != null)
+        {
+            var vbaModules = vbaEngine.ExtractVbaCodeStreams(stream);
+            if (vbaModules.Any())
+            {
+                var vbaOutputs = await Task.Run(() => orchestrator.ProcessVbaModulesAsync(vbaModules, cancellationToken));
+                translationOutputs.AddRange(vbaOutputs);
+            }
+        }
 
         // Phase 5: Persistence
         var record = new TranslatedModelRecord
@@ -136,7 +153,10 @@ app.MapPost("/api/evaluate", async (HttpRequest request,
     }
     finally
     {
-        concurrencyGate.Release();
+        if (gateAcquired)
+        {
+            concurrencyGate.Release();
+        }
     }
 }).DisableAntiforgery();
 
