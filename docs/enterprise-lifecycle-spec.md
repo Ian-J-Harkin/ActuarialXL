@@ -585,6 +585,27 @@ Expose the certified parsing, compression, and reconciliation core as a secure, 
 
 ---
 
+## Phase V: Interactive Observability & Governance (Web UI)
+
+### 1. Architectural Intent
+To provide real-time visibility into the asynchronous LLM compilation pipeline and persist certified transactions into a searchable audit ledger.
+
+### 2. Solution Topology & Namespacing
+* Append `ActuarialTranslationEngine.Web` (**Blazor Web App** using Interactive Server render mode).
+* Add `Microsoft.AspNetCore.SignalR` for real-time `IProgress<T>` broadcasting from the API `BackgroundTranslationWorker` to the UI.
+
+### 3. Target Dataset Boundary
+* Interactive translation wizards allowing users to select target Excel files and dynamically extract specific sheets ("Target Sheet Strategy").
+
+### 4. Architectural Controls
+* **Async Job Pattern:** The API immediately responds with `202 Accepted` and a `SessionId`, and processes the workbook entirely in the background.
+* **Fault-Tolerant Persistence:** Moves away from a monolithic atomic save. Implements a One-to-Many SQLite relational schema (`TranslationJob` to `TranslationPartition`) to incrementally save partitions as the LLM processes them, protecting against catastrophic transient failure.
+* **Resilience Policies:** Wraps the entire API-to-LLM bridge and Web-to-API client in `Microsoft.Extensions.Http.Polly` exponential backoff retries.
+
+### 5. Phase V Exit Criteria
+* The Blazor Web UI features a real-time animated progress bar and logging window that accurately tracks the background compilation pipeline.
+* The Governance Dashboard correctly renders historical translation jobs with Provenance Badges (UUIDs, timestamps, targeted sheets).
+
 ## Strategic Summary of Technical Evolution
 
 | Dimension | Phase II: Small Pipeline | Phase III-A: Scope | Phase III-B: Recon | Phase III-C: VBA Logic | Phase IV: Enterprise API | Frontend: Governance UI |

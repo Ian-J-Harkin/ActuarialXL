@@ -34,7 +34,7 @@ public class PipelineIntegrationTests
         var compressedBlock = compressionEngine.CompressTopology(rawMap);
         
         // Phase II.4: Interrogation (Mocked LLM Bridge)
-        var finalTranslation = await mockBridge.ProcessPayloadAsync(compressedBlock);
+        var finalTranslation = await mockBridge.ProcessPayloadAsync(compressedBlock, "G");
 
         // 3. Assert End-to-End Correctness
         Assert.NotNull(rawMap);
@@ -55,8 +55,60 @@ public class PipelineIntegrationTests
 
         Assert.NotNull(finalTranslation);
         // The mock bridge embeds the valid C# and Markdown outputs, PLUS the dynamic partition count validation
-        Assert.Contains("Received 6 partitions for Table 13.4", finalTranslation.GeneratedCSharpMirrorCode);
         Assert.Contains("public class DynamicReconciliationUnit", finalTranslation.GeneratedCSharpMirrorCode);
         Assert.Contains("Partitions: 6", finalTranslation.FinalAuditableMarkdown);
+    }
+    [Fact]
+    public void EndToEndPipeline_ExtractCompressAndInterrogate_StochasticModeling()
+    {
+        var extractionEngine = new ActuarialExtractionEngine();
+        var compressionEngine = new VectorCompressionEngine();
+        using var fileStream = new FileStream(TargetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        
+        var rawMap = extractionEngine.ExtractSheetData(fileStream, "Example 16.3 - Part 1");
+        var compressedBlock = compressionEngine.CompressTopology(rawMap);
+        
+        Assert.NotNull(rawMap);
+        Assert.Equal("Example 16.3 - Part 1", rawMap.SheetName);
+        Assert.NotNull(compressedBlock);
+        
+        _output.WriteLine($"StochasticModeling Partitions: {compressedBlock.Partitions.Count}");
+        Assert.True(compressedBlock.Partitions.Count > 0);
+    }
+
+    [Fact]
+    public void EndToEndPipeline_ExtractCompressAndInterrogate_BalancingLedgers()
+    {
+        var extractionEngine = new ActuarialExtractionEngine();
+        var compressionEngine = new VectorCompressionEngine();
+        using var fileStream = new FileStream(TargetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        
+        var rawMap = extractionEngine.ExtractSheetData(fileStream, "Solution to Exercise 18.4");
+        var compressedBlock = compressionEngine.CompressTopology(rawMap);
+        
+        Assert.NotNull(rawMap);
+        Assert.Equal("Solution to Exercise 18.4", rawMap.SheetName);
+        Assert.NotNull(compressedBlock);
+        
+        _output.WriteLine($"BalancingLedgers Partitions: {compressedBlock.Partitions.Count}");
+        Assert.True(compressedBlock.Partitions.Count > 0);
+    }
+
+    [Fact]
+    public void EndToEndPipeline_ExtractCompressAndInterrogate_VariableAdjusters()
+    {
+        var extractionEngine = new ActuarialExtractionEngine();
+        var compressionEngine = new VectorCompressionEngine();
+        using var fileStream = new FileStream(TargetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        
+        var rawMap = extractionEngine.ExtractSheetData(fileStream, "Example 13.12");
+        var compressedBlock = compressionEngine.CompressTopology(rawMap);
+        
+        Assert.NotNull(rawMap);
+        Assert.Equal("Example 13.12", rawMap.SheetName);
+        Assert.NotNull(compressedBlock);
+        
+        _output.WriteLine($"VariableAdjusters Partitions: {compressedBlock.Partitions.Count}");
+        Assert.True(compressedBlock.Partitions.Count > 0);
     }
 }

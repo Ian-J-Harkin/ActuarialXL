@@ -1,0 +1,86 @@
+```csharp
+public class Table134ActuarialModel
+{
+    public decimal Premium { get; set; }
+    public decimal DeathBenefit { get; set; }
+    public decimal PerPolicyExpenseCharge { get; set; }
+    public decimal PreviousFundValue { get; set; }
+    public decimal CostOfInsuranceRate { get; set; }
+    public decimal PremiumExpenseRate { get; set; } = 0.03m;
+    public decimal Per1000ExpenseRate { get; set; } = 0.05m;
+    public decimal DiscountRate { get; set; } = 1.04m;
+    public decimal InterestRate { get; set; } = 1.05m;
+
+    public decimal CalculatePremiumExpenseCharge()
+    {
+        return Premium * PremiumExpenseRate;
+    }
+
+    public decimal CalculateNetPremium()
+    {
+        return Premium - CalculatePremiumExpenseCharge();
+    }
+
+    public decimal CalculatePer1000ExpenseCharge()
+    {
+        return DeathBenefit / 1000 * Per1000ExpenseRate;
+    }
+
+    public decimal CalculateNetAmountAtRisk()
+    {
+        return (DeathBenefit - PreviousFundValue - CalculateNetPremium() + PerPolicyExpenseCharge + CalculatePer1000ExpenseCharge()) / (decimal)Math.Pow((double)DiscountRate, 1.0 / 12.0);
+    }
+
+    public decimal CalculateCostOfInsuranceRatePer1000()
+    {
+        return CostOfInsuranceRate * 1000 / 12;
+    }
+
+    public decimal CalculateMonthlyDeduction()
+    {
+        return CalculateNetAmountAtRisk() * CalculateCostOfInsuranceRatePer1000() / 1000 + CalculatePer1000ExpenseCharge() + PerPolicyExpenseCharge;
+    }
+
+    public decimal CalculateFundValueAfterMonthlyDeduction()
+    {
+        return PreviousFundValue + CalculateNetPremium() - CalculateMonthlyDeduction();
+    }
+
+    public decimal CalculateInterestOnFundValue()
+    {
+        return CalculateFundValueAfterMonthlyDeduction() * ((decimal)Math.Pow((double)InterestRate, 1.0 / 12.0) - 1);
+    }
+
+    public decimal CalculateFundValueEndOfMonth()
+    {
+        return CalculateFundValueAfterMonthlyDeduction() + CalculateInterestOnFundValue();
+    }
+}
+
+public class DynamicReconciliationUnit : IActuarialReconciliationUnit
+{
+    public decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs)
+    {
+        var model = new Table134ActuarialModel
+        {
+            Premium = inputs["B"],
+            DeathBenefit = inputs["G"],
+            PerPolicyExpenseCharge = inputs["E"],
+            PreviousFundValue = inputs.ContainsKey("M") ? inputs["M"] : 0,
+            CostOfInsuranceRate = inputs["I"] / 1000 / 12
+        };
+
+        inputs["C"] = model.CalculatePremiumExpenseCharge();
+        inputs["D"] = model.CalculateNetPremium();
+        inputs["F"] = model.CalculatePer1000ExpenseCharge();
+        inputs["H"] = model.CalculateNetAmountAtRisk();
+        inputs["I"] = model.CalculateCostOfInsuranceRatePer1000();
+        inputs["J"] = model.CalculateMonthlyDeduction();
+        inputs["K"] = model.CalculateFundValueAfterMonthlyDeduction();
+        inputs["L"] = model.CalculateInterestOnFundValue();
+        inputs["M"] = model.CalculateFundValueEndOfMonth();
+
+        return inputs["M"];
+    }
+}
+```

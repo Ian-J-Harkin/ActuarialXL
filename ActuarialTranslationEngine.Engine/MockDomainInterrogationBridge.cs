@@ -6,23 +6,22 @@ namespace ActuarialTranslationEngine.Engine;
 
 public class MockDomainInterrogationBridge : IDomainInterrogationBridge
 {
-    public Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
+    public async Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string targetColumn, string? previousCompilerError = null, CancellationToken cancellationToken = default)
     {
-        return Task.FromResult(new TranslationOutput
+        // Mock output that calculates G from E to satisfy unit tests
+        var mockCSharp = @"using System; 
+using System.Collections.Generic; 
+using ActuarialTranslationEngine.Core.Interfaces; 
+
+public class DynamicReconciliationUnit : IActuarialReconciliationUnit 
+{ 
+    public decimal ExecuteCalculationRow(IDictionary<string, decimal> inputs) => inputs.ContainsKey(""E"") ? inputs[""E""] : 0m; 
+}";
+        return new TranslationOutput
         {
             FinalAuditableMarkdown = $"# Mock Specification\nTarget: {payload.TargetWorksheet}\nPartitions: {payload.Partitions.Count}",
-            GeneratedCSharpMirrorCode = $$"""
-                // Received {{payload.Partitions.Count}} partitions for {{payload.TargetWorksheet}}
-                using System;
-                using System.Collections.Generic;
-                using ActuarialTranslationEngine.Core.Interfaces;
-                
-                public class DynamicReconciliationUnit : IActuarialReconciliationUnit
-                {
-                    public decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs) => 42m;
-                }
-                """
-        });
+            GeneratedCSharpMirrorCode = mockCSharp
+        };
     }
 
     public Task<TranslationOutput> ProcessVbaPayloadAsync(VbaModuleCode payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
@@ -38,7 +37,7 @@ public class MockDomainInterrogationBridge : IDomainInterrogationBridge
                 
                 public class DynamicReconciliationUnit : IActuarialReconciliationUnit
                 {
-                    public decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs) => 42m;
+                    public decimal ExecuteCalculationRow(IDictionary<string, decimal> inputs) => 42m;
                 }
                 """
         });

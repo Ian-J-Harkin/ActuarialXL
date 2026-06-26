@@ -4,9 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Polly;
 using ActuarialTranslationEngine.Core.Interfaces;
 using ActuarialTranslationEngine.Engine;
 using ActuarialTranslationEngine.Engine.LlmBridge;
+using ActuarialTranslationEngine.Engine.Orchestration;
+using ActuarialTranslationEngine.Engine.Roslyn;
 using ActuarialTranslationEngine.Core.Models;
 namespace ActuarialTranslationEngine.CLI
 {
@@ -30,6 +33,9 @@ namespace ActuarialTranslationEngine.CLI
 
             var dryRunOption = new Option<bool>("--dry-run", () => false, "Parse and classify only; do not write output files");
 
+            var e2eOption = new Option<bool>("--e2e", () => false,
+                "Run the full End-to-End LLM Translation + Roslyn Reconciliation pipeline (requires ACTUARIAL_LLM_API_KEY)");
+
             var rootCommand = new RootCommand("ActuarialTranslationEngine.CLI")
             {
                 fileOption,
@@ -37,7 +43,8 @@ namespace ActuarialTranslationEngine.CLI
                 outputOption,
                 archetypeOption,
                 verboseOption,
-                dryRunOption
+                dryRunOption,
+                e2eOption
             };
 
             var host = Host.CreateDefaultBuilder(args)
@@ -57,11 +64,15 @@ namespace ActuarialTranslationEngine.CLI
                     services.AddSingleton<LlmBridgeConfiguration>(provider =>
                     {
                         var cfg = new LlmBridgeConfiguration();
-                        var key = Environment.GetEnvironmentVariable("OPENROUTER_API_KEY");
+                        var key = Environment.GetEnvironmentVariable("ACTUARIAL_LLM_API_KEY");
                         if (!string.IsNullOrWhiteSpace(key))
                             cfg.ApiKey = key;
                         else
-                            throw new InvalidOperationException("OpenRouter API key not set in environment variable OPENROUTER_API_KEY");
+                            throw new InvalidOperationException("API key not set in environment variable ACTUARIAL_LLM_API_KEY");
+
+                        var endpoint = Environment.GetEnvironmentVariable("ACTUARIAL_LLM_ENDPOINT");
+                        if (!string.IsNullOrWhiteSpace(endpoint))
+                            cfg.EndpointUrl = endpoint;
 
                         // Resolve path directly from AppContext to avoid brittle traversal
                         string promptPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "system-prompt.txt");
@@ -91,9 +102,22 @@ namespace ActuarialTranslationEngine.CLI
                         return cfg;
                     });
                     
-                    // Register HttpClient for LiveDomainInterrogationBridge
-                    services.AddHttpClient<ActuarialTranslationEngine.Engine.LlmBridge.LiveDomainInterrogationBridge>();
+                    // Register HttpClient for LiveDomainInterrogationBridge with Polly Retry
+                    services.AddHttpClient<ActuarialTranslationEngine.Engine.LlmBridge.LiveDomainInterrogationBridge>()
+                        .AddPolicyHandler(Polly.Extensions.Http.HttpPolicyExtensions
+                            .HandleTransientHttpError()
+                            .Or<System.IO.IOException>()
+                            .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                                onRetry: (outcome, timespan, retryAttempt, context) =>
+                                {
+                                    Console.WriteLine($"\n[Polly] Transient network error detected. Retrying attempt {retryAttempt} in {timespan.TotalSeconds} seconds...\n");
+                                }));
+                    
                     services.AddSingleton<IDomainInterrogationBridge, ActuarialTranslationEngine.Engine.LlmBridge.LiveDomainInterrogationBridge>();
+
+                    // Phase VIII — Register Roslyn engine + Reconciliation Orchestrator for E2E pipeline
+                    services.AddSingleton<IRoslynReconciliationEngine, RoslynReconciliationEngine>();
+                    services.AddSingleton<IReconciliationOrchestrator, ReconciliationOrchestrator>();
 
                     services.AddSingleton<CLIOrchestrator>();
                 })
@@ -109,8 +133,9 @@ namespace ActuarialTranslationEngine.CLI
                 var archetype = context.ParseResult.GetValueForOption(archetypeOption);
                 var verbose = context.ParseResult.GetValueForOption(verboseOption);
                 var dryRun = context.ParseResult.GetValueForOption(dryRunOption);
+                var e2e = context.ParseResult.GetValueForOption(e2eOption);
 
-                int exitCode = await orchestrator.RunAsync(file!, sheet, output!, archetype, verbose, dryRun);
+                int exitCode = await orchestrator.RunAsync(file!, sheet, output!, archetype, verbose, dryRun, e2e);
                 context.ExitCode = exitCode;
             });
 

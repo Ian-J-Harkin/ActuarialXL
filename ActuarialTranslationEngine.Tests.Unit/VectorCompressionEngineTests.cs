@@ -9,6 +9,23 @@ namespace ActuarialTranslationEngine.Tests.Unit;
 public class VectorCompressionEngineTests
 {
     [Fact]
+    public void CompressTopology_ThrowsArgumentNullException_IfMapIsNull()
+    {
+        var engine = new VectorCompressionEngine();
+        Assert.Throws<System.ArgumentNullException>(() => engine.CompressTopology(null!));
+    }
+
+    [Fact]
+    public void CompressTopology_ReturnsEmptyBlock_IfDataRowsIsEmpty()
+    {
+        var engine = new VectorCompressionEngine();
+        var map = new RawWorkbookMap { SheetName = "EmptySheet" }; // DataRows is inherently empty
+        var result = engine.CompressTopology(map);
+        Assert.Equal("EmptySheet", result.TargetWorksheet);
+        Assert.Empty(result.Partitions);
+    }
+
+    [Fact]
     public void CompressTopology_Table13_4_ProperlySegmentsPartitions()
     {
         // Arrange

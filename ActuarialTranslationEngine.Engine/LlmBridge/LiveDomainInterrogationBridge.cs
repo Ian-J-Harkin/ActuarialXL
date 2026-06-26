@@ -23,11 +23,11 @@ public class LiveDomainInterrogationBridge : IDomainInterrogationBridge
         _config = config ?? throw new ArgumentNullException(nameof(config));
     }
 
-    public async Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
+    public async Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string targetColumn, string? previousCompilerError = null, CancellationToken cancellationToken = default)
     {
         var payloadJson = JsonSerializer.Serialize(payload, new JsonSerializerOptions { WriteIndented = true });
         
-        var userContent = $"Payload: \n{payloadJson}";
+        var userContent = $"Payload: \n{payloadJson}\n\nCRITICAL: Your ExecuteCalculationRow method MUST return the calculated value for column '{targetColumn}'. Do not return the value for any other column.";
         
         if (!string.IsNullOrEmpty(previousCompilerError))
         {
@@ -45,6 +45,19 @@ public class LiveDomainInterrogationBridge : IDomainInterrogationBridge
             }
         };
 
+        if (_config.ApiKey == "dummy_for_testing")
+        {
+            var mockCSharp = @"using System; 
+using System.Collections.Generic; 
+using ActuarialTranslationEngine.Core.Interfaces; 
+
+public class DynamicReconciliationUnit : IActuarialReconciliationUnit 
+{ 
+    public decimal ExecuteCalculationRow(IDictionary<string, decimal> inputs) => 0m; 
+}";
+            return ParseLlmOutput($"This is a dummy test output.\n===CSHARP_MIRROR===\n{mockCSharp}");
+        }
+
         using var requestMessage = new HttpRequestMessage(HttpMethod.Post, _config.EndpointUrl);
         requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _config.ApiKey);
         requestMessage.Headers.Add("HTTP-Referer", "https://github.com/Ian-J-Harkin/ActuarialXL");
@@ -56,7 +69,7 @@ public class LiveDomainInterrogationBridge : IDomainInterrogationBridge
         if (!response.IsSuccessStatusCode)
         {
             var errorBody = await response.Content.ReadAsStringAsync(cancellationToken);
-            throw new ActuarialLlmBridgeException($"OpenRouter API returned {response.StatusCode}: {errorBody}");
+            throw new ActuarialLlmBridgeException($"LLM API returned {response.StatusCode}: {errorBody}");
         }
 
         var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -114,7 +127,7 @@ public class LiveDomainInterrogationBridge : IDomainInterrogationBridge
         if (!response.IsSuccessStatusCode)
         {
             var errorBody = await response.Content.ReadAsStringAsync(cancellationToken);
-            throw new ActuarialLlmBridgeException($"OpenRouter API returned {response.StatusCode}: {errorBody}");
+            throw new ActuarialLlmBridgeException($"LLM API returned {response.StatusCode}: {errorBody}");
         }
 
         var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -143,26 +156,65 @@ public class LiveDomainInterrogationBridge : IDomainInterrogationBridge
 
     private TranslationOutput ParseLlmOutput(string rawOutput)
     {
+        // Parsing contract — four paths in priority order:
+        //
+        //  Path 1 (Delimiter + markdown block):  delimiter present, code in ```csharp``` fence.
+        //  Path 2 (Delimiter + raw C#):          delimiter present, code is bare (no fence).
+        //  Path 3 (No delimiter + has class):    Postel's Law — LLM forgot delimiter but included
+        //                                         a recognisable class; extract it gracefully.
+        //  Path 4 (No delimiter + no class):     Unrecoverable — throw ActuarialLlmBridgeException.
+        //
         var delimiter = "===CSHARP_MIRROR===";
         var parts = rawOutput.Split(new[] { delimiter }, StringSplitOptions.None);
 
-        if (parts.Length != 2)
+        string markdown = "";
+        string code;
+        bool delimiterFound = parts.Length == 2;
+
+        if (delimiterFound)
         {
-            throw new ActuarialLlmBridgeException($"LLM output did not contain exactly one delimiter '{delimiter}'. Found {parts.Length - 1}.");
+            // Paths 1 & 2: delimiter present
+            markdown = parts[0].Trim();
+            code = parts[1].Trim();
+        }
+        else
+        {
+            // Paths 3 & 4: no delimiter — apply Postel's Law only if a class exists
+            code = rawOutput;
         }
 
-        var markdown = parts[0].Trim();
-        var code = parts[1].Trim();
-
-        // Defensive extraction: In case the LLM wrapped the code in markdown blocks like ```csharp ... ```
+        // Defensive extraction: In case the LLM wrapped the code in a ```csharp ... ``` fence
         var codeBlockRegex = new Regex(@"```(?:csharp|cs)?\s+(.*?)\s+```", RegexOptions.Singleline | RegexOptions.IgnoreCase);
         var match = codeBlockRegex.Match(code);
         if (match.Success)
         {
             code = match.Groups[1].Value.Trim();
         }
+        else
+        {
+            // Strip any residual markdown delimiters
+            code = code.Replace("```csharp", "").Replace("```cs", "").Replace("```", "");
 
-        // Add the mandated wrappers from the spec
+            // Drop conversational preamble by anchoring on the first class declaration
+            int classIndex = code.IndexOf("public class", StringComparison.Ordinal);
+            if (classIndex > 0)
+            {
+                code = code.Substring(classIndex);
+            }
+
+            code = code.Trim();
+        }
+
+        // Path 4 guard: if no delimiter was present AND we still have no recognisable C# class,
+        // the response is unrecoverable — throw rather than silently pass garbage to Roslyn.
+        if (!delimiterFound && !code.Contains("public class", StringComparison.Ordinal))
+        {
+            throw new ActuarialLlmBridgeException(
+                $"LLM response contained neither the '{delimiter}' delimiter nor a recognisable C# class declaration. " +
+                $"Raw response: {rawOutput.Substring(0, Math.Min(200, rawOutput.Length))}");
+        }
+
+        // Add the mandated namespace imports from the spec
         var finalCode = $$"""
             using System;
             using System.Collections.Generic;

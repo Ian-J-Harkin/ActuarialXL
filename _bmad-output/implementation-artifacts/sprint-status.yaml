@@ -49,4 +49,7 @@ development_status:
   epic-5: done
   5-1-openxml-vba-binary-extraction: done
   5-2-llm-imperative-code-to-code-translation: done
-  epic-5-retrospective: optional
+  epic-5-retrospective: done
+  epic-6: in-progress
+  6-1-blazor-web-application-scaffold: done
+  epic-6-retrospective: optional

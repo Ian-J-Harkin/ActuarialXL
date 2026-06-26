@@ -1,0 +1,77 @@
+=== RAW LLM OUTPUT ===
+using System;
+using System.Collections.Generic;
+using ActuarialTranslationEngine.Core.Interfaces;
+
+using System;
+using System.Collections.Generic;
+
+public class Table134ReconciliationUnit : IActuarialReconciliationUnit
+{
+    private readonly Dictionary<string, decimal> _previousRowValues = new Dictionary<string, decimal>();
+
+    public decimal ExecuteCalculationRow(Dictionary<string, decimal> currentRowValues)
+    {
+        // Initialize the result
+        decimal result = 0m;
+
+        // Calculate the values for the current row
+        currentRowValues["C"] = currentRowValues["B"] * 0.03m;
+        currentRowValues["D"] = currentRowValues["B"] - currentRowValues["C"];
+        currentRowValues["F"] = currentRowValues["G"] / 1000m * 0.05m;
+
+        // Determine the cost of insurance rate per 1000 based on the policy month
+        if (currentRowValues["A"] >= 6 && currentRowValues["A"] <= 17)
+        {
+            currentRowValues["I"] = 0.00112m * 1000m / 12m;
+        }
+        else if (currentRowValues["A"] >= 18 && currentRowValues["A"] <= 29)
+        {
+            currentRowValues["I"] = 0.00117m * 1000m / 12m;
+        }
+        else if (currentRowValues["A"] >= 30 && currentRowValues["A"] <= 41)
+        {
+            currentRowValues["I"] = 0.00124m * 1000m / 12m;
+        }
+        else if (currentRowValues["A"] >= 42 && currentRowValues["A"] <= 53)
+        {
+            currentRowValues["I"] = 0.00133m * 1000m / 12m;
+        }
+        else if (currentRowValues["A"] >= 54 && currentRowValues["A"] <= 65)
+        {
+            currentRowValues["I"] = 0.00141m * 1000m / 12m;
+        }
+
+        // Calculate the net amount at risk
+        currentRowValues["H"] = (currentRowValues["G"] - _previousRowValues["M"] - currentRowValues["D"] + currentRowValues["E"] + currentRowValues["F"]) / (decimal)Math.Pow(1.04, 1.0 / 12.0);
+
+        // Calculate the monthly deduction
+        currentRowValues["J"] = currentRowValues["H"] * currentRowValues["I"] / 1000m + currentRowValues["F"] + currentRowValues["E"];
+
+        // Calculate the fund value after monthly deduction
+        currentRowValues["K"] = _previousRowValues["M"] + currentRowValues["D"] - currentRowValues["J"];
+
+        // Calculate the interest on fund value
+        currentRowValues["L"] = currentRowValues["K"] * ((decimal)Math.Pow(1.05, 1.0 / 12.0) - 1m);
+
+        // Calculate the fund value end of month
+        currentRowValues["M"] = currentRowValues["K"] + currentRowValues["L"];
+
+        // Update the previous row values
+        _previousRowValues.Clear();
+        foreach (var kvp in currentRowValues)
+        {
+            _previousRowValues[kvp.Key] = kvp.Value;
+        }
+
+        // Return the result
+        return result;
+    }
+}
+```
+
+=== ROSLYN ERRORS ===
+Unexpected character '`'
+Unexpected character '`'
+Unexpected character '`'
+'Table134ReconciliationUnit' does not implement interface member 'IActuarialReconciliationUnit.ExecuteCalculationRow(Dictionary<string, decimal>)'. 'Table134ReconciliationUnit.ExecuteCalculationRow(Dictionary<string, decimal>)' cannot implement 'IActuarialReconciliationUnit.ExecuteCalculationRow(Dictionary<string, decimal>)' because it does not have the matching return type of 'decimal'.

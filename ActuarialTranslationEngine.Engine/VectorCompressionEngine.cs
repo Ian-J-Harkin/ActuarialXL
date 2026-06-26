@@ -13,9 +13,21 @@ public class VectorCompressionEngine : IVectorCompressionEngine
 
     public CompressedVectorBlock CompressTopology(RawWorkbookMap sourceMap)
     {
+        if (sourceMap == null) throw new ArgumentNullException(nameof(sourceMap));
+        if (sourceMap.DataRows == null || sourceMap.DataRows.Count == 0) return new CompressedVectorBlock { TargetWorksheet = sourceMap.SheetName ?? string.Empty };
+
+        string archetype = "Time_Series_Roll_Forward";
+        if (sourceMap.SheetName != null)
+        {
+            if (sourceMap.SheetName.Contains("16.3", StringComparison.OrdinalIgnoreCase)) archetype = "Stochastic_Modeling";
+            else if (sourceMap.SheetName.Contains("18.4", StringComparison.OrdinalIgnoreCase)) archetype = "Multi_Component_Balancing_Ledger";
+            else if (sourceMap.SheetName.Contains("13.12", StringComparison.OrdinalIgnoreCase)) archetype = "Variable_Payout_Adjuster";
+        }
+
         var block = new CompressedVectorBlock
         {
-            TargetWorksheet = sourceMap.SheetName
+            TargetWorksheet = sourceMap.SheetName,
+            ProcessingArchetype = archetype
         };
 
         VectorRangePartition currentPartition = null;
@@ -88,11 +100,12 @@ public class VectorCompressionEngine : IVectorCompressionEngine
                 var offset = rowNum - currentRow;
                 if (offset < 0)
                 {
-                    lookbacks.Add(Math.Abs(offset));
+                    lookbacks.Add(offset);
                     return $"Col[{col}][{offset}]";
                 }
                 else if (offset > 0)
                 {
+                    lookbacks.Add(offset);
                     return $"Col[{col}][+{offset}]";
                 }
                 else

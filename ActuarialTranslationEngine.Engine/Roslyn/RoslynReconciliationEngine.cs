@@ -51,7 +51,8 @@ public class RoslynReconciliationEngine : IRoslynReconciliationEngine
             using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             timeoutCts.CancelAfter(TimeSpan.FromSeconds(5));
 
-            var executionTask = Task.Run(() => reconciliationUnit.ExecuteCalculationRow(rowInputs), timeoutCts.Token);
+            var safeInputs = new SafeDictionary(rowInputs);
+            var executionTask = Task.Run(() => reconciliationUnit.ExecuteCalculationRow(safeInputs), timeoutCts.Token);
             
             try
             {
@@ -66,7 +67,7 @@ public class RoslynReconciliationEngine : IRoslynReconciliationEngine
             decimal variance = Math.Abs(actualResult - expectedSpreadsheetResult);
             if (variance > 0.00001m)
             {
-                throw new ActuarialLogicLeakException($"Mathematical variance exceeded threshold. Expected: {expectedSpreadsheetResult}, Actual: {actualResult}, Variance: {variance}");
+                throw new ActuarialLogicLeakException($"Mathematical variance exceeded threshold. Expected: {expectedSpreadsheetResult}, Actual: {actualResult}, Variance: {variance}", variance);
             }
         }
         finally
@@ -93,6 +94,7 @@ public class RoslynReconciliationEngine : IRoslynReconciliationEngine
         var references = new List<MetadataReference>
         {
             MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(decimal).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(Dictionary<,>).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(IActuarialReconciliationUnit).Assembly.Location),
             MetadataReference.CreateFromFile(Assembly.Load("System.Runtime").Location),

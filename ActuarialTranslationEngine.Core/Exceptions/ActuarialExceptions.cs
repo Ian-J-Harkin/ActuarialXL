@@ -12,7 +12,13 @@ public class ActuarialExtractionException : Exception
 
 public class ActuarialLogicLeakException : Exception
 {
-    public ActuarialLogicLeakException(string message) : base(message) { }
+    public decimal? Variance { get; }
+
+    public ActuarialLogicLeakException(string message, decimal? variance = null) : base(message) 
+    { 
+        Variance = variance;
+    }
+    
     public ActuarialLogicLeakException(string message, Exception inner) : base(message, inner) { }
 }
 

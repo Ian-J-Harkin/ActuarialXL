@@ -135,3 +135,26 @@ So that I don't have to use API testing tools to upload files or review SQLite r
 **When** a user navigates to the new Blazor application,
 **Then** they must be presented with a file upload dashboard capable of handling `.xlsx` and `.xlsm` files,
 **And** the application must successfully route the file to the WebAPI and display the returned TranslationOutput visually.
+
+## Epic 7: Rules Database Viewer & Documentation Generation
+**Goal:** Build a robust, interactive interface to examine, query, and edit the business rules extracted from spreadsheets. Since extracting logic is only half the battle, users need human-readable explanations, auto-generated documentation, and structural views of the compiled rules to truly trust and verify the system.
+**FRs covered:** Rule Visibility, Model Explainability, Documentation Generation
+
+### Story 7.1: Interactive Rule Viewer & Editor
+As an Actuary,
+I want to browse and search the SQLite database for extracted business rules,
+So that I can examine the pure C# logic alongside plain-English LLM explanations of what the rule does.
+
+**Acceptance Criteria:**
+- The Blazor UI includes a dedicated "Rule Repository" dashboard.
+- Users can search, filter, and drill down into specific mathematical rules extracted from past uploads.
+- The UI displays side-by-side comparisons: Original Excel Formula/VBA vs. Compiled C# Code vs. Plain-English Explanation.
+
+### Story 7.2: Automated Actuarial Documentation Generation
+As an Actuarial Auditor,
+I want the system to auto-generate comprehensive markdown/PDF documentation for an entire extracted model,
+So that I have a formal, version-controlled artifact detailing every business rule, dependency, and edge case without manually writing it.
+
+**Acceptance Criteria:**
+- The system can export a "Model Explainer Document" that stitches together the LLM explanations of all extracted rules.
+- The documentation visually maps the dependency graph (e.g., how Rule A feeds into Rule B).

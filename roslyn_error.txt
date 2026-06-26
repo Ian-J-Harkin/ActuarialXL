@@ -1,0 +1,4 @@
+ActuarialTranslationEngine.Core.Exceptions.ActuarialDynamicCompilationException: Failed to compile LLM generated code.
+   at ActuarialTranslationEngine.Engine.Roslyn.RoslynReconciliationEngine.CompileToBytesAsync(String csharpCode, CancellationToken cancellationToken) in c:\Github\ActuarialXLpoc\ActuarialTranslationEngine.Engine\Roslyn\RoslynReconciliationEngine.cs:line 115
+   at ActuarialTranslationEngine.Engine.Roslyn.RoslynReconciliationEngine.CompileAndVerifyAsync(String csharpCode, Dictionary`2 rowInputs, Decimal expectedSpreadsheetResult, CancellationToken cancellationToken) in c:\Github\ActuarialXLpoc\ActuarialTranslationEngine.Engine\Roslyn\RoslynReconciliationEngine.cs:line 28
+   at ActuarialTranslationEngine.Tests.Unit.MachineryTest.Test_SemanticAdapterPattern_Machinery() in c:\Github\ActuarialXLpoc\ActuarialTranslationEngine.Tests.Unit\MachineryTest.cs:line 60

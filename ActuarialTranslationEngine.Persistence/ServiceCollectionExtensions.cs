@@ -18,7 +18,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         string databasePath)
     {
-        services.AddDbContext<ActuarialDbContext>(options =>
+        services.AddDbContextFactory<ActuarialDbContext>(options =>
             options.UseSqlite($"DataSource={databasePath}"));
 
         services.AddScoped<IPersistenceManager, SqlitePersistenceManager>();

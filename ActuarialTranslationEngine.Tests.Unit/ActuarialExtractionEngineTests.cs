@@ -24,6 +24,22 @@ public class ActuarialExtractionEngineTests
     }
 
     [Fact]
+    public void ExtractSheetData_ThrowsArgumentNullException_IfStreamIsNull()
+    {
+        var engine = new ActuarialExtractionEngine();
+        Assert.Throws<System.ArgumentNullException>(() => engine.ExtractSheetData(null!, "Sheet1"));
+    }
+
+    [Fact]
+    public void ExtractSheetData_ThrowsExtractionException_IfFileIsInvalidFormat()
+    {
+        var engine = new ActuarialExtractionEngine();
+        using var stream = new MemoryStream(new byte[] { 0x01, 0x02, 0x03 }); // Not an Excel file
+        var ex = Assert.Throws<ActuarialExtractionException>(() => engine.ExtractSheetData(stream, "Sheet1"));
+        Assert.Contains("not a valid Excel package", ex.Message);
+    }
+
+    [Fact]
     public void ExtractSheetData_ThrowsExtractionException_IfSheetNotFound()
     {
         var engine = new ActuarialExtractionEngine();

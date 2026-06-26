@@ -4,5 +4,5 @@ namespace ActuarialTranslationEngine.Core.Interfaces;
 
 public interface IActuarialReconciliationUnit
 {
-    decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs);
+    decimal ExecuteCalculationRow(IDictionary<string, decimal> inputs);
 }

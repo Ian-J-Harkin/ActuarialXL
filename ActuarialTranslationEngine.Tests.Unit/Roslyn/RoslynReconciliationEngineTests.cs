@@ -24,7 +24,7 @@ using ActuarialTranslationEngine.Core.Interfaces;
 
 public class DynamicReconciliationUnit : IActuarialReconciliationUnit
 {
-    public decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs)
+    public decimal ExecuteCalculationRow(IDictionary<string, decimal> inputs)
     {
         return inputs[""A""] + inputs[""B""];
     }
@@ -46,7 +46,7 @@ using ActuarialTranslationEngine.Core.Interfaces;
 
 public class DynamicReconciliationUnit : IActuarialReconciliationUnit
 {
-    public decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs)
+    public decimal ExecuteCalculationRow(IDictionary<string, decimal> inputs)
     {
         return inputs[""A""] * inputs[""B""]; // Wrong operator
     }
@@ -68,7 +68,7 @@ using ActuarialTranslationEngine.Core.Interfaces;
 
 public class DynamicReconciliationUnit : IActuarialReconciliationUnit
 {
-    public decimal ExecuteCalculationRow(Dictionary<string, decimal> inputs) { return 0m; }
+    public decimal ExecuteCalculationRow(IDictionary<string, decimal> inputs) { return 0m; }
 }";
         var inputs = new Dictionary<string, decimal>();
         

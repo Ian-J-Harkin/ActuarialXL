@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bunit" Version="2.7.2" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" />
     <PackageReference Include="EPPlus" Version="4.5.3.3" />
@@ -27,6 +28,9 @@
     <ProjectReference Include="..\ActuarialTranslationEngine.Engine\ActuarialTranslationEngine.Engine.csproj" />
     <ProjectReference Include="..\ActuarialTranslationEngine.Persistence\ActuarialTranslationEngine.Persistence.csproj" />
     <ProjectReference Include="..\ActuarialTranslationEngine.API\ActuarialTranslationEngine.API.csproj" />
+    <ProjectReference Include="..\ActuarialTranslationEngine.Web\ActuarialTranslationEngine.Web.csproj">
+      <Aliases>WebProject</Aliases>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

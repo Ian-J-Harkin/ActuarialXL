@@ -4,5 +4,5 @@ namespace ActuarialTranslationEngine.Core.Persistence;
 
 public class TranslationPayload
 {
-    public TranslationOutput? Output { get; set; }
+    public List<TranslationOutput> Outputs { get; set; } = new();
 }

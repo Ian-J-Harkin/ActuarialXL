@@ -9,27 +9,67 @@ using ActuarialTranslationEngine.Core.Interfaces;
 using ActuarialTranslationEngine.Core.Models;
 using ActuarialTranslationEngine.Engine.Orchestration;
 using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
 public class ReconciliationOrchestratorTests
 {
+    private async Task<List<TranslationOutput>> ExhaustAsync(IAsyncEnumerable<TranslationOutput> enumerable)
+    {
+        var list = new List<TranslationOutput>();
+        await foreach (var item in enumerable) list.Add(item);
+        return list;
+    }
     [Fact]
-    public async Task ProcessBlockAsync_PassesOnFirstTry_With3RowValidation()
+    public async Task ProcessBlockAsync_ThrowsArgumentNullException_IfBlockIsNull()
+    {
+        var bridge = new MockBridge();
+        var engine = new MockRoslynEngine();
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
+
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await ExhaustAsync(sut.ProcessBlockAsync(null!, new RawWorkbookMap { SheetName = "Test" })));
+    }
+
+    [Fact]
+    public async Task ProcessBlockAsync_ThrowsArgumentNullException_IfMapIsNull()
+    {
+        var bridge = new MockBridge();
+        var engine = new MockRoslynEngine();
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
+
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await ExhaustAsync(sut.ProcessBlockAsync(CreateTestBlock(), null!)));
+    }
+
+    [Fact]
+    public async Task ProcessBlockAsync_ReturnsEmptyList_IfPartitionsEmpty()
+    {
+        var bridge = new MockBridge();
+        var engine = new MockRoslynEngine();
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
+
+        var block = new CompressedVectorBlock { TargetWorksheet = "Test", Partitions = new List<VectorRangePartition>() };
+        var result = await ExhaustAsync(sut.ProcessBlockAsync(block, new RawWorkbookMap { SheetName = "Test" }));
+
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public async Task ProcessBlockAsync_PassesOnFirstTry_ValidatesAllSequentialRows()
     {
         // Arrange
         var bridge = new MockBridge { ReturnCode = "public class A { }" };
         var engine = new MockRoslynEngine();
-        var sut = new ReconciliationOrchestrator(bridge, engine);
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
 
         var block = CreateTestBlock();
-        var map = CreateTestWorkbookMap();
+        var map = CreateTestWorkbookMap(); // 5 clean rows: rows 5–9
 
         // Act
-        await sut.ProcessBlockAsync(block, map);
+        await ExhaustAsync(sut.ProcessBlockAsync(block, map));
 
-        // Assert
+        // Assert — Phase VIII: LLM called once per partition, then ALL sequential rows verified
         Assert.Equal(1, bridge.CallCount);
-        Assert.Equal(3, engine.CallCount); // First, Mid, Last rows validated
+        Assert.Equal(5, engine.CallCount); // All 5 rows (5,6,7,8,9) processed sequentially
     }
 
     [Fact]
@@ -37,28 +77,92 @@ public class ReconciliationOrchestratorTests
     {
         var bridge = new MockBridge { ReturnCode = "public class A { }" };
         var engine = new MockRoslynEngine { FailUntilAttempt = 3 }; // Fails twice, passes on third
-        var sut = new ReconciliationOrchestrator(bridge, engine);
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
 
         var block = CreateTestBlock();
         var map = CreateTestWorkbookMap();
 
-        await sut.ProcessBlockAsync(block, map);
+        await ExhaustAsync(sut.ProcessBlockAsync(block, map));
 
         Assert.Equal(3, bridge.CallCount); // Prompted 3 times
     }
 
     [Fact]
-    public async Task ProcessBlockAsync_ThrowsCompilationException_WhenRetriesExhausted()
+    public async Task ProcessBlockAsync_ReturnsUncertifiedOutput_WhenCompilationRetriesExhausted()
     {
         var bridge = new MockBridge { ReturnCode = "public class A { }" };
         var engine = new MockRoslynEngine { FailUntilAttempt = 4 }; // Fails all 3 times
-        var sut = new ReconciliationOrchestrator(bridge, engine);
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
 
         var block = CreateTestBlock();
         var map = CreateTestWorkbookMap();
 
-        await Assert.ThrowsAsync<ActuarialDynamicCompilationException>(() => sut.ProcessBlockAsync(block, map));
+        var result = await ExhaustAsync(sut.ProcessBlockAsync(block, map));
+        Assert.Single(result);
+        Assert.False(result[0].IsCertified);
         Assert.Equal(3, bridge.CallCount);
+    }
+
+    [Fact]
+    public async Task ProcessBlockAsync_RetriesOnLlmTimeout_ThenPasses()
+    {
+        // Arrange — bridge times out on attempts 1 and 2, succeeds on 3
+        var bridge = new TimeoutMockBridge 
+        { 
+            ReturnCode = "public class A { }",
+            TimeoutUntilAttempt = 3 
+        };
+        var engine = new MockRoslynEngine();
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
+
+        var block = CreateTestBlock();
+        var map = CreateTestWorkbookMap();
+
+        // Act
+        await ExhaustAsync(sut.ProcessBlockAsync(block, map));
+
+        // Assert — bridge was called 3 times (2 timeouts + 1 success)
+        Assert.Equal(3, bridge.CallCount);
+    }
+
+    [Fact]
+    public async Task ProcessBlockAsync_ReturnsUncertifiedOutput_OnLlmTimeout_WhenAllRetriesExhausted()
+    {
+        // Arrange — bridge always times out
+        var bridge = new TimeoutMockBridge 
+        { 
+            ReturnCode = "public class A { }",
+            TimeoutUntilAttempt = 99 // Always timeout
+        };
+        var engine = new MockRoslynEngine();
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
+
+        var block = CreateTestBlock();
+        var map = CreateTestWorkbookMap();
+
+        // Act & Assert — should exhaust retries and return uncertified
+        var result = await ExhaustAsync(sut.ProcessBlockAsync(block, map));
+        Assert.Single(result);
+        Assert.False(result[0].IsCertified);
+        Assert.Equal(3, bridge.CallCount);
+    }
+
+    [Fact]
+    public async Task ProcessBlockAsync_DoesNotRetryOnUserCancellation()
+    {
+        // Arrange — simulate user clicking cancel
+        var bridge = new MockBridge { ReturnCode = "public class A { }" };
+        var engine = new MockRoslynEngine();
+        var sut = new ReconciliationOrchestrator(bridge, engine, new NullLogger<ReconciliationOrchestrator>());
+
+        var block = CreateTestBlock();
+        var map = CreateTestWorkbookMap();
+        var cts = new CancellationTokenSource();
+        cts.Cancel(); // Pre-cancel
+
+        // Act & Assert — should throw immediately, not retry
+        await Assert.ThrowsAsync<OperationCanceledException>(async () => await ExhaustAsync(sut.ProcessBlockAsync(block, map, cancellationToken: cts.Token)));
+        Assert.Equal(0, bridge.CallCount); // Should never even call the bridge
     }
 
     private CompressedVectorBlock CreateTestBlock()
@@ -104,7 +208,7 @@ public class MockBridge : IDomainInterrogationBridge
     public int CallCount { get; private set; }
     public string ReturnCode { get; set; } = string.Empty;
 
-    public Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
+    public Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string targetColumn, string? previousCompilerError = null, CancellationToken cancellationToken = default)
     {
         CallCount++;
         return Task.FromResult(new TranslationOutput 
@@ -142,5 +246,40 @@ public class MockRoslynEngine : IRoslynReconciliationEngine
         }
 
         return Task.CompletedTask;
+    }
+}
+
+/// <summary>
+/// Mock bridge that throws OperationCanceledException (simulating an HttpClient timeout)
+/// on the first N attempts, then succeeds.
+/// </summary>
+public class TimeoutMockBridge : IDomainInterrogationBridge
+{
+    public int CallCount { get; private set; }
+    public string ReturnCode { get; set; } = string.Empty;
+    public int TimeoutUntilAttempt { get; set; } = 0;
+
+    public Task<TranslationOutput> ProcessPayloadAsync(CompressedVectorBlock payload, string targetColumn, string? previousCompilerError = null, CancellationToken cancellationToken = default)
+    {
+        CallCount++;
+        if (CallCount < TimeoutUntilAttempt)
+        {
+            throw new OperationCanceledException("The operation was canceled due to timeout.");
+        }
+        return Task.FromResult(new TranslationOutput 
+        { 
+            FinalAuditableMarkdown = "Test", 
+            GeneratedCSharpMirrorCode = ReturnCode 
+        });
+    }
+
+    public Task<TranslationOutput> ProcessVbaPayloadAsync(VbaModuleCode payload, string? previousCompilerError = null, CancellationToken cancellationToken = default)
+    {
+        CallCount++;
+        return Task.FromResult(new TranslationOutput 
+        { 
+            FinalAuditableMarkdown = "Test VBA", 
+            GeneratedCSharpMirrorCode = ReturnCode 
+        });
     }
 }

@@ -5,4 +5,6 @@
   <Project Path="ActuarialTranslationEngine.Engine/ActuarialTranslationEngine.Engine.csproj" />
   <Project Path="ActuarialTranslationEngine.Tests.Unit/ActuarialTranslationEngine.Tests.Unit.csproj" />
   <Project Path="ActuarialTranslationEngine.Persistence/ActuarialTranslationEngine.Persistence.csproj" />
+  <Project Path="ActuarialTranslationEngine.Web/ActuarialTranslationEngine.Web.csproj" />
+  <Project Path="ActuarialTranslationEngine.Tests.E2E/ActuarialTranslationEngine.Tests.E2E.csproj" />
 </Solution>
