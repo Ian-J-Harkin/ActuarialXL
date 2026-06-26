@@ -37,7 +37,7 @@ The system supports four distinct calculation archetypes:
 ## 8. Persistence & Storage Layer (The Hybrid Database Metadata Pattern)
 - **Technology:** `Entity Framework Core` backing an embedded `SQLite` database.
 - **Function:** Stores versioned, successfully reconciled C# code logic and accompanying Auditable Markdown payloads. 
-- **Fault Tolerance:** Implements a One-to-Many relational schema mapping a single `TranslationJob` to multiple `TranslationPartition` records. This ensures incremental saves, preventing data loss during network interruptions or API timeouts. (Transitioning from `EnsureCreated()` to EF Core Migrations).
+- **Fault Tolerance:** Implements a One-to-Many relational schema mapping a single `TranslationJob` to multiple `TranslationPartition` records. This ensures incremental saves, preventing data loss during network interruptions or API timeouts. (Uses EF Core Migrations instead of `EnsureCreated()` for robust schema evolution and concurrency safety).
 
 ## 9. Enterprise Production API & Resilience
 - **Technology:** ASP.NET Core WebAPI with `System.Threading.Channels`.

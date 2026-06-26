@@ -132,15 +132,7 @@ System.Net.Http.HttpRequestException: Error while copying content to a stream.
 **Why this happens:** This occurs when the external LLM provider drops the connection (due to rate limiting, payload timeouts, or upstream network resets).
 **Workaround:** The engine implements automatic exponential backoff retries using `Polly` to gracefully retry network and socket layer exceptions without crashing the background worker.
 
-**Common Error: Database Schema Mismatch (SQL INSERT crashes)**
-```text
-Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes.
----> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table TranslatedModels has no column named Payload'.
-```
-**Why this happens:** The system uses a local SQLite database (`audit.db`). Entity Framework's `EnsureCreated()` method does not automatically apply migrations or update the schema of an existing database if the code changes.
-**Workaround:** You must manually delete the old database files so the API can recreate them cleanly on the next startup.
-- Delete `C:\Github\ActuarialXLpoc\ActuarialTranslationEngine.API\audit.db`
-- Restart the API project.
+
 
 ---
 
