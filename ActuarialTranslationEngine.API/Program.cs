@@ -100,7 +100,7 @@ using (var scope = app.Services.CreateScope())
 {
     var contextFactory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ActuarialDbContext>>();
     using var dbContext = contextFactory.CreateDbContext();
-    dbContext.Database.EnsureCreated();
+    dbContext.Database.Migrate();
 }
 
 app.MapSessionEndpoints();

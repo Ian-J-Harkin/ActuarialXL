@@ -17,7 +17,6 @@ public class SqlitePersistenceManager : IPersistenceManager
         _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
         
         using var dbContext = _contextFactory.CreateDbContext();
-        dbContext.Database.EnsureCreated(); // Creates schema on first run; no-op thereafter.
     }
 
     public async Task<TranslationJobEntity> CreateJobAsync(Guid jobId, string originalFileName, string fileHash, string modelUsed, string targetSheet, Guid? workbookSessionId = null, CancellationToken cancellationToken = default)
