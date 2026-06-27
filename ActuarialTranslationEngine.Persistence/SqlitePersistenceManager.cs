@@ -54,6 +54,19 @@ public class SqlitePersistenceManager : IPersistenceManager
         }, cancellationToken);
     }
 
+    public async Task UpdateJobTargetSheetAsync(Guid jobId, string targetSheet, CancellationToken cancellationToken = default)
+    {
+        await ExecuteWithRetryAsync(async dbContext =>
+        {
+            var job = await dbContext.TranslationJobs.FindAsync(new object[] { jobId }, cancellationToken);
+            if (job != null)
+            {
+                job.TargetSheet = targetSheet;
+                await dbContext.SaveChangesAsync(cancellationToken);
+            }
+        }, cancellationToken);
+    }
+
     public async Task SavePartitionAsync(TranslationPartitionEntity partition, CancellationToken cancellationToken = default)
     {
         if (partition == null) throw new ArgumentNullException(nameof(partition));

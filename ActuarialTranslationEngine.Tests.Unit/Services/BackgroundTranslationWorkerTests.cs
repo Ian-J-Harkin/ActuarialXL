@@ -64,6 +64,49 @@ namespace ActuarialTranslationEngine.Tests.Unit.Services
             if (File.Exists(dummyPath)) File.Delete(dummyPath);
         }
 
+        [Fact]
+        public async Task ProcessJobAsync_WithToxicWorksheet_TrapsExceptionAndContinues()
+        {
+            // Arrange
+            var expectedJobId = Guid.NewGuid();
+            var mockPersistence = new MockPersistenceManager();
+            var dummyPath = Path.GetTempFileName();
+            File.WriteAllBytes(dummyPath, new byte[] { 0x50, 0x4B, 0x03, 0x04 });
+            var mockQueue = new MockTranslationJobQueue(new TranslationJobRequest
+            {
+                JobId = expectedJobId,
+                OriginalFileName = "toxic.xlsx",
+                FilePath = dummyPath,
+                TargetSheet = "ToxicSheet"
+            });
+
+            var services = new ServiceCollection();
+            services.AddSingleton<IActuarialExtractionEngine>(new ToxicExtractionEngine());
+            services.AddSingleton<IVectorCompressionEngine>(new DummyCompressionEngine());
+            services.AddSingleton<IReconciliationOrchestrator>(new DummyOrchestrator());
+            services.AddSingleton<IPersistenceManager>(mockPersistence);
+            services.AddSingleton<IHubContext<TranslationProgressHub>>(new DummyHubContext());
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var worker = new BackgroundTranslationWorker(mockQueue, serviceProvider, new NullLogger<BackgroundTranslationWorker>());
+
+            // Act
+            using var cts = new CancellationTokenSource();
+            await worker.StartAsync(cts.Token);
+            await Task.Delay(200);
+            cts.Cancel();
+            await worker.StopAsync(CancellationToken.None);
+
+            // Assert
+            Assert.True(mockPersistence.CreateJobCalled);
+            Assert.True(mockPersistence.SavedPartitions.Count > 0, "A partition should be saved for the toxic sheet error");
+            Assert.Contains("Fatal extraction error: Intentional toxic sheet failure", mockPersistence.SavedPartitions[0].ErrorMessage);
+            Assert.Equal(TranslationJobStatus.Completed, mockPersistence.FinalJobStatus); // Job should still complete successfully
+
+            if (File.Exists(dummyPath)) File.Delete(dummyPath);
+        }
+
         private class MockTranslationJobQueue : ITranslationJobQueue
         {
             private readonly TranslationJobRequest _request;
@@ -96,6 +139,8 @@ namespace ActuarialTranslationEngine.Tests.Unit.Services
         {
             public bool CreateJobCalled { get; private set; }
             public Guid PassedJobId { get; private set; }
+            public List<TranslationPartitionEntity> SavedPartitions { get; private set; } = new();
+            public TranslationJobStatus FinalJobStatus { get; private set; }
 
             public Task<TranslationJobEntity> CreateJobAsync(Guid jobId, string originalFileName, string fileHash, string modelUsed, string targetSheet = "ALL", Guid? workbookSessionId = null, CancellationToken cancellationToken = default)
             {
@@ -104,8 +149,22 @@ namespace ActuarialTranslationEngine.Tests.Unit.Services
                 return Task.FromResult(new TranslationJobEntity { Id = jobId });
             }
 
-            public Task UpdateJobStatusAsync(Guid jobId, TranslationJobStatus status, CancellationToken cancellationToken = default) => Task.CompletedTask;
-            public Task SavePartitionAsync(TranslationPartitionEntity partition, CancellationToken cancellationToken = default) => Task.CompletedTask;
+            public Task UpdateJobStatusAsync(Guid jobId, TranslationJobStatus status, CancellationToken cancellationToken = default)
+            {
+                FinalJobStatus = status;
+                return Task.CompletedTask;
+            }
+
+            public Task UpdateJobTargetSheetAsync(Guid jobId, string targetSheet, CancellationToken cancellationToken = default)
+            {
+                return Task.CompletedTask;
+            }
+            
+            public Task SavePartitionAsync(TranslationPartitionEntity partition, CancellationToken cancellationToken = default) 
+            {
+                SavedPartitions.Add(partition);
+                return Task.CompletedTask;
+            }
             public Task<List<TranslationJobEntity>> GetPaginatedHistoryAsync(int skip, int take, CancellationToken cancellationToken = default) => Task.FromResult(new List<TranslationJobEntity>());
             public Task<TranslationJobEntity?> GetJobDetailsAsync(Guid jobId, CancellationToken cancellationToken = default) => Task.FromResult<TranslationJobEntity?>(null);
             public Task<List<TranslationJobEntity>> GetJobsBySessionIdAsync(Guid sessionId, CancellationToken cancellationToken = default) => Task.FromResult(new List<TranslationJobEntity>());
@@ -113,8 +172,14 @@ namespace ActuarialTranslationEngine.Tests.Unit.Services
 
         private class DummyExtractionEngine : IActuarialExtractionEngine
         {
-            public List<string> GetWorksheetNames(Stream workbookStream) => throw new NotImplementedException();
-            public RawWorkbookMap ExtractSheetData(Stream workbookStream, string sheetName) => throw new NotImplementedException();
+            public List<string> GetWorksheetNames(Stream workbookStream) => new List<string> { "Sheet1" };
+            public RawWorkbookMap ExtractSheetData(Stream workbookStream, string sheetName) => new RawWorkbookMap { SheetName = sheetName };
+        }
+
+        private class ToxicExtractionEngine : IActuarialExtractionEngine
+        {
+            public List<string> GetWorksheetNames(Stream workbookStream) => new List<string> { "ToxicSheet" };
+            public RawWorkbookMap ExtractSheetData(Stream workbookStream, string sheetName) => throw new Exception("Intentional toxic sheet failure");
         }
 
         private class DummyCompressionEngine : IVectorCompressionEngine

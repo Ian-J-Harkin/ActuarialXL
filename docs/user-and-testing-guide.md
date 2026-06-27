@@ -18,8 +18,8 @@ The Web UI is a Blazor application that provides a visual interface for uploadin
    - *(Optional Developer Tip)*: If you are making UI/HTML changes, run the Web UI using hot-reload instead: `dotnet watch run --project ActuarialTranslationEngine.Web`. This will automatically apply C# and HTML changes without needing to restart the server.
 2. Open your browser and navigate to `http://localhost:5200` (or the configured Web UI port).
 3. Click the upload zone and select an `.xlsx` or `.xlsm` file (e.g., `edu-2012-c13-01.xlsx`). *(Note: Uploads are strictly limited to 5MB and must be valid Excel archives).*
-4. The system will dynamically inspect the file. Select the **Target Sheet** from the populated dropdown. You *must* select a specific sheet; bulk-processing an entire workbook is restricted to prevent resource exhaustion.
-5. Click **Create Translation Session**.
+4. The system will securely upload the file to a sandboxed `/uploads` directory, instantly tie it to an authenticated Database Session ID (to prevent metadata hijacking), and dynamically inspect the file. Select the **Target Sheet** from the populated dropdown. You *must* select a specific sheet; bulk-processing an entire workbook is restricted to prevent resource exhaustion.
+5. Click **Configure Translation Session**. The selected target sheet is locked in the database, and the double-upload inefficiency has been eliminated.
 6. The **Interactive Translation Wizard** will appear, listing the extracted partitions for your selected sheet. Click the **Translate** button next to the specific partition you want to process.
 7. The system will display a real-time progress bar and a scrolling log window as it processes that partition.
 8. Once completed, the button will change to **View Ledger**. Click it to open the Governance Dashboard and view the generated C# runtime code side-by-side with the semantic specification.

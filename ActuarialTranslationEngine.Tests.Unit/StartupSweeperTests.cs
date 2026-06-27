@@ -6,6 +6,7 @@ using Xunit;
 using Microsoft.EntityFrameworkCore;
 using ActuarialTranslationEngine.API.Services;
 using ActuarialTranslationEngine.Core.Models;
+using ActuarialTranslationEngine.Core.Persistence;
 using ActuarialTranslationEngine.Persistence;
 
 namespace ActuarialTranslationEngine.Tests.Unit

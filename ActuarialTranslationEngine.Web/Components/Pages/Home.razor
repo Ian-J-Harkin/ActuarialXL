@@ -158,14 +158,14 @@ else
                 View Audit History Ledger
             </a>
         </div>
-        <button class="btn-primary" @onclick="CreateSessionAsync" disabled="@(_selectedFile == null || _isLoading || _isInspecting || string.IsNullOrEmpty(_targetSheet))">
+        <button class="btn-primary" @onclick="ConfigureSessionAsync" disabled="@(_selectedFile == null || _isLoading || _isInspecting || string.IsNullOrEmpty(_targetSheet))">
             @if (_isLoading)
             {
-                <span>Initializing Session...</span>
+                <span>Configuring Session...</span>
             }
             else
             {
-                <span>Create Translation Session</span>
+                <span>Configure Translation Session</span>
             }
         </button>
     </div>
@@ -323,6 +323,7 @@ else
     private string _fileName = "Select Workbook";
     private string _targetSheet = "";
     private List<string> _availableSheets = new();
+    private Guid _tempSessionId;
     private bool _isInspecting = false;
     private bool _isLoading = false;
     private string? _errorMessage;
@@ -492,7 +493,9 @@ else
         
         try
         {
-            _availableSheets = await TranslationClient.InspectFileAsync(_selectedFile);
+            var response = await TranslationClient.UploadFileAsync(_selectedFile);
+            _tempSessionId = response.SessionId;
+            _availableSheets = response.AvailableSheets;
         }
         catch (Exception ex)
         {
@@ -504,14 +507,14 @@ else
         }
     }
 
-    private async Task CreateSessionAsync()
+    private async Task ConfigureSessionAsync()
     {
-        if (_selectedFile == null) return;
+        if (_tempSessionId == Guid.Empty) return;
         _isLoading = true;
         _errorMessage = null;
         try
         {
-            _activeSession = await TranslationClient.CreateSessionAsync(_selectedFile, _targetSheet);
+            _activeSession = await TranslationClient.ConfigureSessionAsync(_tempSessionId, _targetSheet);
             if (_activeSession != null)
             {
                 try

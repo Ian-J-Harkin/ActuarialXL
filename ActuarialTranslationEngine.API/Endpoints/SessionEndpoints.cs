@@ -17,7 +17,7 @@ public static class SessionEndpoints
 {
     public static void MapSessionEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/session/inspect", async (HttpRequest request, IActuarialExtractionEngine extractionEngine) =>
+        app.MapPost("/api/session/upload", async (HttpRequest request, IActuarialExtractionEngine extractionEngine, IPersistenceManager persistenceManager) =>
         {
             try
             {
@@ -31,7 +31,9 @@ public static class SessionEndpoints
 
                 var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
                 if (!Directory.Exists(uploadDir)) Directory.CreateDirectory(uploadDir);
-                var tempPath = Path.Combine(uploadDir, $"inspect_{Guid.NewGuid()}.xlsx");
+                
+                var sessionId = Guid.NewGuid();
+                var tempPath = Path.Combine(uploadDir, $"{sessionId}.xlsx");
 
                 try
                 {
@@ -47,6 +49,7 @@ public static class SessionEndpoints
                     }
                     if (magicBytes[0] != 0x50 || magicBytes[1] != 0x4B)
                     {
+                        if (File.Exists(tempPath)) File.Delete(tempPath);
                         return Results.BadRequest(new { Error = "Invalid file signature. File is not a valid ZIP/XLSX." });
                     }
 
@@ -55,11 +58,16 @@ public static class SessionEndpoints
                     {
                         sheets = extractionEngine.GetWorksheetNames(readStream);
                     }
-                    return Results.Ok(sheets);
+                    
+                    var jobId = Guid.NewGuid();
+                    var job = await persistenceManager.CreateJobAsync(jobId, file.FileName, "uploaded-stream", "Live Model", "Pending Selection", sessionId);
+
+                    return Results.Ok(new { SessionId = sessionId, AvailableSheets = sheets });
                 }
-                finally
+                catch (Exception)
                 {
                     if (File.Exists(tempPath)) File.Delete(tempPath);
+                    throw;
                 }
             }
             catch (Exception ex)
@@ -68,38 +76,26 @@ public static class SessionEndpoints
             }
         }).DisableAntiforgery();
 
-        app.MapPost("/api/session/create", async (HttpRequest request, IActuarialExtractionEngine extractionEngine, IPersistenceManager persistenceManager) =>
+        app.MapPost("/api/session/configure", async (HttpRequest request, IActuarialExtractionEngine extractionEngine, IPersistenceManager persistenceManager) =>
         {
-            var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
-            var sessionId = Guid.NewGuid();
-            var filePath = Path.Combine(uploadDir, $"{sessionId}.xlsx");
-
             try
             {
-                if (!request.HasFormContentType || !request.Form.Files.Any()) return Results.BadRequest(new { Error = "No file uploaded." });
-                var file = request.Form.Files.First();
+                if (!request.HasJsonContentType()) return Results.BadRequest(new { Error = "Expected JSON payload." });
+                var payload = await request.ReadFromJsonAsync<ConfigureSessionRequest>();
+                if (payload == null || payload.SessionId == Guid.Empty || string.IsNullOrWhiteSpace(payload.TargetSheet))
+                {
+                    return Results.BadRequest(new { Error = "Invalid payload. SessionId and TargetSheet are required." });
+                }
 
-                var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-                if (ext != ".xlsx" && ext != ".xlsm") return Results.BadRequest(new { Error = "Unsupported file type. Only .xlsx and .xlsm are supported." });
-
-                if (file.Length > 5 * 1024 * 1024) return Results.BadRequest(new { Error = "File exceeds the 5MB upload limit." });
-
-                if (!Directory.Exists(uploadDir)) Directory.CreateDirectory(uploadDir);
+                var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+                var filePath = Path.Combine(uploadDir, $"{payload.SessionId}.xlsx");
                 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(fileStream);
-                }
+                if (!File.Exists(filePath))
+                    return Results.NotFound(new { Error = "Session file not found or already deleted. Please re-upload the file." });
 
-                byte[] magicBytes = new byte[2];
-                using (var readStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                if (payload.TargetSheet == "ALL")
                 {
-                    readStream.Read(magicBytes, 0, 2);
-                }
-                if (magicBytes[0] != 0x50 || magicBytes[1] != 0x4B)
-                {
-                    if (File.Exists(filePath)) File.Delete(filePath);
-                    return Results.BadRequest(new { Error = "Invalid file signature. File is not a valid ZIP/XLSX." });
+                    return Results.BadRequest(new { Error = "The 'ALL' strategy has been disabled. You must select a specific target sheet." });
                 }
 
                 List<string> sheets;
@@ -107,33 +103,25 @@ public static class SessionEndpoints
                 {
                     sheets = extractionEngine.GetWorksheetNames(readStream);
                 }
-                
-                var strategy = request.Form.TryGetValue("targetSheet", out var tSheet) ? tSheet.ToString() : "";
-                if (string.IsNullOrWhiteSpace(strategy) || strategy == "ALL")
+
+                if (!sheets.Contains(payload.TargetSheet))
                 {
-                    if (File.Exists(filePath)) File.Delete(filePath);
-                    return Results.BadRequest(new { Error = "The 'ALL' strategy has been disabled. You must select a specific target sheet." });
+                    return Results.BadRequest(new { Error = $"The requested target sheet '{payload.TargetSheet}' does not exist in the workbook." });
                 }
 
-                if (!sheets.Contains(strategy))
-                {
-                    if (File.Exists(filePath)) File.Delete(filePath);
-                    return Results.BadRequest(new { Error = $"The requested target sheet '{strategy}' does not exist in the workbook." });
-                }
+                var jobs = await persistenceManager.GetJobsBySessionIdAsync(payload.SessionId);
+                var job = jobs.FirstOrDefault();
+                if (job == null) return Results.NotFound(new { Error = "Session job record not found." });
 
-                var jobs = new List<TranslationJobEntity>();
-                var jobId = Guid.NewGuid();
-                var job = await persistenceManager.CreateJobAsync(jobId, file.FileName, "uploaded-stream", "Live Model", strategy, sessionId);
-                jobs.Add(job);
+                await persistenceManager.UpdateJobTargetSheetAsync(job.Id, payload.TargetSheet);
 
-                return Results.Ok(new { SessionId = sessionId, Jobs = jobs.Select(j => new { j.Id, j.TargetSheet, Status = j.Status.ToString() }) });
+                return Results.Ok(new { SessionId = payload.SessionId, Jobs = new[] { new { job.Id, TargetSheet = payload.TargetSheet, Status = job.Status.ToString() } } });
             }
             catch (Exception ex)
             {
-                if (File.Exists(filePath)) File.Delete(filePath);
                 return Results.BadRequest(new { Error = ex.Message });
             }
-        }).DisableAntiforgery();
+        });
 
         app.MapPost("/api/session/{sessionId:guid}/execute/{jobId:guid}", async (Guid sessionId, Guid jobId, HttpRequest request, ITranslationJobQueue jobQueue, IPersistenceManager persistenceManager) =>
         {
@@ -145,6 +133,11 @@ public static class SessionEndpoints
 
             var job = await persistenceManager.GetJobDetailsAsync(jobId);
             if (job == null) return Results.NotFound();
+
+            if (job.Status == TranslationJobStatus.Running || job.Status == TranslationJobStatus.Completed)
+            {
+                return Results.Conflict(new { Error = "Job is already running or completed and cannot be executed again." });
+            }
 
             string? connectionId = null;
             if (request.HasFormContentType && request.Form.TryGetValue("connectionId", out var cid))
@@ -175,8 +168,14 @@ public static class SessionEndpoints
             return Results.Ok(new { SessionId = sessionId, Jobs = jobs.Select(j => new { j.Id, j.TargetSheet, Status = j.Status.ToString() }) });
         });
 
-        app.MapPost("/api/session/{sessionId:guid}/finish", (Guid sessionId) => 
+        app.MapPost("/api/session/{sessionId:guid}/finish", async (Guid sessionId, IPersistenceManager persistenceManager) => 
         {
+            var jobs = await persistenceManager.GetJobsBySessionIdAsync(sessionId);
+            if (jobs.Any(j => j.Status == TranslationJobStatus.Pending || j.Status == TranslationJobStatus.Running))
+            {
+                return Results.BadRequest(new { Error = "Cannot delete session file while jobs are still Pending or Running." });
+            }
+
             var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
             var filePath = Path.Combine(uploadDir, $"{sessionId}.xlsx");
             try
@@ -193,4 +192,10 @@ public static class SessionEndpoints
             }
         });
     }
+}
+
+public class ConfigureSessionRequest
+{
+    public Guid SessionId { get; set; }
+    public string TargetSheet { get; set; } = string.Empty;
 }

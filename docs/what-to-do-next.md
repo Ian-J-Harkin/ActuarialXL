@@ -1,8 +1,8 @@
 # What To Do Next
 
 ## Next Immediate Parallel Tasks
-- **Task 1:** Commit all the files to GitHub.
-- **Task 2:** Reverse engineer and produce a detailed design spec of the full program end-to-end, including testing and anything else that needs to be documented.
+- `[x]` **Task 1:** Commit all the files to GitHub.
+- `[x]` **Task 2:** Reverse engineer and produce a detailed design spec of the full program end-to-end, including testing and anything else that needs to be documented.
 ## Current State (Where We Left Off)
 We have successfully completed **Phase IX: Real-Time Observability & Live Integration** and **Phase X: Option B (Expand Pipeline to Unsolved Archetypes)**.
 
@@ -50,14 +50,25 @@ The system has grown rapidly. We successfully:
   - [x] TODO: Ask user about integration and E2E testing upon completion
 
 ## Backlog / Testing & QA
-- **Security & Validation Tests (API):** Add tests enforcing the 5MB file limit and the Magic Byte (PK) signature check for `.xlsx` uploads.
-- **Resilience Tests (Background Worker):** Add tests verifying that `BackgroundTranslationWorker` gracefully traps exceptions from a specific toxic worksheet, writes the `ErrorMessage`, and continues processing the rest of the workbook.
+- **[RESOLVED] Security & Validation Tests (API):** Added tests enforcing the 5MB file limit and the Magic Byte (PK) signature check for `.xlsx` uploads.
+- **[RESOLVED] Resilience Tests (Background Worker):** Added tests verifying that `BackgroundTranslationWorker` gracefully traps exceptions from a specific toxic worksheet, writes the `ErrorMessage`, and continues processing the rest of the workbook.
 - **Frontend E2E Tests: [RESOLVED]**
   - [x] Verify "Validation Status Indicators" render a "Red / Variance Delta" badge when math reconciliation fails.
   - [x] Verify "Home Screen Routing" displays the "Upload vs Audit History" choice when previous jobs exist.
 
 ## Future Enhancements Backlog
 - **Parallel Mass Processing (Multi-threading):** Update the `BackgroundTranslationWorker` to use multiple concurrent threads when pulling from the `ITranslationJobQueue` Channel. Currently, it uses a strictly sequential `while` loop which is fine for single users but limits scale for mass processing.
+- **Database Schema Migration for Available Sheets:** To eliminate the need for `FileStream` re-reading during session configuration, the `TranslationJobEntity` schema should be migrated to cache the list of extracted worksheets natively in the database.
+
+## Backlog / Session Flow Refactor & Resilience [COMPLETED]
+These tasks address inefficiencies and safety gaps discovered during an adversarial review of the Phase V wizard architecture.
+- **[RESOLVED] Fix Session Metadata Loss & Hijacking:** Migrate DB Job creation from `/create` (configure) back to the initial `/upload` endpoint to ensure files are inextricably tied to an authenticated DB record immediately.
+- **[RESOLVED] Enforce Idempotency on Execute:** Add a strict state check in `/api/session/{sessionId}/execute/{jobId}` to prevent double-queuing of jobs already running or completed.
+- **[RESOLVED] Fix File Deletion Race Condition:** Ensure the `/finish` endpoint verifies that no jobs tied to the session are actively `Pending` or `Running` before allowing file deletion.
+- **[RESOLVED] Eliminate Double-Upload Inefficiency:** Rename `/inspect` to `/upload` and refactor `/create` to `/configure` so the UI only uploads the 5MB file once. (Relying on fast FileStream re-reads to validate the TargetSheet configuration without an immediate DB schema migration).
+- **[RESOLVED] Continuous Disk Garbage Collection:** Implement a `BackgroundService` to periodically sweep `uploads/` for abandoned files older than 24 hours.
+- **[RESOLVED] Execute Endpoint Test Coverage:** Add missing unit tests for the `/execute` endpoint (Happy Path and Negative cases like Invalid ID, Deleted File, and Conflict).
+- **[RESOLVED] Content-Length Enforcement:** Add `[RequestSizeLimit(5242880)]` to the `/upload` endpoint.
 
 ## Backlog / Technical Debt
 - **Security Vulnerabilities: [RESOLVED]** Resolved compiler warnings about out-of-date and vulnerable packages by adding explicit `PackageReference` overrides for the transitive dependencies:

@@ -677,3 +677,5 @@ $RECYCLE.BIN/
 *.swp
 output/
 diff.txt
+*.db*
+uploads/

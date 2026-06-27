@@ -45,6 +45,12 @@ public class JobSummary
     public string Status { get; set; } = string.Empty;
 }
 
+public class UploadFileResponse
+{
+    public Guid SessionId { get; set; }
+    public List<string> AvailableSheets { get; set; } = new();
+}
+
 public class ApiTranslationClient
 {
     private readonly HttpClient _httpClient;
@@ -89,16 +95,11 @@ public class ApiTranslationClient
         return result?.JobId ?? Guid.Empty;
     }
 
-    public async Task<SessionCreateResponse> CreateSessionAsync(IBrowserFile file, string targetSheet = "ALL")
+    public async Task<SessionCreateResponse> ConfigureSessionAsync(Guid sessionId, string targetSheet)
     {
-        using var content = new MultipartFormDataContent();
-        using var fileStream = file.OpenReadStream(maxAllowedSize: 50 * 1024 * 1024);
-        using var fileContent = new StreamContent(fileStream);
-        fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType ?? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        content.Add(fileContent, "file", file.Name);
-        content.Add(new StringContent(targetSheet), "targetSheet");
+        var content = JsonContent.Create(new { SessionId = sessionId, TargetSheet = targetSheet });
 
-        var response = await _httpClient.PostAsync("/api/session/create", content);
+        var response = await _httpClient.PostAsync("/api/session/configure", content);
         if (!response.IsSuccessStatusCode)
             throw new Exception($"API Error: {await response.Content.ReadAsStringAsync()}");
 
@@ -151,7 +152,7 @@ public class ApiTranslationClient
         return JsonSerializer.Deserialize<SessionCreateResponse>(responseString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 
-    public async Task<List<string>> InspectFileAsync(IBrowserFile file)
+    public async Task<UploadFileResponse> UploadFileAsync(IBrowserFile file)
     {
         using var content = new MultipartFormDataContent();
         using var fileStream = file.OpenReadStream(maxAllowedSize: 50 * 1024 * 1024);
@@ -159,12 +160,12 @@ public class ApiTranslationClient
         fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType ?? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         content.Add(fileContent, "file", file.Name);
 
-        var response = await _httpClient.PostAsync("/api/session/inspect", content);
+        var response = await _httpClient.PostAsync("/api/session/upload", content);
         if (!response.IsSuccessStatusCode)
             throw new Exception($"API Error: {await response.Content.ReadAsStringAsync()}");
 
         var responseString = await response.Content.ReadAsStringAsync();
-        return JsonSerializer.Deserialize<List<string>>(responseString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<string>();
+        return JsonSerializer.Deserialize<UploadFileResponse>(responseString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new UploadFileResponse();
     }
 
     public async Task CancelJobAsync(Guid jobId)

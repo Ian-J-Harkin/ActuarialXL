@@ -91,6 +91,7 @@ builder.Services.AddSingleton<IReconciliationOrchestrator, ReconciliationOrchest
 builder.Services.AddSingleton<ITranslationJobQueue, TranslationJobQueue>();
 builder.Services.AddHostedService<BackgroundTranslationWorker>();
 builder.Services.AddHostedService<LlmWatchdogService>();
+builder.Services.AddHostedService<UploadSweeperService>();
 
 // Persistence registration
 var dbPath = Environment.GetEnvironmentVariable("ACTUARIAL_DB_PATH") ?? "audit.db";
