@@ -17,10 +17,12 @@ The Web UI is a Blazor application that provides a visual interface for uploadin
    - To run the Web UI: `dotnet run --project ActuarialTranslationEngine.Web`
    - *(Optional Developer Tip)*: If you are making UI/HTML changes, run the Web UI using hot-reload instead: `dotnet watch run --project ActuarialTranslationEngine.Web`. This will automatically apply C# and HTML changes without needing to restart the server.
 2. Open your browser and navigate to `http://localhost:5200` (or the configured Web UI port).
-3. Click the upload zone and select an `.xlsx` or `.xlsm` file (e.g., `edu-2012-c13-01.xlsx`).
-4. Click **Begin Translation Analysis**.
-5. The system will display a real-time progress bar and a scrolling log window as it processes the file partition by partition.
-6. Once completed, the dashboard will display the generated C# runtime code side-by-side with the semantic specification.
+3. Click the upload zone and select an `.xlsx` or `.xlsm` file (e.g., `edu-2012-c13-01.xlsx`). *(Note: Uploads are strictly limited to 5MB and must be valid Excel archives).*
+4. The system will dynamically inspect the file. Select the **Target Sheet** from the populated dropdown. You *must* select a specific sheet; bulk-processing an entire workbook is restricted to prevent resource exhaustion.
+5. Click **Create Translation Session**.
+6. The **Interactive Translation Wizard** will appear, listing the extracted partitions for your selected sheet. Click the **Translate** button next to the specific partition you want to process.
+7. The system will display a real-time progress bar and a scrolling log window as it processes that partition.
+8. Once completed, the button will change to **View Ledger**. Click it to open the Governance Dashboard and view the generated C# runtime code side-by-side with the semantic specification.
    - **Provenance Badge:** Each run displays an Audit Ledger badge indicating the exact Database ID, Timestamp, and LLM Model used for the translation.
    - **Data Provenance:** The generated C# code now clearly identifies the precise mathematical source via a dynamic `Compiled` header (e.g., `Compiled: Worksheet Table 13.4 (Rows 5-20)` or `VBA Module: Module1`). This ensures the compiled block can be traced 1:1 directly back to its originating Excel workbook range or macro.
    - **Export:** You can click the **Download .cs** button on any generated partition. Instead of saving to the server's hard drive, the file is generated directly in the browser and saved to your local machine's `Downloads` folder.
@@ -144,6 +146,7 @@ To boot the full system for local testing and Web UI usage, start both the API a
 ```bash
 dotnet run --project ActuarialTranslationEngine.API
 ```
+*Note: Once the API is running, developers can view and interact with the REST endpoints via the Swagger UI at `http://localhost:5242/swagger`.*
 
 **Terminal 2 (Start the Web UI):**
 ```bash

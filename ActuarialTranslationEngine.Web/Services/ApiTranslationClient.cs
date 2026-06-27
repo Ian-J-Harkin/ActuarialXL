@@ -19,10 +19,11 @@ public class ApiTranslationResponse
 public class HistorySummary
 {
     public Guid Id { get; set; }
-    public string? OriginalFileName { get; set; }
+    public string OriginalFileName { get; set; } = string.Empty;
+    public string TargetSheet { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
-    public int EvaluationsCount { get; set; }
     public string Status { get; set; } = string.Empty;
+    public int EvaluationsCount { get; set; }
 }
 
 public class JobEnqueueResponse
@@ -130,5 +131,46 @@ public class ApiTranslationClient
         if (!response.IsSuccessStatusCode) return null;
         var content = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<ApiTranslationResponse>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+
+    public async Task FinishSessionAsync(Guid sessionId)
+    {
+        var response = await _httpClient.PostAsync($"/api/session/{sessionId}/finish", null);
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Failed to finish session: {error}");
+        }
+    }
+
+    public async Task<SessionCreateResponse?> GetSessionJobsAsync(Guid sessionId)
+    {
+        var response = await _httpClient.GetAsync($"/api/session/{sessionId}/jobs");
+        if (!response.IsSuccessStatusCode) return null;
+        var responseString = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<SessionCreateResponse>(responseString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+
+    public async Task<List<string>> InspectFileAsync(IBrowserFile file)
+    {
+        using var content = new MultipartFormDataContent();
+        using var fileStream = file.OpenReadStream(maxAllowedSize: 50 * 1024 * 1024);
+        using var fileContent = new StreamContent(fileStream);
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType ?? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        content.Add(fileContent, "file", file.Name);
+
+        var response = await _httpClient.PostAsync("/api/session/inspect", content);
+        if (!response.IsSuccessStatusCode)
+            throw new Exception($"API Error: {await response.Content.ReadAsStringAsync()}");
+
+        var responseString = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<List<string>>(responseString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<string>();
+    }
+
+    public async Task CancelJobAsync(Guid jobId)
+    {
+        var response = await _httpClient.DeleteAsync($"/api/evaluate/{jobId}");
+        if (!response.IsSuccessStatusCode)
+            throw new Exception($"Failed to cancel job: {await response.Content.ReadAsStringAsync()}");
     }
 }

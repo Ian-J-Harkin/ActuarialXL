@@ -48,6 +48,7 @@
                     <tr style="border-bottom: 1px solid var(--border-glass); color: var(--text-secondary);">
                         <th style="padding: 12px 8px;">Date/Time</th>
                         <th style="padding: 12px 8px;">Workbook Name</th>
+                        <th style="padding: 12px 8px;">Target Sheet</th>
                         <th style="padding: 12px 8px;">Status</th>
                         <th style="padding: 12px 8px;">Partitions</th>
                         <th style="padding: 12px 8px;">Transaction ID</th>
@@ -61,6 +62,7 @@
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 16px 8px;">@record.CreatedAt.ToLocalTime().ToString("g")</td>
                             <td style="padding: 16px 8px; font-weight: 500;">@record.OriginalFileName</td>
+                            <td style="padding: 16px 8px; font-style: italic; color: var(--text-secondary);">@record.TargetSheet</td>
                             <td style="padding: 16px 8px; color: @statusColor;">@record.Status</td>
                             <td style="padding: 16px 8px;">
                                 <span style="background: rgba(139, 92, 246, 0.2); color: var(--accent-purple); padding: 2px 8px; border-radius: 12px; font-size: 12px;">
@@ -88,7 +90,7 @@
         <div class="glass-panel" style="margin-bottom: 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);">
             <h3 style="color: #34d399; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                Historical Audit Record (@_detail.Status)
+                Audit Record: @_detail.WorksheetName (@_detail.Status)
             </h3>
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; color: #e2e8f0; font-size: 14px;">
                 <div><strong>Transaction ID:</strong><br/> <span style="font-family: monospace;">@_detail.TranslationId</span></div>
@@ -255,8 +257,9 @@
             else
             {
                 var skip = _currentPage * _pageSize;
-                _history = await TranslationClient.GetHistoryAsync(skip, _pageSize);
-                _hasNextPage = _history.Count == _pageSize;
+                var rawHistory = await TranslationClient.GetHistoryAsync(skip, _pageSize + 1);
+                _hasNextPage = rawHistory.Count > _pageSize;
+                _history = rawHistory.Take(_pageSize).ToList();
             }
         }
         catch (Exception ex)

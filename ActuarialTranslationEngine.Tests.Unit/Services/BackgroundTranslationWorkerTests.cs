@@ -24,11 +24,13 @@ namespace ActuarialTranslationEngine.Tests.Unit.Services
             // Arrange
             var expectedJobId = Guid.NewGuid();
             var mockPersistence = new MockPersistenceManager();
+            var dummyPath = Path.GetTempFileName();
+            File.WriteAllBytes(dummyPath, new byte[] { 0x50, 0x4B, 0x03, 0x04 });
             var mockQueue = new MockTranslationJobQueue(new TranslationJobRequest
             {
                 JobId = expectedJobId,
                 OriginalFileName = "test.xlsx",
-                FileData = new byte[] { 0x50, 0x4B }
+                FilePath = dummyPath
             });
 
             var services = new ServiceCollection();
@@ -58,6 +60,8 @@ namespace ActuarialTranslationEngine.Tests.Unit.Services
             // Assert
             Assert.True(mockPersistence.CreateJobCalled, "CreateJobAsync was never called on the PersistenceManager.");
             Assert.Equal(expectedJobId, mockPersistence.PassedJobId);
+            
+            if (File.Exists(dummyPath)) File.Delete(dummyPath);
         }
 
         private class MockTranslationJobQueue : ITranslationJobQueue

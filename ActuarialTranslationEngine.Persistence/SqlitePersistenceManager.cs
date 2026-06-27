@@ -71,6 +71,7 @@ public class SqlitePersistenceManager : IPersistenceManager
         return await dbContext.TranslationJobs
             .Include(j => j.Partitions)
             .OrderByDescending(x => x.CreatedAt)
+            .ThenBy(x => x.Id)
             .Skip(skip)
             .Take(take)
             .ToListAsync(cancellationToken);

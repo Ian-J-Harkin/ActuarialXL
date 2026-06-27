@@ -141,6 +141,34 @@ public class SqlitePersistenceManagerTests : IDisposable
         await Assert.ThrowsAsync<InvalidOperationException>(() => manager.SavePartitionAsync(partition));
     }
 
+    [Fact]
+    public async Task GetPaginatedHistoryAsync_ShouldSortDeterministically_WhenTimestampsAreIdentical()
+    {
+        // Arrange
+        var factory = new TestDbContextFactory(_options);
+        var manager = new SqlitePersistenceManager(factory);
+        var time = DateTime.UtcNow;
+
+        // Create two jobs with identical timestamps manually
+        using (var dbContext = factory.CreateDbContext())
+        {
+            var job1 = new TranslationJobEntity { Id = Guid.Parse("11111111-1111-1111-1111-111111111111"), OriginalFileName = "test.xlsx", FileHash = "1", ModelUsed = "M", TargetSheet = "Sheet1", Status = TranslationJobStatus.Pending, CreatedAt = time };
+            var job2 = new TranslationJobEntity { Id = Guid.Parse("22222222-2222-2222-2222-222222222222"), OriginalFileName = "test.xlsx", FileHash = "2", ModelUsed = "M", TargetSheet = "Sheet2", Status = TranslationJobStatus.Pending, CreatedAt = time };
+            
+            dbContext.TranslationJobs.AddRange(job1, job2);
+            await dbContext.SaveChangesAsync();
+        }
+
+        // Act
+        var results = await manager.GetPaginatedHistoryAsync(0, 10);
+
+        // Assert
+        Assert.Equal(2, results.Count);
+        // The one with the smaller GUID (111...) should come first due to ThenBy(x => x.Id)
+        Assert.Equal(Guid.Parse("11111111-1111-1111-1111-111111111111"), results[0].Id);
+        Assert.Equal(Guid.Parse("22222222-2222-2222-2222-222222222222"), results[1].Id);
+    }
+
     public void Dispose()
     {
         _connection.Close();

@@ -95,22 +95,16 @@ public class BackgroundTranslationWorker : BackgroundService
 
         try
         {
-            using var stream = new MemoryStream(jobRequest.FileData);
+            if (!File.Exists(jobRequest.FilePath))
+                throw new FileNotFoundException($"The uploaded file was not found on disk at {jobRequest.FilePath}");
+
+            using var stream = new FileStream(jobRequest.FilePath, FileMode.Open, FileAccess.Read);
             
             var sheets = extractionEngine.GetWorksheetNames(stream);
             if (!sheets.Any()) throw new InvalidOperationException("No worksheets found.");
 
             var targetSheets = new List<string>();
-            if (jobRequest.TargetSheet == "ALL")
-            {
-                var allowedSheets = new[] { "Table 13.4", "Example 16.3 - Part 1", "Example 18.4", "Example 13.12" };
-                foreach (var s in allowedSheets)
-                {
-                    if (sheets.Contains(s)) targetSheets.Add(s);
-                }
-                if (!targetSheets.Any()) targetSheets.Add(sheets.First());
-            }
-            else if (sheets.Contains(jobRequest.TargetSheet))
+            if (sheets.Contains(jobRequest.TargetSheet))
             {
                 targetSheets.Add(jobRequest.TargetSheet);
             }
@@ -123,60 +117,100 @@ public class BackgroundTranslationWorker : BackgroundService
 
             foreach (var targetSheet in targetSheets)
             {
-                stream.Position = 0;
-                var sheetRawMap = extractionEngine.ExtractSheetData(stream, targetSheet);
-
-                var compressedBlock = compressionEngine.CompressTopology(sheetRawMap);
-
-                // 3. Process the block and stream the partitions directly into the DB
-                await foreach (var llmOutput in orchestrator.ProcessBlockAsync(compressedBlock, sheetRawMap, progress, jobToken))
+                try
                 {
+                    stream.Position = 0;
+                    var sheetRawMap = extractionEngine.ExtractSheetData(stream, targetSheet);
+
+                    var compressedBlock = compressionEngine.CompressTopology(sheetRawMap);
+
+                    // 3. Process the block and stream the partitions directly into the DB
+                    await foreach (var llmOutput in orchestrator.ProcessBlockAsync(compressedBlock, sheetRawMap, progress, jobToken))
+                    {
+                        partitionCounter++;
+                        var partitionEntity = new TranslationPartitionEntity
+                        {
+                            JobId = dbJob.Id,
+                            PartitionIndex = partitionCounter,
+                            FinalAuditableMarkdown = llmOutput.FinalAuditableMarkdown,
+                            GeneratedCSharpMirrorCode = llmOutput.GeneratedCSharpMirrorCode,
+                            SourceName = llmOutput.SourceName,
+                            IsCertified = llmOutput.IsCertified,
+                            VarianceDelta = llmOutput.VarianceDelta,
+                            ErrorMessage = llmOutput.ErrorMessage,
+                            DisruptiveNodesJson = System.Text.Json.JsonSerializer.Serialize(llmOutput.DisruptiveNodes)
+                        };
+                        await persistenceManager.SavePartitionAsync(partitionEntity, jobToken);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Failed to process target sheet: {targetSheet}");
                     partitionCounter++;
                     var partitionEntity = new TranslationPartitionEntity
                     {
                         JobId = dbJob.Id,
                         PartitionIndex = partitionCounter,
-                        FinalAuditableMarkdown = llmOutput.FinalAuditableMarkdown,
-                        GeneratedCSharpMirrorCode = llmOutput.GeneratedCSharpMirrorCode,
-                        SourceName = llmOutput.SourceName,
-                        IsCertified = llmOutput.IsCertified,
-                        VarianceDelta = llmOutput.VarianceDelta,
-                        ErrorMessage = llmOutput.ErrorMessage,
-                        DisruptiveNodesJson = System.Text.Json.JsonSerializer.Serialize(llmOutput.DisruptiveNodes)
+                        FinalAuditableMarkdown = string.Empty,
+                        GeneratedCSharpMirrorCode = string.Empty,
+                        SourceName = targetSheet,
+                        IsCertified = false,
+                        ErrorMessage = $"Fatal extraction error: {ex.Message}",
+                        DisruptiveNodesJson = "[]"
                     };
                     await persistenceManager.SavePartitionAsync(partitionEntity, jobToken);
                 }
             }
 
-            // Extract VBA logic only if 'ALL' or explicitly requested, or if we want it as a separate job
-            if (jobRequest.TargetSheet == "ALL" || jobRequest.TargetSheet == "VBA")
+            // Extract VBA logic only if explicitly requested
+            if (jobRequest.TargetSheet == "VBA")
             {
-                stream.Position = 0;
-                var vbaEngine = scope.ServiceProvider.GetService<IVbaExtractionEngine>();
-                if (vbaEngine != null)
+                try
                 {
-                    var vbaModules = vbaEngine.ExtractVbaCodeStreams(stream);
-                    if (vbaModules.Any())
+                    stream.Position = 0;
+                    var vbaEngine = scope.ServiceProvider.GetService<IVbaExtractionEngine>();
+                    if (vbaEngine != null)
                     {
-                        var vbaOutputs = await orchestrator.ProcessVbaModulesAsync(vbaModules, jobToken);
-                        foreach (var llmOutput in vbaOutputs)
+                        var vbaModules = vbaEngine.ExtractVbaCodeStreams(stream);
+                        if (vbaModules.Any())
                         {
-                            partitionCounter++;
-                            var partitionEntity = new TranslationPartitionEntity
+                            var vbaOutputs = await orchestrator.ProcessVbaModulesAsync(vbaModules, jobToken);
+                            foreach (var llmOutput in vbaOutputs)
                             {
-                                JobId = dbJob.Id,
-                                PartitionIndex = partitionCounter,
-                                FinalAuditableMarkdown = llmOutput.FinalAuditableMarkdown,
-                                GeneratedCSharpMirrorCode = llmOutput.GeneratedCSharpMirrorCode,
-                                SourceName = llmOutput.SourceName,
-                                IsCertified = llmOutput.IsCertified,
-                                VarianceDelta = llmOutput.VarianceDelta,
-                                ErrorMessage = llmOutput.ErrorMessage,
-                                DisruptiveNodesJson = System.Text.Json.JsonSerializer.Serialize(llmOutput.DisruptiveNodes)
-                            };
-                            await persistenceManager.SavePartitionAsync(partitionEntity, jobToken);
+                                partitionCounter++;
+                                var partitionEntity = new TranslationPartitionEntity
+                                {
+                                    JobId = dbJob.Id,
+                                    PartitionIndex = partitionCounter,
+                                    FinalAuditableMarkdown = llmOutput.FinalAuditableMarkdown,
+                                    GeneratedCSharpMirrorCode = llmOutput.GeneratedCSharpMirrorCode,
+                                    SourceName = llmOutput.SourceName,
+                                    IsCertified = llmOutput.IsCertified,
+                                    VarianceDelta = llmOutput.VarianceDelta,
+                                    ErrorMessage = llmOutput.ErrorMessage,
+                                    DisruptiveNodesJson = System.Text.Json.JsonSerializer.Serialize(llmOutput.DisruptiveNodes)
+                                };
+                                await persistenceManager.SavePartitionAsync(partitionEntity, jobToken);
+                            }
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to extract or process VBA logic");
+                    partitionCounter++;
+                    var partitionEntity = new TranslationPartitionEntity
+                    {
+                        JobId = dbJob.Id,
+                        PartitionIndex = partitionCounter,
+                        FinalAuditableMarkdown = string.Empty,
+                        GeneratedCSharpMirrorCode = string.Empty,
+                        SourceName = "VBA Macros",
+                        IsCertified = false,
+                        ErrorMessage = $"Fatal VBA processing error: {ex.Message}",
+                        DisruptiveNodesJson = "[]"
+                    };
+                    await persistenceManager.SavePartitionAsync(partitionEntity, jobToken);
                 }
             }
 
@@ -212,11 +246,25 @@ public class BackgroundTranslationWorker : BackgroundService
         }
         finally
         {
+            // Clean up worker registration tokens
             if (Program.ActiveJobTokens.TryRemove(jobRequest.JobId, out var cts))
             {
                 cts.Dispose();
             }
             linkedCts?.Dispose();
+            
+            try
+            {
+                if (File.Exists(jobRequest.FilePath))
+                {
+                    File.Delete(jobRequest.FilePath);
+                    _logger.LogInformation($"Cleaned up temporary file {jobRequest.FilePath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, $"Failed to delete temporary file {jobRequest.FilePath}");
+            }
         }
     }
 }

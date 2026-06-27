@@ -16,7 +16,7 @@
         <h1 class="gradient-text" style="margin-top: 0; margin-bottom: 24px;">Welcome to Actuarial Governance</h1>
         <p class="text-secondary" style="margin-bottom: 32px;">You have existing audits in your ledger. Would you like to upload a new model or review your history?</p>
         
-        <div style="display: flex; gap: 24px; justify-content: center;">
+        <div style="display: flex; gap: 24px; justify-content: center; margin-bottom: 40px;">
             <button class="btn-primary" @onclick="() => _showUploadScreen = true" style="padding: 16px 32px; font-size: 18px;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px; vertical-align: middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                 Upload New Model
@@ -26,6 +26,39 @@
                 View Audit History
             </a>
         </div>
+
+        @if (_recentAudits.Any())
+        {
+            <div style="margin-top: 40px; text-align: left;">
+                <h3 style="color: var(--accent-cyan); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 16px;">Recent Audits</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: var(--text-secondary); border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px;">
+                            <th style="padding: 8px 4px; text-align: left;">Time</th>
+                            <th style="padding: 8px 4px; text-align: left;">Workbook</th>
+                            <th style="padding: 8px 4px; text-align: left;">Sheet</th>
+                            <th style="padding: 8px 4px; text-align: left;">Status</th>
+                            <th style="padding: 8px 4px; text-align: right;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var audit in _recentAudits)
+                        {
+                            string statusColor = audit.Status == "Completed" ? "#34d399" : (audit.Status == "Failed" ? "#ef4444" : (audit.Status == "Canceled" ? "#f59e0b" : "#60a5fa"));
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px;">
+                                <td style="padding: 12px 4px; color: var(--text-secondary);">@audit.CreatedAt.ToLocalTime().ToString("g")</td>
+                                <td style="padding: 12px 4px; font-weight: 500;">@audit.OriginalFileName</td>
+                                <td style="padding: 12px 4px; font-style: italic; color: var(--text-secondary);">@audit.TargetSheet</td>
+                                <td style="padding: 12px 4px; color: @statusColor;">@audit.Status</td>
+                                <td style="padding: 12px 4px; text-align: right;">
+                                    <a href="history/@audit.Id" class="btn-primary" style="padding: 4px 8px; font-size: 12px; text-decoration: none;">View</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
     </div>
 }
 else if (_activeSession != null)
@@ -44,6 +77,10 @@ else if (_activeSession != null)
                     {
                         <button class="btn-primary" @onclick="() => ExecuteJobAsync(job.Id)">Translate</button>
                     }
+                    else if (job.Status == "Running")
+                    {
+                        <button class="btn-primary" style="background: rgba(220, 38, 38, 0.2); border-color: rgba(220, 38, 38, 0.4); color: #f87171;" @onclick="() => CancelJobAsync(job.Id)">Cancel Translation</button>
+                    }
                     else if (job.Status == "Completed")
                     {
                         <button class="btn-secondary" @onclick="() => LoadResponseAsync(job.Id)">View Ledger</button>
@@ -55,7 +92,7 @@ else if (_activeSession != null)
         @if (!_activeSession.Jobs.Any(j => j.Status == "Pending" || j.Status == "Running"))
         {
              <div style="margin-top: 24px;">
-                 <button class="btn-secondary" @onclick="() => _activeSession = null">Finish Session</button>
+                 <button class="btn-secondary" @onclick="FinishSessionAsync">Finish Session</button>
              </div>
         }
         
@@ -87,23 +124,41 @@ else
         }
     </label>
 
-    <div style="margin-top: 16px;">
-        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Target Sheet Strategy:</label>
-        <select @bind="_targetSheet" style="width: 100%; padding: 12px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #e2e8f0; border: 1px solid rgba(139, 92, 246, 0.4); outline: none;">
-            <option value="ALL">ALL (Process Sequentially)</option>
-            <option value="Table 13.4">Table 13.4 (Time-Series)</option>
-            <option value="Example 16.3 - Part 1">Example 16.3 - Part 1 (Stochastic)</option>
-            <option value="Example 18.4">Example 18.4 (Balancing Ledger)</option>
-            <option value="Example 13.12">Example 13.12 (Variable Adjuster)</option>
-        </select>
-    </div>
+    @if (_availableSheets.Any() || _isInspecting)
+    {
+        <div style="margin-top: 16px;">
+            <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Target Sheet:</label>
+            <select @bind="_targetSheet" disabled="@_isInspecting" style="width: 100%; padding: 12px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #e2e8f0; border: 1px solid rgba(139, 92, 246, 0.4); outline: none;">
+                @if (_isInspecting)
+                {
+                    <option value="">Inspecting file...</option>
+                }
+                else
+                {
+                    <option value="">-- Select a Sheet --</option>
+                    @foreach (var sheet in _availableSheets)
+                    {
+                        <option value="@sheet">@sheet</option>
+                    }
+                }
+            </select>
+        </div>
+    }
 
     <div style="margin-top: 24px; display: flex; justify-content: space-between; align-items: center;">
-        <a href="history" class="btn-secondary" style="padding: 10px 16px; border-radius: 6px; text-decoration: none; color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.1);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; display: inline-block; vertical-align: middle;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            View Audit History Ledger
-        </a>
-        <button class="btn-primary" @onclick="CreateSessionAsync" disabled="@(_selectedFile == null || _isLoading)">
+        <div style="display: flex; gap: 12px;">
+            @if (_hasAuditHistory)
+            {
+                <button class="btn-secondary" @onclick="() => _showUploadScreen = false" style="padding: 10px 16px; border-radius: 6px;">
+                    &larr; Back to Dashboard
+                </button>
+            }
+            <a href="history" class="btn-secondary" style="padding: 10px 16px; border-radius: 6px; text-decoration: none; color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.1); display: inline-flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                View Audit History Ledger
+            </a>
+        </div>
+        <button class="btn-primary" @onclick="CreateSessionAsync" disabled="@(_selectedFile == null || _isLoading || _isInspecting || string.IsNullOrEmpty(_targetSheet))">
             @if (_isLoading)
             {
                 <span>Initializing Session...</span>
@@ -266,7 +321,9 @@ else
 @code {
     private IBrowserFile? _selectedFile;
     private string _fileName = "Select Workbook";
-    private string _targetSheet = "ALL";
+    private string _targetSheet = "";
+    private List<string> _availableSheets = new();
+    private bool _isInspecting = false;
     private bool _isLoading = false;
     private string? _errorMessage;
     private ApiTranslationResponse? _response;
@@ -279,6 +336,7 @@ else
 
     private bool _hasAuditHistory = false;
     private bool _showUploadScreen = false;
+    private List<HistorySummary> _recentAudits = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -333,11 +391,16 @@ else
         }
         try
         {
-            var history = await TranslationClient.GetHistoryAsync(0, 1);
+            var history = await TranslationClient.GetHistoryAsync(0, 5);
             if (history != null && history.Any())
+            {
                 _hasAuditHistory = true;
+                _recentAudits = history;
+            }
             else
+            {
                 _showUploadScreen = true;
+            }
         }
         catch
         {
@@ -345,12 +408,100 @@ else
         }
     }
 
-    private void HandleFileSelected(InputFileChangeEventArgs e)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var sessionIdStr = await JSRuntime.InvokeAsync<string>("sessionStorage.getItem", "activeSessionId");
+                if (!string.IsNullOrEmpty(sessionIdStr) && Guid.TryParse(sessionIdStr, out var sessionId))
+                {
+                    var session = await TranslationClient.GetSessionJobsAsync(sessionId);
+                    if (session != null && session.Jobs.Any())
+                    {
+                        _activeSession = session;
+                        _showUploadScreen = false;
+                        await InvokeAsync(StateHasChanged);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error restoring session: {ex.Message}");
+            }
+        }
+    }
+
+    private async Task FinishSessionAsync()
+    {
+        if (_activeSession != null)
+        {
+            try
+            {
+                await TranslationClient.FinishSessionAsync(_activeSession.SessionId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to clean up session: {ex.Message}");
+            }
+        }
+
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("sessionStorage.removeItem", "activeSessionId");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to clear session storage: {ex.Message}");
+        }
+
+        _activeSession = null;
+        _errorMessage = null;
+        _response = null;
+        
+        try
+        {
+            var history = await TranslationClient.GetHistoryAsync(0, 5);
+            if (history != null && history.Any())
+            {
+                _hasAuditHistory = true;
+                _recentAudits = history;
+                _showUploadScreen = false; // Go back to welcome page showing recent history
+            }
+            else
+            {
+                _showUploadScreen = true;
+            }
+        }
+        catch
+        {
+            _showUploadScreen = true;
+        }
+    }
+
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
     {
         _selectedFile = e.File;
         _fileName = _selectedFile.Name;
         _errorMessage = null;
         _response = null;
+        _targetSheet = "";
+        _availableSheets.Clear();
+        _isInspecting = true;
+        
+        try
+        {
+            _availableSheets = await TranslationClient.InspectFileAsync(_selectedFile);
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Failed to inspect file: {ex.Message}";
+        }
+        finally
+        {
+            _isInspecting = false;
+        }
     }
 
     private async Task CreateSessionAsync()
@@ -361,6 +512,17 @@ else
         try
         {
             _activeSession = await TranslationClient.CreateSessionAsync(_selectedFile, _targetSheet);
+            if (_activeSession != null)
+            {
+                try
+                {
+                    await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "activeSessionId", _activeSession.SessionId.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to save session to storage: {ex.Message}");
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -400,6 +562,21 @@ else
     private async Task LoadResponseAsync(Guid jobId)
     {
         _response = await TranslationClient.GetHistoricalTranslationAsync(jobId);
+    }
+
+    private async Task CancelJobAsync(Guid jobId)
+    {
+        try
+        {
+            await TranslationClient.CancelJobAsync(jobId);
+            var job = _activeSession?.Jobs.FirstOrDefault(j => j.Id == jobId);
+            if (job != null) job.Status = "Canceled";
+            _isLoading = false;
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
     }
 
     private async Task DownloadCodeAsync(string code, int index)

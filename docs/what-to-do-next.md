@@ -1,5 +1,8 @@
 # What To Do Next
 
+## Next Immediate Parallel Tasks
+- **Task 1:** Commit all the files to GitHub.
+- **Task 2:** Reverse engineer and produce a detailed design spec of the full program end-to-end, including testing and anything else that needs to be documented.
 ## Current State (Where We Left Off)
 We have successfully completed **Phase IX: Real-Time Observability & Live Integration** and **Phase X: Option B (Expand Pipeline to Unsolved Archetypes)**.
 
@@ -46,6 +49,16 @@ The system has grown rapidly. We successfully:
   - [x] TODO: Add unit tests
   - [x] TODO: Ask user about integration and E2E testing upon completion
 
+## Backlog / Testing & QA
+- **Security & Validation Tests (API):** Add tests enforcing the 5MB file limit and the Magic Byte (PK) signature check for `.xlsx` uploads.
+- **Resilience Tests (Background Worker):** Add tests verifying that `BackgroundTranslationWorker` gracefully traps exceptions from a specific toxic worksheet, writes the `ErrorMessage`, and continues processing the rest of the workbook.
+- **Frontend E2E Tests: [RESOLVED]**
+  - [x] Verify "Validation Status Indicators" render a "Red / Variance Delta" badge when math reconciliation fails.
+  - [x] Verify "Home Screen Routing" displays the "Upload vs Audit History" choice when previous jobs exist.
+
+## Future Enhancements Backlog
+- **Parallel Mass Processing (Multi-threading):** Update the `BackgroundTranslationWorker` to use multiple concurrent threads when pulling from the `ITranslationJobQueue` Channel. Currently, it uses a strictly sequential `while` loop which is fine for single users but limits scale for mass processing.
+
 ## Backlog / Technical Debt
 - **Security Vulnerabilities: [RESOLVED]** Resolved compiler warnings about out-of-date and vulnerable packages by adding explicit `PackageReference` overrides for the transitive dependencies:
   - `System.Drawing.Common` pinned to 10.0.9 in `Engine.csproj` (was 4.7.0 via ClosedXML — critical vulnerability NU1904 / GHSA-rxg9-xrhp-64gj).
@@ -67,7 +80,22 @@ These items address gaps discovered during live testing where a 100-second `Http
   - **[RESOLVED] Data Provenance Tracking.** The LLM orchestrator now natively injects exact source tags (e.g., `Worksheet Table 13.4`) into the pipeline. These labels persist all the way to the UI, replacing the generic "Partition N" headers with precise auditing context.
 ### Medium-Term Architectural Changes
 - **[RESOLVED] Migrate to One-to-Many Database Schema (Fault Tolerance).** The legacy atomic save pattern was replaced. The database schema now correctly maps a `TranslationJob` to multiple `TranslationPartition` records. Partitions are saved as they complete incrementally, preventing complete data loss during intermittent network or LLM API timeouts.
-- **[TODO] Migrate from EnsureCreated() to EF Core Migrations.** The current database initialization relies on `dbContext.Database.EnsureCreated()`, which bootstraps a schema instantly but does not support schema evolution (e.g., adding new columns). This caused crashes during E2E testing when the C# models were updated but the `audit.db` file remained on an old schema. The persistence layer must be transitioned to use `dbContext.Database.Migrate()` and official migration scripts to properly handle data evolution in production.
+- **[RESOLVED] Migrate from EnsureCreated() to EF Core Migrations.** The database initialization now uses `dbContext.Database.Migrate()` to properly handle data evolution in production.
+
+## Adversarial Review Remediations [COMPLETED]
+During an intensive adversarial review, several critical architectural flaws were identified and subsequently resolved:
+- **[RESOLVED] Tier 1 (OOM Memory Leaks):** Fixed `OutOfMemoryException` crashes by transitioning the `BackgroundTranslationWorker` to read workbooks via a disk-streaming strategy (`FileStream` to an `uploads/` directory) rather than holding massive >50MB files in a `MemoryStream`. Added a Startup Sweeper to clean up orphaned jobs.
+- **[RESOLVED] Tier 2 (Resilience & Error Granularity):** Added dedicated `try-catch` boundaries around individual worksheet evaluations and VBA binary extractions. A single toxic macro or invalid sheet no longer crashes the entire background service queue. Errors are gracefully localized to the specific `TranslationPartitionEntity`.
+- **[RESOLVED] Tier 3 (Architecture Purity):** 
+  - Migrated hardcoded environment variables to the standard `IOptions<LlmBridgeConfiguration>` bound to `appsettings.json`.
+  - Integrated `Swashbuckle.AspNetCore` to provide a live OpenAPI Swagger UI for the API endpoints.
+  - Purged the monolithic Minimal API "God Files" (`Program_Extensions.cs`) by explicitly restructuring them into domain-driven endpoint mappers (`Endpoints/SessionEndpoints.cs`, `Endpoints/EvaluateEndpoints.cs`, `Endpoints/HistoryEndpoints.cs`).
+- **[RESOLVED] Tier 4 (DoS and Memory Exhaustion):**
+  - Patched an unauthenticated Job Cancellation memory leak in `EvaluateEndpoints.cs` where the token dictionary used `TryGetValue` instead of `TryRemove`.
+  - Resolved a catastrophic Denial of Service (DoS) vulnerability where the hardcoded "ALL" dropdown option sequentially spawned parallel processes for every single worksheet in large files (e.g., 45 jobs at once), bypassing intended limits.
+- **[RESOLVED] Tier 5 (File Validation and UX Constraints):**
+  - Implemented dynamic file inspection in the UI via the new `/api/session/inspect` endpoint, directly mapping the `<select>` dropdown to the actual worksheets inside the uploaded workbook.
+  - Enforced a strict 5MB upload limit and a 2-byte Magic Byte signature check (`0x50, 0x4B`) for XLSX/ZIP archives in `SessionEndpoints.cs`.
 
 ## Reference Documents
 - `docs/project-status-tracker.md` (Phases VIII and IX now marked COMPLETED)

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Polly;
 using ActuarialTranslationEngine.API;
@@ -22,6 +23,7 @@ using ActuarialTranslationEngine.Core.Persistence;
 using Microsoft.AspNetCore.SignalR;
 using ActuarialTranslationEngine.API.Hubs;
 using ActuarialTranslationEngine.API.Services;
+using ActuarialTranslationEngine.API.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,12 +41,12 @@ builder.Services.AddSingleton<IActuarialExtractionEngine, ActuarialExtractionEng
 builder.Services.AddSingleton<IVectorCompressionEngine, VectorCompressionEngine>();
 builder.Services.AddSingleton<IVbaExtractionEngine, VbaExtractionEngine>();
 
-builder.Services.AddSingleton<LlmBridgeConfiguration>(provider =>
+builder.Services.Configure<LlmBridgeConfiguration>(builder.Configuration.GetSection("LlmBridge"));
+builder.Services.PostConfigure<LlmBridgeConfiguration>(cfg =>
 {
-    var cfg = new LlmBridgeConfiguration();
     var key = Environment.GetEnvironmentVariable("ACTUARIAL_LLM_API_KEY");
     if (!string.IsNullOrWhiteSpace(key))
-        cfg.ApiKey = key; // Default dummy key for integration test
+        cfg.ApiKey = key;
 
     var endpoint = Environment.GetEnvironmentVariable("ACTUARIAL_LLM_ENDPOINT");
     if (!string.IsNullOrWhiteSpace(endpoint))
@@ -52,19 +54,19 @@ builder.Services.AddSingleton<LlmBridgeConfiguration>(provider =>
 
     string promptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "system-prompt.txt");
     if (File.Exists(promptPath))
-    {
         cfg.SystemPrompt = File.ReadAllText(promptPath).Trim();
-    }
     else
-    {
         cfg.SystemPrompt = string.Empty;
-    }
 
     if (string.IsNullOrWhiteSpace(cfg.SystemPrompt))
         throw new InvalidOperationException("Prompt file is empty or whitespace.");
-
-    return cfg;
 });
+
+builder.Services.AddSingleton<LlmBridgeConfiguration>(provider => 
+    provider.GetRequiredService<IOptions<LlmBridgeConfiguration>>().Value);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Since the bridge requires an HttpClient, register it with Polly Retry
 builder.Services.AddHttpClient<LiveDomainInterrogationBridge>(client => 
@@ -88,12 +90,21 @@ builder.Services.AddSingleton<IReconciliationOrchestrator, ReconciliationOrchest
 // Background Job Services
 builder.Services.AddSingleton<ITranslationJobQueue, TranslationJobQueue>();
 builder.Services.AddHostedService<BackgroundTranslationWorker>();
+builder.Services.AddHostedService<LlmWatchdogService>();
 
 // Persistence registration
-builder.Services.AddActuarialPersistence("audit.db");
+var dbPath = Environment.GetEnvironmentVariable("ACTUARIAL_DB_PATH") ?? "audit.db";
+builder.Services.AddActuarialPersistence(dbPath);
 builder.Services.AddSignalR();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.MapHub<TranslationProgressHub>("/progressHub");
 
 using (var scope = app.Services.CreateScope())
@@ -101,135 +112,18 @@ using (var scope = app.Services.CreateScope())
     var contextFactory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ActuarialDbContext>>();
     using var dbContext = contextFactory.CreateDbContext();
     dbContext.Database.Migrate();
+    
+    // Sweeper logic: mark orphaned jobs from previous crashes as Failed
+    StartupSweeper.RunDatabaseSweeper(dbContext);
+    
+    // Disk Sweeper: delete any .xlsx files in uploads/ older than 24 hours
+    var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+    StartupSweeper.RunDiskSweeper(uploadDir, DateTime.UtcNow.AddHours(-24));
 }
 
 app.MapSessionEndpoints();
-
-app.MapPost("/api/evaluate", async (HttpRequest request, 
-    ITranslationJobQueue jobQueue,
-    ILoggerFactory loggerFactory,
-    CancellationToken cancellationToken) =>
-{
-    var logger = loggerFactory.CreateLogger("EvaluateEndpoint");
-    try
-    {
-        if (!request.HasFormContentType || !request.Form.Files.Any())
-        {
-            return Results.BadRequest(new { Error = "No file uploaded." });
-        }
-
-        var file = request.Form.Files.First();
-        var fileName = file.FileName;
-        var ext = Path.GetExtension(fileName).ToLowerInvariant();
-        
-        if (ext != ".xlsx" && ext != ".xlsm")
-        {
-            return Results.BadRequest(new { Error = "Unsupported file type. Only .xlsx and .xlsm are supported." });
-        }
-
-        // Security: 5MB File Limit
-        if (file.Length > 5 * 1024 * 1024)
-        {
-            return Results.BadRequest(new { Error = "File exceeds the 5MB upload limit." });
-        }
-
-        using var memoryStream = new MemoryStream();
-        await file.CopyToAsync(memoryStream, cancellationToken);
-        var fileData = memoryStream.ToArray();
-
-        // Security: Magic Byte Check for ZIP/XLSX (PK = 50 4B)
-        if (fileData.Length < 2 || fileData[0] != 0x50 || fileData[1] != 0x4B)
-        {
-            return Results.BadRequest(new { Error = "Invalid file signature. File is not a valid ZIP/XLSX." });
-        }
-
-        string? connectionId = request.Form.TryGetValue("connectionId", out var cid) ? cid.ToString() : null;
-        string correlationId = request.Form.TryGetValue("correlationId", out var corid) ? corid.ToString() : Guid.NewGuid().ToString();
-        string targetSheet = request.Form.TryGetValue("targetSheet", out var tSheet) ? tSheet.ToString() : "ALL";
-
-        using var logScope = logger.BeginScope(new Dictionary<string, object> { ["CorrelationId"] = correlationId });
-
-        var jobId = Guid.NewGuid();
-
-        // Create a dedicated CTS for this job
-        var cts = new CancellationTokenSource();
-        Program.ActiveJobTokens.TryAdd(jobId, cts);
-
-        var jobRequest = new TranslationJobRequest
-        {
-            JobId = jobId,
-            OriginalFileName = fileName,
-            FileData = fileData,
-            TargetSheet = targetSheet,
-            ConnectionId = connectionId,
-            CorrelationId = correlationId,
-            CancellationToken = cts.Token
-        };
-
-        await jobQueue.EnqueueJobAsync(jobRequest, cancellationToken);
-
-        logger.LogInformation($"Job {jobId} enqueued for file {fileName}. ConnectionId: {connectionId}");
-
-        return Results.Accepted($"/api/history/{jobId}", new { JobId = jobId, Status = "Accepted" });
-    }
-    catch (Exception ex)
-    {
-        logger.LogError(ex, "Failed to enqueue evaluation job.");
-        return Results.BadRequest(new { Error = ex.Message });
-    }
-}).DisableAntiforgery();
-
-app.MapDelete("/api/evaluate/{id:guid}", (Guid id, ILoggerFactory loggerFactory) =>
-{
-    var logger = loggerFactory.CreateLogger("EvaluateEndpoint");
-    if (Program.ActiveJobTokens.TryGetValue(id, out var cts))
-    {
-        cts.Cancel();
-        logger.LogInformation($"Cancellation requested for Job {id}");
-        return Results.Ok(new { Message = "Job cancellation requested." });
-    }
-    return Results.NotFound(new { Error = "Active job not found or already completed." });
-});
-
-app.MapGet("/api/history", async (IPersistenceManager persistenceManager, int skip = 0, int take = 10, CancellationToken cancellationToken = default) =>
-{
-    var history = await persistenceManager.GetPaginatedHistoryAsync(skip, take, cancellationToken);
-    return Results.Ok(history.Select(h => new
-    {
-        h.Id,
-        h.OriginalFileName,
-        h.CreatedAt,
-        Status = h.Status.ToString(),
-        EvaluationsCount = h.Partitions?.Count ?? 0
-    }));
-});
-
-app.MapGet("/api/history/{id:guid}", async (Guid id, IPersistenceManager persistenceManager, CancellationToken cancellationToken) =>
-{
-    var job = await persistenceManager.GetJobDetailsAsync(id, cancellationToken);
-    if (job == null) return Results.NotFound();
-    
-    return Results.Ok(new
-    {
-        WorkbookName = job.OriginalFileName,
-        WorksheetName = "Historical Record",
-        Evaluations = job.Partitions?.Select(p => new TranslationOutput { 
-            SourceName = p.SourceName,
-            FinalAuditableMarkdown = p.FinalAuditableMarkdown, 
-            GeneratedCSharpMirrorCode = p.GeneratedCSharpMirrorCode,
-            IsCertified = p.IsCertified,
-            VarianceDelta = p.VarianceDelta,
-            ErrorMessage = p.ErrorMessage,
-            DisruptiveNodes = string.IsNullOrEmpty(p.DisruptiveNodesJson) 
-                ? new System.Collections.Generic.List<DisruptiveNode>() 
-                : System.Text.Json.JsonSerializer.Deserialize<System.Collections.Generic.List<DisruptiveNode>>(p.DisruptiveNodesJson) ?? new System.Collections.Generic.List<DisruptiveNode>()
-        }).ToList() ?? new System.Collections.Generic.List<TranslationOutput>(),
-        TranslationId = job.Id,
-        Timestamp = job.CreatedAt,
-        ModelUsed = job.ModelUsed,
-        Status = job.Status.ToString()
-    });
-});
+app.MapEvaluateEndpoints();
+app.MapHistoryEndpoints();
 
 app.Run();
 
@@ -237,5 +131,4 @@ app.Run();
 public partial class Program 
 {
     public static System.Collections.Concurrent.ConcurrentDictionary<Guid, CancellationTokenSource> ActiveJobTokens { get; } = new();
-    public static System.Collections.Concurrent.ConcurrentDictionary<Guid, byte[]> ActiveSessions { get; } = new();
 }
