@@ -113,3 +113,25 @@ This document tracks the execution and completion status of the phases defined i
   * **9-1-partition-isolation-and-targeting:** Solved LLM mathematical hallucination by isolating the payload to a single `VectorRangePartition` and dynamically enforcing the `targetColumn` constraint inside `LiveDomainInterrogationBridge`.
   * **9-2-lookahead-lookback-injection:** Prevented `KeyNotFoundException` crashes by having the `ReconciliationOrchestrator` pre-seed the `-1` (previous) and `+1` (next) rows into the state dictionary, and zeroing out structural padding columns.
   * **9-3-real-time-progress-streaming:** Addressed the performance latency of partition-by-partition API calls by implementing a generic `IProgress<TranslationProgressEvent>`. Wired this interface to `Spectre.Console` (for CLI) and `Microsoft.AspNetCore.SignalR` (for a real-time Web UI progress bar).
+
+---
+
+## Phase X: UX, Testing, Resilience, & Technical Debt Cleanup
+**Status:** ✅ **COMPLETED**
+* **Goal:** Polish the Blazor Web UI, resolve technical debt, eliminate UI vulnerabilities, and ensure resilient end-to-end testing coverage across the entire system.
+* **Key Deliverables:**
+  * **10-1-ux-enhancements:** Added clear visual validation status indicators and disruptive node exception handling (e.g. #REF! warnings) directly into the UI.
+  * **10-2-resilience-and-reliability:** Resolved transient timeouts by implementing `Polly` exponential backoff retries for Web->API and API->LLM connections. Migrated to asynchronous background job patterns to avoid HTTP timeout crashes.
+  * **10-3-security-and-debt:** Pinned transitive dependencies to fix known vulnerabilities (`System.Drawing.Common`, `SQLitePCLRaw`).
+  * **10-4-testing:** Implemented robust frontend E2E Playwright tests and unit tests for background workers.
+
+---
+
+## Phase XI: Session Flow Refactor & Resilience
+**Status:** ✅ **COMPLETED**
+* **Goal:** Remediate vulnerabilities discovered during an adversarial review of the file processing flow to ensure absolute stability against malicious or malformed inputs.
+* **Key Deliverables:**
+  * **11-1-secure-session-flow:** Eliminated the double-upload inefficiency and metadata hijacking risk by binding database jobs immediately on the initial 5MB-limited `/upload` endpoint.
+  * **11-2-idempotent-executions:** Prevented queue-spam DoS vulnerabilities by rejecting `/execute` requests for jobs already marked `Running` or `Completed`.
+  * **11-3-garbage-collection:** Implemented `UploadSweeperService`, a background worker to continuously clean up orphaned files older than 24 hours.
+  * **11-4-race-condition-safety:** Protected `/finish` from forcefully deleting active source files by halting deletion if any tied jobs are `Pending` or `Running`.

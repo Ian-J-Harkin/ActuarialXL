@@ -64,5 +64,15 @@ Given the unpredictable nature of external LLM dependencies, atomic saves proved
 
 ---
 
+## 7. Session Architecture & State Trust
+### ❌ Original Design
+The wizard flow relied on client-side state passing (uploading a file, then passing the file stream *again* alongside configuration metadata) to create a DB job. 
+
+### ✅ Reality (Metadata Hijacking & Inefficiency)
+Double-uploading large files is inherently inefficient, and deferring database anchoring until the final step allowed unauthenticated states where files existed on disk without DB records. An adversarial review revealed this could lead to metadata hijacking or race-condition deletions if `/finish` was called while jobs were executing.
+**The Fix:** We consolidated the session flow into a highly secure, two-step pattern (`/api/session/upload` and `/api/session/configure`). Uploads are immediately anchored to the database in step 1, ensuring zero orphaned states. Additionally, `/execute` was made strictly idempotent, instantly rejecting duplicate submissions to protect the worker queue.
+
+---
+
 ## Summary
-The original architectural specifications (`enterprise-lifecycle-spec.md` and `architectural-blueprint.md`) provided an excellent mathematical constraint structure (e.g., the variance limits, compression models). However, they failed to account for the **harsh realities of infrastructure**: network unreliability, large file memory constraints, asynchronous ghost processes, and OLE format quirks. The implemented system is significantly more resilient, fault-tolerant, and infrastructure-aware than the original theoretical blueprints.
+The original architectural specifications (`enterprise-lifecycle-spec.md` and `architectural-blueprint.md`) provided an excellent mathematical constraint structure (e.g., the variance limits, compression models). However, they failed to account for the **harsh realities of infrastructure**: network unreliability, large file memory constraints, asynchronous ghost processes, OLE format quirks, and session-state vulnerabilities. The implemented system is significantly more resilient, fault-tolerant, and infrastructure-aware than the original theoretical blueprints.
